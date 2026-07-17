@@ -12,7 +12,7 @@ The immediate priority is to build, train, and evaluate the custom analytics mod
 4. **Continuous Learning:** Implement an automated retraining pipeline. The model will store historical data in the SQLite database and learn from new daily records to continuously improve its accuracy over time.
 
 ### Phase 2: Full-Stack Web Application
-Once the model is built and verified, we will integrate it into a web application with the following stack:
+Once the model is built and verified, we will integrate it into a web application with the following stack
 
 #### Frontend (Web Application)
 - **Framework:** React JS, standard JS, HTML.
