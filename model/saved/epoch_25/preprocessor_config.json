@@ -1,0 +1,41 @@
+{
+  "feature_columns": [
+    "Ship Mode_Enc",
+    "Segment_Enc",
+    "Region_Enc",
+    "Category_Enc",
+    "Sub-Category_Enc",
+    "Quantity",
+    "Base_Sales",
+    "Order_Month",
+    "Order_DayOfWeek",
+    "Order_Quarter",
+    "Ship_Days"
+  ],
+  "discount_bins": [
+    0.0,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.5
+  ],
+  "categorical_cols": [
+    "Ship Mode",
+    "Segment",
+    "Region",
+    "Category",
+    "Sub-Category"
+  ],
+  "continuous_cols": [
+    "Quantity",
+    "Base_Sales"
+  ],
+  "time_features": [
+    "Order_Month",
+    "Order_DayOfWeek",
+    "Order_Quarter",
+    "Ship_Days"
+  ]
+}

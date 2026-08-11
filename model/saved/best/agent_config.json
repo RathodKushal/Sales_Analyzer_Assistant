@@ -1,0 +1,12 @@
+{
+  "state_dim": 11,
+  "n_actions": 7,
+  "gamma": 0.95,
+  "epsilon": 0.8183201210226743,
+  "epsilon_end": 0.01,
+  "epsilon_decay": 0.995,
+  "batch_size": 64,
+  "target_update_freq": 10,
+  "training_step": 19849,
+  "use_prioritized_replay": true
+}

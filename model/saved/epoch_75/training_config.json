@@ -1,0 +1,25 @@
+{
+  "data_path": "SALES.xlsx",
+  "val_split": 0.2,
+  "n_episodes": 150,
+  "max_steps_per_episode": 1000,
+  "warmup_steps": 300,
+  "train_frequency": 2,
+  "lr": 0.001,
+  "gamma": 0.95,
+  "epsilon_start": 1.0,
+  "epsilon_end": 0.01,
+  "epsilon_decay": 0.995,
+  "batch_size": 64,
+  "target_update_freq": 10,
+  "buffer_capacity": 50000,
+  "hidden_dims": [
+    128,
+    128,
+    64
+  ],
+  "use_prioritized_replay": true,
+  "save_dir": "model/saved",
+  "checkpoint_freq": 25,
+  "log_freq": 10
+}
