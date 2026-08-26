@@ -1,5 +1,5 @@
 {
-  "action_agreement_rate": 4.09245547328397,
+  "action_agreement_rate": 4.082449469681809,
   "historical_discount_distribution": {
     "0.0": 4798,
     "0.1": 94,
@@ -10,45 +10,45 @@
     "0.5": 922
   },
   "agent_discount_distribution": {
-    "0.0": 417,
-    "0.1": 9420,
+    "0.0": 441,
+    "0.1": 9415,
     "0.15": 0,
-    "0.2": 157,
+    "0.2": 138,
     "0.3": 0,
     "0.4": 0,
     "0.5": 0
   },
   "total_historical_profit": 255252.6875,
-  "total_agent_estimated_profit": 1029001.875,
-  "profit_improvement": 773749.1875,
-  "profit_improvement_pct": 303.13067626953125,
+  "total_agent_estimated_profit": 1026205.25,
+  "profit_improvement": 770952.5625,
+  "profit_improvement_pct": 302.0350341796875,
   "mean_historical_reward": 25.540592193603516,
-  "mean_agent_estimated_reward": 102.96196746826172,
+  "mean_agent_estimated_reward": 102.68213653564453,
   "historical_positive_profit_rate": 80.62837702621573,
-  "agent_positive_profit_rate": 99.78987392435461,
-  "mean_q_value": 4.866608142852783,
-  "std_q_value": 0.5812954306602478,
-  "q_value_spread": 1.6931135654449463,
+  "agent_positive_profit_rate": 99.79987992795677,
+  "mean_q_value": 4.866986274719238,
+  "std_q_value": 0.5833094120025635,
+  "q_value_spread": 1.6954900026321411,
   "per_category": {
     "Furniture": {
       "count": 2121,
       "historical_mean_profit": 10.01019287109375,
-      "agent_mean_profit": 99.29632568359375,
-      "improvement": 89.2861328125,
+      "agent_mean_profit": 98.49594116210938,
+      "improvement": 88.48574829101562,
       "most_chosen_discount": 0.1
     },
     "Office Supplies": {
       "count": 6026,
       "historical_mean_profit": 19.198152542114258,
-      "agent_mean_profit": 99.97419738769531,
-      "improvement": 80.77604675292969,
+      "agent_mean_profit": 99.70513153076172,
+      "improvement": 80.5069808959961,
       "most_chosen_discount": 0.1
     },
     "Technology": {
       "count": 1847,
       "historical_mean_profit": 64.06768798828125,
-      "agent_mean_profit": 116.91925048828125,
-      "improvement": 52.8515625,
+      "agent_mean_profit": 117.20208740234375,
+      "improvement": 53.1343994140625,
       "most_chosen_discount": 0.1
     }
   }
