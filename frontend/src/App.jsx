@@ -5,30 +5,30 @@ import Layout from './components/Layout';
 
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
-import ReportsPage from './pages/ReportsPage';
-import SocialPage from './pages/SocialPage';
-import DocumentAnalysisPage from './pages/DocumentAnalysisPage';
+import CustomersPage from './pages/CustomersPage';
+import OrdersPage from './pages/OrdersPage';
+import ProductsPage from './pages/ProductsPage';
+import DiscountAIPage from './pages/DiscountAIPage';
+import ProductHypePage from './pages/ProductHypePage';
 
 export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          {/* Public Route */}
           <Route path="/login" element={<LoginPage />} />
           
-          {/* Protected Routes */}
           <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
             <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/document-analysis" element={<DocumentAnalysisPage />} />
-            <Route path="/reports" element={<ReportsPage />} />
-            <Route path="/social" element={<SocialPage />} />
+            <Route path="/customers" element={<CustomersPage />} />
+            <Route path="/orders" element={<OrdersPage />} />
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/discount-ai" element={<DiscountAIPage />} />
+            <Route path="/hype-ai" element={<ProductHypePage />} />
             
-            {/* Redirect root to dashboard */}
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
           </Route>
           
-          {/* Fallback */}
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </AuthProvider>

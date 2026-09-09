@@ -18,8 +18,7 @@ from backend.config import get_settings, PROJECT_ROOT
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from model.agent import DQNAgent
-from model.data_preprocessor import SalesDataPreprocessor
+from model.data_preprocessor import EcommerceDataPreprocessor
 
 
 class ModelService:
@@ -33,8 +32,9 @@ class ModelService:
 
     def __init__(self):
         self.agent: Optional[DQNAgent] = None
-        self.preprocessor: Optional[SalesDataPreprocessor] = None
+        self.preprocessor: Optional[EcommerceDataPreprocessor] = None
         self.evaluation_results: Optional[dict] = None
+        self.hype_results: Optional[dict] = None
         self._is_loaded = False
 
     @classmethod
@@ -65,7 +65,7 @@ class ModelService:
         print(f"[ModelService] Loading model from {model_dir}...")
 
         # Load preprocessor (encoders, scaler, config)
-        self.preprocessor = SalesDataPreprocessor()
+        self.preprocessor = EcommerceDataPreprocessor()
         self.preprocessor.load_saved(str(model_dir))
 
         # Load agent config to get dimensions
@@ -88,10 +88,20 @@ class ModelService:
         if eval_path.exists():
             with open(eval_path, "r") as f:
                 self.evaluation_results = json.load(f)
-
+                
         self._is_loaded = True
         print(f"[ModelService] Model loaded successfully. "
               f"State dim: {state_dim}, Actions: {n_actions}")
+
+    def load_hype_results(self):
+        """Load hype evaluation results independently of DQN model."""
+        hype_path = PROJECT_ROOT / "model" / "saved_hype" / "hype_evaluation_results.json"
+        if hype_path.exists():
+            with open(hype_path, "r") as f:
+                self.hype_results = json.load(f)
+            print(f"[ModelService] Hype results loaded ({len(self.hype_results.get('product_predictions', {}))} products)")
+        else:
+            print(f"[ModelService] WARNING: Hype results not found at {hype_path}")
 
     def predict_discount(self, features: dict) -> dict:
         """
@@ -219,30 +229,30 @@ class ModelService:
     def _features_to_dataframe(self, features: dict) -> pd.DataFrame:
         """
         Convert API feature dict to a single-row DataFrame
-        matching the raw SALES.xlsx schema.
+        matching the schema expected by EcommerceDataPreprocessor.
         """
-        from datetime import datetime, timedelta
+        from datetime import datetime
 
         # Build a row that looks like the raw data the preprocessor expects
-        order_date = datetime.now()
-        ship_days = features.get("ship_days", 4)
-        ship_date = order_date + timedelta(days=ship_days)
-
-        discount = features.get("discount", 0.0)
-        sales = features["sales"]
-
         row = {
-            "Ship Mode": features["ship_mode"],
-            "Segment": features["segment"],
-            "Region": features["region"],
-            "Category": features["category"],
-            "Sub-Category": features["sub_category"],
-            "Quantity": features["quantity"],
-            "Sales": sales,
-            "Discount": discount,
-            "Profit": sales * 0.15,  # Placeholder — not used for prediction
-            "Order Date": order_date,
-            "Ship Date": ship_date,
+            "State": features.get("state", "Unknown"),
+            "Category": features.get("category", "Unknown"),
+            "PaymentMethod": features.get("payment_method", "Unknown"),
+            "CustomerSegment": features.get("segment", "Unknown"),
+            "Gender": features.get("gender", "Unknown"),
+            
+            "UnitPrice": features.get("unit_price", 100.0),
+            "Quantity": features.get("quantity", 1),
+            "TotalAmount": features.get("total_amount", 100.0),
+            "Profit": features.get("total_amount", 100.0) * 0.15,
+            "Age": features.get("age", 30),
+            "CustomerLTV": features.get("customer_ltv", 1000.0),
+            "DaysSinceLastPurchase": features.get("days_since_last_purchase", 10),
+            "PurchaseFrequency": features.get("purchase_frequency", 5),
+            "AvgOrderValue": features.get("avg_order_value", 150.0),
+            "CustomerReturnRate": features.get("return_rate", 0.05),
+            
+            "OrderDate": datetime.now(),
         }
 
         return pd.DataFrame([row])
@@ -253,3 +263,30 @@ class ModelService:
             raise RuntimeError(
                 "Model not loaded. Call ModelService.load() at startup."
             )
+
+    def get_hype_prediction(self, stock_code: str) -> dict:
+        """
+        Returns the hype prediction for a specific product.
+        """
+        if not self.hype_results:
+            raise ValueError("Hype model results not loaded. Run evaluate_hype.py first.")
+            
+        preds = self.hype_results.get('product_predictions', {})
+        if stock_code not in preds:
+            raise ValueError(f"No hype prediction found for {stock_code}")
+            
+        data = preds[stock_code]
+        
+        # Convert prediction bin to score 0-100
+        # Bins: 0: Severe Drop, 1: Drop, 2: Steady, 3: Growth, 4: Viral
+        bin_score = {0: 10, 1: 30, 2: 50, 3: 75, 4: 95}
+        score = bin_score.get(data['predicted_bin'], 50)
+        
+        return {
+            "stock_code": stock_code,
+            "hype_score": score,
+            "predicted_bin": data['predicted_bin'],
+            "actual_growth_percentage": round(data['actual_growth'] * 100, 2),
+            "historical_sales": data['historical_sales'],
+            "target_month": str(data['target_month'])
+        }

@@ -1,7 +1,6 @@
 {
-  "total_episodes": 150,
-  "total_steps": 150000,
-  "training_time_seconds": 1146.6814024448395,
-  "best_val_reward": 144.8481903076172,
-  "final_epsilon": 0.47147873742168567
+  "total_episodes": 100,
+  "best_reward": -7.73070062689679e-06,
+  "final_epsilon": 0.01,
+  "training_time_seconds": 111.26866483688354
 }

@@ -56,29 +56,31 @@ export const authAPI = {
     client.get('/auth/me'),
 };
 
-// ── Sales API ───────────────────────────────────────────
-export const salesAPI = {
-  list: (page = 1, perPage = 25, filters = {}) =>
-    client.get('/sales/', {
-      params: { page, per_page: perPage, ...filters },
-    }),
+// ── Customers API ───────────────────────────────────────
+export const customersAPI = {
+  list: (skip = 0, limit = 50) => client.get('/customers/', { params: { skip, limit } }),
+  getById: (id) => client.get(`/customers/${id}`),
+  getSegments: () => client.get('/customers/stats'),
+};
 
-  getById: (id) =>
-    client.get(`/sales/${id}`),
+// ── Orders API ──────────────────────────────────────────
+export const ordersAPI = {
+  list: (skip = 0, limit = 50) => client.get('/orders/', { params: { skip, limit } }),
+  getById: (id) => client.get(`/orders/${id}`),
+  getStats: () => client.get('/orders/stats'),
+};
 
-  create: (data) =>
-    client.post('/sales/', data),
+// ── Products API ────────────────────────────────────────
+export const productsAPI = {
+  list: (skip = 0, limit = 50) => client.get('/products/', { params: { skip, limit } }),
+  getById: (id) => client.get(`/products/${id}`),
+};
 
-  getStats: () =>
-    client.get('/sales/stats'),
-
-  upload: (file) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    return client.post('/sales/upload', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
-  },
+// ── Returns API ─────────────────────────────────────────
+export const returnsAPI = {
+  list: (skip = 0, limit = 50) => client.get('/returns/', { params: { skip, limit } }),
+  getById: (id) => client.get(`/returns/${id}`),
+  getStats: () => client.get('/returns/stats'),
 };
 
 // ── Analytics API ───────────────────────────────────────
@@ -94,6 +96,9 @@ export const analyticsAPI = {
 
   getDiscountBins: () =>
     client.get('/analytics/discount-bins'),
+
+  getHypePrediction: (stockCode) =>
+    client.get(`/analytics/hype/${stockCode}`),
 };
 
 // ── Reports API ─────────────────────────────────────────

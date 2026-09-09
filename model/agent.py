@@ -159,13 +159,13 @@ class PrioritizedReplayBuffer:
 
 class DQNAgent:
     """
-    Deep Q-Network Agent for sales discount optimization.
+    Deep Q-Network Agent for e-commerce pricing optimization.
     
     Uses Double DQN with Dueling architecture, prioritized experience 
     replay, and epsilon-greedy exploration with decay.
     
     The agent learns to recommend the optimal discount level for each
-    sale to maximize profit.
+    e-commerce transaction to maximize profit.
     
     Args:
         state_dim: Dimensionality of the state space

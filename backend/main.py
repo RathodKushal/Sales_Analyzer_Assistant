@@ -29,7 +29,10 @@ from backend.analytics.service import ModelService
 # Import routers
 from backend.auth.router import router as auth_router
 from backend.analytics.router import router as analytics_router
-from backend.sales.router import router as sales_router
+from backend.customers.router import router as customers_router
+from backend.orders.router import router as orders_router
+from backend.products.router import router as products_router
+from backend.returns.router import router as returns_router
 from backend.reports.router import router as reports_router
 from backend.social.router import router as social_router
 from backend.ingestion.router import router as ingestion_router
@@ -37,7 +40,10 @@ from backend.powerbi.router import router as powerbi_router
 
 # Import models so SQLAlchemy knows about them when creating tables
 from backend.auth.models import User       # noqa: F401
-from backend.sales.models import SalesRecord  # noqa: F401
+from backend.customers.models import Customer      # noqa: F401
+from backend.orders.models import Order, OrderItem # noqa: F401
+from backend.products.models import Product        # noqa: F401
+from backend.returns.models import ReturnRecord    # noqa: F401
 from backend.ingestion.models import DocumentAnalysis # noqa: F401
 
 settings = get_settings()
@@ -75,6 +81,13 @@ async def lifespan(app: FastAPI):
         print("[Startup] Model endpoints will return errors until the model is trained.")
     except Exception as e:
         print(f"[Startup] WARNING: Failed to load model: {e}")
+
+    # 4. Load Hype RL results (independent of DQN discount model)
+    try:
+        model_service = ModelService.get_instance()
+        model_service.load_hype_results()
+    except Exception as e:
+        print(f"[Startup] WARNING: Failed to load hype results: {e}")
 
     print("[Startup] Server is ready!")
     print("=" * 60)
@@ -140,7 +153,10 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(analytics_router)
-app.include_router(sales_router)
+app.include_router(customers_router)
+app.include_router(orders_router)
+app.include_router(products_router)
+app.include_router(returns_router)
 app.include_router(reports_router)
 app.include_router(social_router)
 app.include_router(ingestion_router)

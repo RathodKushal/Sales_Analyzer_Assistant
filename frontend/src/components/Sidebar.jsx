@@ -1,20 +1,14 @@
-/**
- * Sidebar — Navigation Sidebar
- * ================================
- * Persistent sidebar with navigation links,
- * user profile, and logout button.
- */
-
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   HiOutlineChartBarSquare,
+  HiOutlineUsers,
   HiOutlineShoppingCart,
-  HiOutlineDocumentText,
+  HiOutlineCube,
   HiOutlineSparkles,
+  HiOutlineFire,
   HiOutlineArrowRightOnRectangle,
-  HiOutlineCpuChip,
-  HiOutlineDocumentArrowUp,
+  HiOutlineCommandLine,
 } from 'react-icons/hi2';
 
 export default function Sidebar() {
@@ -30,70 +24,83 @@ export default function Sidebar() {
     {
       to: '/dashboard',
       icon: <HiOutlineChartBarSquare />,
-      label: 'Dashboard',
+      label: 'Overview',
     },
     {
-      to: '/document-analysis',
-      icon: <HiOutlineDocumentArrowUp />,
-      label: 'Data Ingestion',
+      to: '/customers',
+      icon: <HiOutlineUsers />,
+      label: 'Customers',
     },
     {
-      to: '/reports',
-      icon: <HiOutlineDocumentText />,
-      label: 'Reports',
+      to: '/orders',
+      icon: <HiOutlineShoppingCart />,
+      label: 'Orders',
     },
     {
-      to: '/social',
+      to: '/products',
+      icon: <HiOutlineCube />,
+      label: 'Products',
+    },
+    {
+      to: '/discount-ai',
       icon: <HiOutlineSparkles />,
-      label: 'Social Media AI',
+      label: 'Discount AI',
+    },
+    {
+      to: '/hype-ai',
+      icon: <HiOutlineFire />,
+      label: 'Hype AI',
     },
   ];
 
   return (
-    <aside className="sidebar">
+    <aside className="fixed inset-y-0 left-0 w-64 bg-zinc-950 border-r border-zinc-800/60 flex flex-col pt-6 pb-4">
       {/* Logo */}
-      <div className="sidebar__logo">
-        <div className="sidebar__logo-icon">
-          <HiOutlineCpuChip />
+      <div className="px-6 flex items-center gap-3 mb-10">
+        <div className="w-8 h-8 rounded-md bg-zinc-800/80 border border-zinc-700/50 flex items-center justify-center text-zinc-300">
+          <HiOutlineCommandLine size={18} />
         </div>
-        <span className="sidebar__logo-text">Sales Analyzer</span>
+        <span className="font-semibold tracking-tight text-zinc-100">ShopFlow CRM</span>
       </div>
 
       {/* Navigation */}
-      <nav className="sidebar__nav">
-        <span className="sidebar__section-label">Main Menu</span>
+      <nav className="flex-1 px-4 space-y-1">
+        <div className="px-3 mb-2 text-[10.5px] font-medium tracking-wider text-zinc-500 uppercase">Core Operations</div>
         {navItems.map(({ to, icon, label }) => (
           <NavLink
             key={to}
             to={to}
             className={({ isActive }) =>
-              `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`
+              `flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                isActive 
+                  ? 'bg-zinc-800/80 text-zinc-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]' 
+                  : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/40'
+              }`
             }
           >
-            <span className="sidebar__link-icon">{icon}</span>
+            <span className="text-[1.1rem] opacity-80">{icon}</span>
             {label}
           </NavLink>
         ))}
       </nav>
 
       {/* Footer: User + Logout */}
-      <div className="sidebar__footer">
-        <div className="sidebar__user">
-          <div className="sidebar__avatar">
+      <div className="px-4 mt-auto">
+        <div className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800/50 flex items-center gap-3 mb-2">
+          <div className="w-8 h-8 rounded bg-zinc-800 flex items-center justify-center text-xs font-semibold text-zinc-300">
             {user?.username?.charAt(0).toUpperCase() || 'U'}
           </div>
-          <div className="sidebar__user-info">
-            <div className="sidebar__user-name">{user?.username || 'User'}</div>
-            <div className="sidebar__user-role">{user?.role || 'viewer'}</div>
+          <div className="flex-1 overflow-hidden">
+            <div className="text-sm font-medium text-zinc-200 truncate">{user?.username || 'User'}</div>
+            <div className="text-xs text-zinc-500 truncate">{user?.role || 'viewer'}</div>
           </div>
         </div>
         <button
-          className="btn btn--ghost"
+          className="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/40 transition-colors"
           onClick={handleLogout}
-          style={{ width: '100%', marginTop: 8, justifyContent: 'flex-start' }}
         >
-          <HiOutlineArrowRightOnRectangle />
-          Logout
+          <HiOutlineArrowRightOnRectangle size={16} />
+          Sign out
         </button>
       </div>
     </aside>

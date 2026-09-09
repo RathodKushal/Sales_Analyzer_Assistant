@@ -1,55 +1,73 @@
 {
-  "action_agreement_rate": 4.082449469681809,
-  "historical_discount_distribution": {
-    "0.0": 4798,
-    "0.1": 94,
-    "0.15": 52,
-    "0.2": 3657,
-    "0.3": 254,
-    "0.4": 217,
-    "0.5": 922
+  "overall": {
+    "profit_lift_percentage": -53.150973673038095,
+    "total_profit_predicted": 504389.74333196494,
+    "avg_discount_predicted": 9.49
   },
-  "agent_discount_distribution": {
-    "0.0": 441,
-    "0.1": 9415,
-    "0.15": 0,
-    "0.2": 138,
-    "0.3": 0,
-    "0.4": 0,
-    "0.5": 0
+  "by_segment": {
+    "At Risk": {
+      "Count": 2233,
+      "AvgPredDiscount": 0.0,
+      "ProfitLift": 389070.76
+    },
+    "Champions": {
+      "Count": 193,
+      "AvgPredDiscount": 21.68,
+      "ProfitLift": -59569.27
+    },
+    "Lost": {
+      "Count": 1407,
+      "AvgPredDiscount": 16.78,
+      "ProfitLift": -307106.37
+    },
+    "Loyal": {
+      "Count": 12,
+      "AvgPredDiscount": 15.42,
+      "ProfitLift": -69009.83
+    },
+    "Potential": {
+      "Count": 1155,
+      "AvgPredDiscount": 16.86,
+      "ProfitLift": -525623.55
+    }
   },
-  "total_historical_profit": 255252.6875,
-  "total_agent_estimated_profit": 1026205.25,
-  "profit_improvement": 770952.5625,
-  "profit_improvement_pct": 302.0350341796875,
-  "mean_historical_reward": 25.540592193603516,
-  "mean_agent_estimated_reward": 102.68213653564453,
-  "historical_positive_profit_rate": 80.62837702621573,
-  "agent_positive_profit_rate": 99.79987992795677,
-  "mean_q_value": 4.866986274719238,
-  "std_q_value": 0.5833094120025635,
-  "q_value_spread": 1.6954900026321411,
-  "per_category": {
-    "Furniture": {
-      "count": 2121,
-      "historical_mean_profit": 10.01019287109375,
-      "agent_mean_profit": 98.49594116210938,
-      "improvement": 88.48574829101562,
-      "most_chosen_discount": 0.1
+  "by_state_top5": {
+    "Maharashtra": {
+      "ProfitLift": 59841.64,
+      "AvgDiscount": 9.47
     },
-    "Office Supplies": {
-      "count": 6026,
-      "historical_mean_profit": 19.198152542114258,
-      "agent_mean_profit": 99.70513153076172,
-      "improvement": 80.5069808959961,
-      "most_chosen_discount": 0.1
+    "Chhattisgarh": {
+      "ProfitLift": 10763.28,
+      "AvgDiscount": 0.0
     },
-    "Technology": {
-      "count": 1847,
-      "historical_mean_profit": 64.06768798828125,
-      "agent_mean_profit": 117.20208740234375,
-      "improvement": 53.1343994140625,
-      "most_chosen_discount": 0.1
+    "Bihar": {
+      "ProfitLift": 10476.22,
+      "AvgDiscount": 2.21
+    },
+    "Andhra Pradesh": {
+      "ProfitLift": 7254.44,
+      "AvgDiscount": 5.23
+    },
+    "Assam": {
+      "ProfitLift": 6127.98,
+      "AvgDiscount": 1.46
+    }
+  },
+  "by_payment": {
+    "COD": {
+      "AvgDiscount": 10.74
+    },
+    "Credit Card": {
+      "AvgDiscount": 8.47
+    },
+    "Debit Card": {
+      "AvgDiscount": 7.59
+    },
+    "Net Banking": {
+      "AvgDiscount": 11.79
+    },
+    "UPI": {
+      "AvgDiscount": 8.88
     }
   }
 }

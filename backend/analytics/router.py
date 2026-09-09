@@ -98,3 +98,22 @@ def get_discount_bins(
 ):
     """Returns the discrete discount levels the model can recommend."""
     return DiscountBinsResponse(**model.get_discount_bins())
+
+
+@router.get(
+    "/hype/{stock_code}",
+    summary="Get product hype prediction",
+)
+def get_product_hype(
+    stock_code: str,
+    _user: User = Depends(get_current_user),
+    model: ModelService = Depends(get_model_service),
+):
+    """
+    Returns the RL agent's hype prediction for a given product.
+    """
+    try:
+        return model.get_hype_prediction(stock_code)
+    except ValueError as e:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail=str(e))

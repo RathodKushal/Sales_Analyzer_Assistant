@@ -16,22 +16,22 @@ class PredictRequest(BaseModel):
     
     These match the columns from SALES.xlsx that the model was trained on.
     """
-    ship_mode: str = Field(..., examples=["Standard Class"])
-    segment: str = Field(..., examples=["Consumer"])
-    region: str = Field(..., examples=["West"])
-    category: str = Field(..., examples=["Technology"])
-    sub_category: str = Field(..., examples=["Phones"])
-    quantity: int = Field(..., ge=1, examples=[3])
-    sales: float = Field(..., gt=0, examples=[249.99])
-    discount: float = Field(
-        default=0.0, ge=0, le=1,
-        description="Current/proposed discount (0.0 to 1.0). Used to compute Base_Sales.",
-        examples=[0.2],
-    )
-    order_month: Optional[int] = Field(default=6, ge=1, le=12, examples=[6])
-    order_day_of_week: Optional[int] = Field(default=2, ge=0, le=6, examples=[2])
-    order_quarter: Optional[int] = Field(default=2, ge=1, le=4, examples=[2])
-    ship_days: Optional[int] = Field(default=4, ge=0, examples=[4])
+    state: str = Field("Unknown", examples=["Delhi"])
+    category: str = Field("Unknown", examples=["Electronics"])
+    payment_method: str = Field("Unknown", examples=["Credit Card"])
+    segment: str = Field("Unknown", examples=["Loyal"])
+    gender: str = Field("Unknown", examples=["Female"])
+    
+    unit_price: float = Field(..., gt=0, examples=[500.0])
+    quantity: int = Field(..., ge=1, examples=[2])
+    total_amount: float = Field(..., gt=0, examples=[1000.0])
+    
+    age: Optional[int] = Field(30, examples=[28])
+    customer_ltv: Optional[float] = Field(0.0, examples=[5000.0])
+    days_since_last_purchase: Optional[int] = Field(0, examples=[10])
+    purchase_frequency: Optional[int] = Field(1, examples=[5])
+    avg_order_value: Optional[float] = Field(0.0, examples=[1000.0])
+    return_rate: Optional[float] = Field(0.0, examples=[0.05])
 
 
 class BatchPredictRequest(BaseModel):

@@ -5,6 +5,7 @@ Reads settings from environment variables / .env file.
 Uses pydantic-settings for validation and type coercion.
 """
 
+import os
 from pathlib import Path
 from pydantic_settings import BaseSettings
 from functools import lru_cache
@@ -18,7 +19,7 @@ class Settings(BaseSettings):
     """Application settings — loaded from .env or environment variables."""
 
     # ── App ─────────────────────────────────────────────────────
-    APP_NAME: str = "Sales Analyzer API"
+    APP_NAME: str = "ShopFlow CRM API"
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = True
 
@@ -30,9 +31,10 @@ class Settings(BaseSettings):
     # ── Database ────────────────────────────────────────────────
     DATABASE_URL: str = "mysql+pymysql://root:@localhost/sales_analyzer"
 
-    # ── ML Model ────────────────────────────────────────────────
-    MODEL_PATH: str = str(PROJECT_ROOT / "model" / "saved" / "best")
-    DATA_PATH: str = str(PROJECT_ROOT / "SALES.xlsx")
+    # Data and Model Settings
+    DATA_PATH: Path = Path(os.getenv("DATA_PATH", "../data"))
+    MODEL_PATH: Path = Path(os.getenv("MODEL_PATH", "../model/saved/best"))
+    SQLITE_PATH: str = os.getenv("SQLITE_PATH", "sqlite:///./shopflow_crm.db")
 
     # ── CORS ────────────────────────────────────────────────────
     CORS_ORIGINS: list[str] = [

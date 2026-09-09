@@ -1,14 +1,7 @@
-/**
- * LoginPage — Authentication Screen
- * =====================================
- * Premium split-screen layout with framer-motion animations,
- * high-contrast typography, and a polished auth form.
- */
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { HiOutlineCpuChip } from 'react-icons/hi2';
+import { HiOutlineCommandLine } from 'react-icons/hi2';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function LoginPage() {
@@ -36,142 +29,77 @@ export default function LoginPage() {
       }
       navigate('/dashboard');
     } catch (err) {
-      const msg =
-        err.response?.data?.detail || 'Something went wrong. Please try again.';
+      const msg = err.response?.data?.detail || 'Something went wrong. Please try again.';
       setError(msg);
     } finally {
       setLoading(false);
     }
   };
 
-  // Animation variants
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 80, damping: 20 } }
-  };
-
-  const slideIn = {
-    hidden: { opacity: 0, x: 40 },
-    show: { opacity: 1, x: 0, transition: { type: 'spring', stiffness: 80, damping: 20 } },
-    exit: { opacity: 0, x: -40, transition: { duration: 0.2 } }
-  };
-
   return (
-    <div className="login-page" style={{ background: '#000' }}>
+    <div className="min-h-screen bg-zinc-950 flex flex-col md:flex-row font-sans text-zinc-300">
       {/* Hero Side - Left */}
-      <div 
-        className="login-page__hero" 
-        style={{ 
-          background: 'radial-gradient(circle at top left, rgba(16, 185, 129, 0.15), #000 60%)',
-          borderRight: '1px solid rgba(255, 255, 255, 0.05)'
-        }}
-      >
+      <div className="flex-1 bg-zinc-950 border-r border-zinc-900/60 relative overflow-hidden flex items-center justify-center p-8 md:p-16">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_50%)]" />
+        
         <motion.div 
-          className="login-hero-content"
-          variants={staggerContainer}
-          initial="hidden"
-          animate="show"
-          style={{ textAlign: 'left', padding: '60px', width: '100%', maxWidth: '600px' }}
+          className="relative z-10 w-full max-w-lg"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <motion.div variants={fadeUp} style={{ marginBottom: '40px' }}>
-            <div 
-              style={{ 
-                width: '64px', height: '64px', 
-                background: 'rgba(255, 255, 255, 0.05)', 
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: '16px',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                boxShadow: '0 0 40px rgba(16, 185, 129, 0.2)'
-              }}
-            >
-              <HiOutlineCpuChip size={32} color="#10b981" />
-            </div>
-          </motion.div>
+          <div className="w-14 h-14 rounded-xl bg-zinc-900/80 border border-zinc-800/80 flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.15)] mb-10">
+            <HiOutlineCommandLine size={28} className="text-blue-500" />
+          </div>
           
-          <motion.h1 
-            variants={fadeUp}
-            style={{ 
-              fontSize: '3.5rem', 
-              fontWeight: 700, 
-              lineHeight: 1.1,
-              letterSpacing: '-0.02em',
-              color: '#fff',
-              marginBottom: '24px'
-            }}
-          >
-            Intelligence for <br/>
-            <span style={{ color: '#10b981' }}>Sales Strategy.</span>
-          </motion.h1>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-white leading-[1.1] mb-6">
+            E-commerce <br />
+            <span className="text-blue-500">Intelligence.</span>
+          </h1>
           
-          <motion.p 
-            variants={fadeUp}
-            style={{ 
-              fontSize: '1.15rem', 
-              color: 'rgba(255, 255, 255, 0.85)', 
-              lineHeight: 1.6,
-              maxWidth: '480px'
-            }}
-          >
-            Leverage Deep Q-Networks for dynamic discount optimization, 
-            automated performance reports, and AI-driven content generation.
-          </motion.p>
+          <p className="text-lg text-zinc-400 leading-relaxed max-w-[400px]">
+            ShopFlow CRM integrates deep reinforcement learning to optimize discounts, track LTV, and manage operations.
+          </p>
         </motion.div>
       </div>
 
       {/* Form Side - Right */}
-      <div className="login-page__form-section" style={{ background: '#09090b' }}>
+      <div className="flex-1 bg-zinc-950/50 flex items-center justify-center p-8 md:p-16">
         <motion.div 
-          className="login-form-container"
+          className="w-full max-w-md"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
           <AnimatePresence mode="wait">
             <motion.div
               key={isRegister ? 'register' : 'login'}
-              variants={slideIn}
-              initial="hidden"
-              animate="show"
-              exit="exit"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
             >
-              <h2 style={{ fontSize: '2rem', fontWeight: 700, color: '#fff', marginBottom: '8px' }}>
+              <h2 className="text-3xl font-bold text-white mb-2 tracking-tight">
                 {isRegister ? 'Create Account' : 'Welcome Back'}
               </h2>
-              <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: '0.95rem', marginBottom: '32px' }}>
-                {isRegister
-                  ? 'Sign up to access the analytics platform'
-                  : 'Enter your credentials to continue'}
+              <p className="text-zinc-500 mb-8">
+                {isRegister ? 'Sign up to access the analytics platform' : 'Enter your credentials to continue'}
               </p>
 
               {error && (
-                <motion.div 
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  className="login-form__error"
-                >
+                <div className="p-3 mb-6 bg-red-500/10 border border-red-500/20 text-red-400 rounded-md text-sm">
                   {error}
-                </motion.div>
+                </div>
               )}
 
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label className="form-label" htmlFor="username">Username</label>
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label className="block text-sm font-medium text-zinc-400 mb-1.5" htmlFor="username">Username</label>
                   <input
                     id="username"
-                    className="form-input"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition-all"
                     type="text"
-                    placeholder="e.g. jdoe123"
+                    placeholder="e.g. admin"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
@@ -181,16 +109,15 @@ export default function LoginPage() {
 
                 {isRegister && (
                   <motion.div 
-                    className="form-group"
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                   >
-                    <label className="form-label" htmlFor="email">Email</label>
+                    <label className="block text-sm font-medium text-zinc-400 mb-1.5" htmlFor="email">Email</label>
                     <input
                       id="email"
-                      className="form-input"
+                      className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition-all"
                       type="email"
-                      placeholder="e.g. jdoe@example.com"
+                      placeholder="admin@example.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -198,11 +125,11 @@ export default function LoginPage() {
                   </motion.div>
                 )}
 
-                <div className="form-group" style={{ marginBottom: '32px' }}>
-                  <label className="form-label" htmlFor="password">Password</label>
+                <div>
+                  <label className="block text-sm font-medium text-zinc-400 mb-1.5" htmlFor="password">Password</label>
                   <input
                     id="password"
-                    className="form-input"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition-all"
                     type="password"
                     placeholder="••••••••"
                     value={password}
@@ -212,25 +139,22 @@ export default function LoginPage() {
                   />
                 </div>
 
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                <button
                   type="submit"
-                  className="btn btn--primary btn--lg"
                   disabled={loading}
-                  style={{ width: '100%', background: '#10b981', color: '#000', fontWeight: 600, boxShadow: '0 4px 14px rgba(16, 185, 129, 0.4)' }}
+                  className="w-full mt-2 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2.5 rounded-lg transition-colors flex items-center justify-center disabled:opacity-50"
                 >
                   {loading ? (
-                    <span className="spinner spinner--sm" style={{ borderColor: 'rgba(0,0,0,0.2)', borderTopColor: '#000' }} />
+                    <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
                   ) : isRegister ? (
                     'Create Account'
                   ) : (
                     'Sign In'
                   )}
-                </motion.button>
+                </button>
               </form>
 
-              <div className="login-form__toggle" style={{ marginTop: '32px', color: 'rgba(255,255,255,0.6)' }}>
+              <div className="mt-8 text-center text-sm text-zinc-500">
                 {isRegister ? 'Already have an account?' : "Don't have an account?"}
                 <button
                   type="button"
@@ -238,7 +162,7 @@ export default function LoginPage() {
                     setIsRegister(!isRegister);
                     setError('');
                   }}
-                  style={{ color: '#10b981', background: 'none', border: 'none', marginLeft: '8px', cursor: 'pointer', fontWeight: 600 }}
+                  className="text-blue-500 hover:text-blue-400 ml-2 font-medium bg-transparent border-none cursor-pointer"
                 >
                   {isRegister ? 'Sign In' : 'Sign Up'}
                 </button>
