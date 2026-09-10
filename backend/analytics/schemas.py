@@ -68,17 +68,21 @@ class BatchPredictResponse(BaseModel):
 
 class ModelSummaryResponse(BaseModel):
     """Response for the model evaluation summary."""
-    profit_improvement_pct: float
-    total_historical_profit: float
-    total_agent_estimated_profit: float
-    mean_historical_reward: float
-    mean_agent_estimated_reward: float
-    historical_positive_profit_rate: float
-    agent_positive_profit_rate: float
-    action_agreement_rate: float
+    profit_improvement_pct: float = 0.0
+    total_historical_profit: float = 0.0
+    total_agent_estimated_profit: float = 0.0
+    mean_historical_reward: float = 0.0
+    mean_agent_estimated_reward: float = 0.0
+    historical_positive_profit_rate: float = 0.0
+    agent_positive_profit_rate: float = 0.0
+    action_agreement_rate: float = 0.0
     per_category: Optional[dict] = None
     agent_discount_distribution: Optional[dict] = None
     historical_discount_distribution: Optional[dict] = None
+    overall: Optional[dict] = None
+    by_segment: Optional[dict] = None
+    by_state_top5: Optional[dict] = None
+    by_payment: Optional[dict] = None
 
 
 class DiscountBinsResponse(BaseModel):

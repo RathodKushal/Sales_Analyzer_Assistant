@@ -97,6 +97,12 @@ export const analyticsAPI = {
   getDiscountBins: () =>
     client.get('/analytics/discount-bins'),
 
+  getHypeProducts: (limit = 150, search = null) => {
+    const params = { limit };
+    if (search) params.search = search;
+    return client.get('/analytics/hype-products', { params });
+  },
+
   getHypePrediction: (stockCode) =>
     client.get(`/analytics/hype/${stockCode}`),
 
@@ -112,6 +118,9 @@ export const analyticsAPI = {
 
   getCategoryTrends: () =>
     client.get('/analytics/category-trends'),
+
+  getDatasetMeta: () =>
+    client.get('/analytics/dataset-meta'),
 };
 
 // ── Reports API ─────────────────────────────────────────
@@ -149,6 +158,8 @@ export const ingestionAPI = {
   },
   getDatasetStatus: () =>
     client.get('/ingestion/dataset-status'),
+  resetDataset: () =>
+    client.post('/ingestion/reset-dataset'),
   downloadTemplate: () =>
     client.get('/ingestion/sample-template', { responseType: 'blob' }),
   getHistory: () =>

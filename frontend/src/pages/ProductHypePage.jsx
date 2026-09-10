@@ -27,19 +27,15 @@ export default function ProductHypePage() {
   useEffect(() => {
     async function loadProducts() {
       try {
-        const res = await analyticsAPI.getHypePrediction('85123A').catch(() => null);
-        // Also fetch product list
-        const client = (await import('../api/client')).default;
-        const listRes = await client.get('/analytics/hype-products?limit=150');
-        if (listRes.data?.products) {
+        const listRes = await analyticsAPI.getHypeProducts(150);
+        if (listRes.data?.products && listRes.data.products.length > 0) {
           setProductList(listRes.data.products);
-          if (listRes.data.products.length > 0) {
-            const firstCode = listRes.data.products[0].stock_code;
-            setStockCode(firstCode);
-            setSelectedProduct(firstCode);
-            // Fetch initial product hype
-            fetchHypeForCode(firstCode);
-          }
+          const firstCode = listRes.data.products[0].stock_code;
+          setStockCode(firstCode);
+          setSelectedProduct(firstCode);
+          fetchHypeForCode(firstCode);
+        } else {
+          setProductList([]);
         }
       } catch (err) {
         console.error(err);
@@ -122,7 +118,9 @@ export default function ProductHypePage() {
               onChange={(e) => handleSelectProduct(e.target.value)}
               className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-4 py-2.5 text-zinc-200 focus:outline-none focus:border-blue-500"
             >
-              <option value="" disabled>-- Select a Product from Dataset --</option>
+              <option value="" disabled>
+                {productList.length > 0 ? '-- Select a Product from Dataset --' : '-- No Products (Upload a dataset first) --'}
+              </option>
               {productList.map((p) => (
                 <option key={p.stock_code} value={p.stock_code}>
                   [{p.stock_code}] {p.description} ({p.demand_emoji} {p.demand_label})

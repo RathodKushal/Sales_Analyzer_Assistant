@@ -20,9 +20,13 @@ def get_returns(db: Session, skip: int = 0, limit: int = 50, status: Optional[st
     }
 
 def get_return_stats(db: Session):
+    from backend.orders.models import Order
     total_returns = db.query(models.ReturnRecord).count()
     total_refunds = db.query(func.sum(models.ReturnRecord.refund_amount)).scalar() or 0.0
+    total_orders = db.query(Order).count()
     
+    return_rate_pct = (total_returns / total_orders * 100) if total_orders > 0 else 0.0
+
     # Reasons breakdown
     reasons = db.query(
         models.ReturnRecord.return_reason,
@@ -32,5 +36,8 @@ def get_return_stats(db: Session):
     return {
         "total_returns": total_returns,
         "total_refunds": total_refunds,
+        "return_rate_percentage": round(return_rate_pct, 2),
+        "has_data": total_returns > 0,
         "reasons": [{"reason": r.return_reason, "count": r.count} for r in reasons]
     }
+

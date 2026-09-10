@@ -106,6 +106,19 @@ def get_discount_bins(
 
 
 @router.get(
+    "/dataset-meta",
+    summary="Get active dataset categories, segments, and regions for AI forms",
+)
+def get_dataset_meta(
+    _user: User = Depends(get_current_user),
+    model: ModelService = Depends(get_model_service),
+):
+    """Returns categories, segments, and states from active dataset."""
+    return model.get_dataset_meta()
+
+
+
+@router.get(
     "/hype-products",
     summary="Get list of products with hype predictions",
 )

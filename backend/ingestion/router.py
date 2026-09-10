@@ -113,32 +113,112 @@ async def upload_sales_dataset(
 def get_dataset_status(
     current_user: User = Depends(get_current_user)
 ):
-    """Return status and info about the currently active sales dataset."""
+    """Return status, metrics availability, and info about the currently active sales dataset."""
     from pathlib import Path
-    import pandas as pd
+    import json
 
     project_root = Path(__file__).resolve().parent.parent.parent
-    master_path = project_root / "data" / "uploaded_sales_dataset.csv"
+    data_dir = project_root / "data"
+    master_path = data_dir / "uploaded_sales_dataset.csv"
+    meta_path = data_dir / "dataset_metadata.json"
 
     if not master_path.exists():
         return {
             "has_dataset": False,
-            "message": "No single uploaded dataset found. System is using default dataset.",
+            "message": "No active dataset. System is in zero/null state.",
+            "total_rows": 0,
+            "total_revenue": 0.0,
+            "total_orders": 0,
+            "total_customers": 0,
+            "total_products": 0,
+            "available_metrics": {
+                "revenue": False,
+                "orders": False,
+                "avg_order_value": False,
+                "products": False,
+                "categories": False,
+                "customers": False,
+                "returns": False,
+                "profit": False,
+                "location": False,
+            },
+            "missing_tooltips": {
+                "returns": "This data not mentioned in the dataset",
+                "customers": "This data not mentioned in the dataset",
+                "customer_segments": "This data not mentioned in the dataset",
+                "categories": "This data not mentioned in the dataset",
+                "profit": "This data not mentioned in the dataset",
+                "location": "This data not mentioned in the dataset",
+            },
         }
 
+    if meta_path.exists():
+        try:
+            with open(meta_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+
+    # Fallback if metadata json missing but master CSV exists
     try:
+        import pandas as pd
         df = pd.read_csv(master_path)
+        has_cat = "Category" in df.columns and not (df["Category"] == "-").all()
+        has_cust = "CustomerID" in df.columns and not (df["CustomerID"] == "-").all()
         return {
             "has_dataset": True,
             "file_name": "uploaded_sales_dataset.csv",
             "total_rows": len(df),
             "total_revenue": float(df["TotalAmount"].sum()) if "TotalAmount" in df.columns else 0.0,
-            "categories": sorted(df["Category"].unique().tolist()) if "Category" in df.columns else [],
-            "has_missing_category": "-" in df["Category"].values if "Category" in df.columns else True,
-            "columns": df.columns.tolist(),
+            "total_orders": df["OrderID"].nunique() if "OrderID" in df.columns else len(df),
+            "total_products": df["StockCode"].nunique() if "StockCode" in df.columns else len(df),
+            "categories_found": sorted([c for c in df["Category"].unique().tolist() if c != "-"]) if has_cat else [],
+            "available_metrics": {
+                "revenue": "TotalAmount" in df.columns,
+                "orders": True,
+                "avg_order_value": True,
+                "products": True,
+                "categories": has_cat,
+                "customers": has_cust,
+                "returns": False,
+                "profit": "Profit" in df.columns and df["Profit"].notna().any(),
+                "location": "Country" in df.columns and not (df["Country"] == "-").all(),
+            },
+            "missing_tooltips": {
+                "returns": "This data not mentioned in the dataset",
+                "customers": "This data not mentioned in the dataset",
+                "customer_segments": "This data not mentioned in the dataset",
+                "categories": "This data not mentioned in the dataset",
+                "profit": "This data not mentioned in the dataset",
+                "location": "This data not mentioned in the dataset",
+            },
         }
     except Exception as e:
         return {"has_dataset": False, "error": str(e)}
+
+
+@router.post("/reset-dataset")
+def reset_dataset(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """
+    Reset all data to 0/null: deletes uploaded dataset and empties business database tables.
+    """
+    from .dataset_parser import clear_active_dataset
+    from backend.analytics.service import ModelService
+
+    result = clear_active_dataset(db)
+    
+    # Reset in-memory model caches
+    try:
+        model_service = ModelService.get_instance()
+        model_service.forecaster = None
+        model_service.hype_results = {"product_predictions": {}}
+    except Exception as e:
+        print(f"[ResetDataset] Note: {e}")
+
+    return result
 
 
 @router.get("/sample-template")

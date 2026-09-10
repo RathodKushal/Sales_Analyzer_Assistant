@@ -15,7 +15,7 @@ class OrderItemResponse(OrderItemBase):
     order_id: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class OrderBase(BaseModel):
     order_id: str
@@ -35,7 +35,7 @@ class OrderResponse(OrderBase):
     items: Optional[List[OrderItemResponse]] = []
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class OrderListResponse(BaseModel):
     total: int

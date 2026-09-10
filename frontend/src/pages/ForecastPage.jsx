@@ -213,93 +213,100 @@ export default function ForecastPage() {
         ))}
       </div>
 
-      {/* Main Chart */}
-      <motion.div
-        key={selectedCategory}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="bg-zinc-950/50 border border-zinc-800/60 rounded-xl p-6"
-      >
-        <h3 className="text-sm font-medium text-zinc-400 mb-4">
-          Revenue Forecast — {selectedCategory}
-        </h3>
-        <div className="h-[400px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart data={chartData}>
-              <defs>
-                <linearGradient id="confidenceBand" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.15} />
-                  <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.02} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
-              <XAxis
-                dataKey="date"
-                tick={{ fill: '#71717a', fontSize: 11 }}
-                tickLine={false}
-                axisLine={{ stroke: '#27272a' }}
-              />
-              <YAxis
-                tick={{ fill: '#71717a', fontSize: 11 }}
-                tickFormatter={formatCurrency}
-                tickLine={false}
-                axisLine={{ stroke: '#27272a' }}
-              />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: '#18181b',
-                  border: '1px solid #3f3f46',
-                  borderRadius: '8px',
-                  fontSize: '12px',
-                }}
-                labelStyle={{ color: '#a1a1aa' }}
-                formatter={(value, name) => [formatCurrency(value), name]}
-              />
-              <Legend
-                wrapperStyle={{ fontSize: '12px', color: '#a1a1aa' }}
-              />
-              {/* Confidence band (area between lower and upper) */}
-              <Area
-                type="monotone"
-                dataKey="upper"
-                stroke="none"
-                fill="url(#confidenceBand)"
-                name="Upper Bound"
-                dot={false}
-              />
-              <Area
-                type="monotone"
-                dataKey="lower"
-                stroke="none"
-                fill="#050505"
-                name="Lower Bound"
-                dot={false}
-              />
-              {/* Actual historical line */}
-              <Line
-                type="monotone"
-                dataKey="actual"
-                stroke="#22c55e"
-                strokeWidth={2}
-                dot={{ r: 3, fill: '#22c55e' }}
-                name="Actual Revenue"
-                connectNulls={false}
-              />
-              {/* Forecast line */}
-              <Line
-                type="monotone"
-                dataKey="forecast"
-                stroke="#3b82f6"
-                strokeWidth={2}
-                strokeDasharray="5 5"
-                dot={{ r: 3, fill: '#3b82f6' }}
-                name="Forecast"
-                connectNulls={false}
-              />
-            </ComposedChart>
-          </ResponsiveContainer>
+      {/* Main Chart or Zero State */}
+      {chartData.length > 0 ? (
+        <motion.div
+          key={selectedCategory}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="bg-zinc-950/50 border border-zinc-800/60 rounded-xl p-6"
+        >
+          <h3 className="text-sm font-medium text-zinc-400 mb-4">
+            Revenue Forecast — {selectedCategory}
+          </h3>
+          <div className="h-[400px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <ComposedChart data={chartData}>
+                <defs>
+                  <linearGradient id="confidenceBand" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.15} />
+                    <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.02} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
+                <XAxis
+                  dataKey="date"
+                  tick={{ fill: '#71717a', fontSize: 11 }}
+                  tickLine={false}
+                  axisLine={{ stroke: '#27272a' }}
+                />
+                <YAxis
+                  tick={{ fill: '#71717a', fontSize: 11 }}
+                  tickFormatter={formatCurrency}
+                  tickLine={false}
+                  axisLine={{ stroke: '#27272a' }}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: '#18181b',
+                    border: '1px solid #3f3f46',
+                    borderRadius: '8px',
+                    fontSize: '12px',
+                  }}
+                  labelStyle={{ color: '#a1a1aa' }}
+                  formatter={(value, name) => [formatCurrency(value), name]}
+                />
+                <Legend
+                  wrapperStyle={{ fontSize: '12px', color: '#a1a1aa' }}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="upper"
+                  stroke="none"
+                  fill="url(#confidenceBand)"
+                  name="Upper Bound"
+                  dot={false}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="lower"
+                  stroke="none"
+                  fill="#050505"
+                  name="Lower Bound"
+                  dot={false}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="actual"
+                  stroke="#22c55e"
+                  strokeWidth={2}
+                  dot={{ r: 3, fill: '#22c55e' }}
+                  name="Actual Revenue"
+                  connectNulls={false}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="forecast"
+                  stroke="#3b82f6"
+                  strokeWidth={2}
+                  strokeDasharray="5 5"
+                  dot={{ r: 3, fill: '#3b82f6' }}
+                  name="Forecast"
+                  connectNulls={false}
+                />
+              </ComposedChart>
+            </ResponsiveContainer>
+          </div>
+        </motion.div>
+      ) : (
+        <div className="bg-zinc-950/50 border border-zinc-800/60 rounded-xl p-12 text-center">
+          <p className="text-zinc-300 font-medium text-base mb-1">Zero-State Active: No forecast model trained yet.</p>
+          <p className="text-zinc-500 text-xs max-w-md mx-auto">
+            Upload your sales dataset in the Dataset Upload page. The AI Forecaster will automatically fit Prophet models strictly to your historical revenue.
+          </p>
         </div>
-      </motion.div>
+      )}
+
 
       {/* Category Highlights Table */}
       {summary.category_highlights?.length > 0 && (

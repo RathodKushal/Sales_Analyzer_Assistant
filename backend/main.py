@@ -68,29 +68,27 @@ async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
     print("[Startup] Database tables created")
 
-    # 2. Seed default admin user & ensure dataset seeded
+    # 2. Seed default admin user (admin/admin123)
     _seed_admin_user()
-    _check_and_seed_dataset()
 
-    # 3. Load ML model
+    # 3. Load ML model (if available)
     try:
         model_service = ModelService.get_instance()
         model_service.load()
         print("[Startup] ML model loaded successfully")
     except FileNotFoundError as e:
-        print(f"[Startup] WARNING: {e}")
-        print("[Startup] Model endpoints will return errors until the model is trained.")
+        print(f"[Startup] NOTE: {e}")
     except Exception as e:
-        print(f"[Startup] WARNING: Failed to load model: {e}")
+        print(f"[Startup] NOTE: Failed to load model: {e}")
 
-    # 4. Load Hype RL results (independent of DQN discount model)
+    # 4. Load Hype RL results
     try:
         model_service = ModelService.get_instance()
         model_service.load_hype_results()
     except Exception as e:
-        print(f"[Startup] WARNING: Failed to load hype results: {e}")
+        print(f"[Startup] NOTE: Failed to load hype results: {e}")
 
-    print("[Startup] Server is ready!")
+    print("[Startup] Server is ready! Zero-state active until user uploads dataset.")
     print("=" * 60)
 
     yield
@@ -100,7 +98,7 @@ async def lifespan(app: FastAPI):
 
 
 def _seed_admin_user():
-    """Create a default admin user if no users exist yet."""
+    """Create or update default admin user with admin/admin123 credentials."""
     from sqlalchemy.orm import Session
     from backend.database import SessionLocal
     from backend.auth.models import User
@@ -108,8 +106,8 @@ def _seed_admin_user():
 
     db: Session = SessionLocal()
     try:
-        user_count = db.query(User).count()
-        if user_count == 0:
+        admin = db.query(User).filter(User.username == "admin").first()
+        if not admin:
             admin = User(
                 username="admin",
                 email="admin@salesanalyzer.local",
@@ -120,29 +118,9 @@ def _seed_admin_user():
             db.commit()
             print("[Startup] Default admin user created (admin / admin123)")
         else:
-            print(f"[Startup] {user_count} user(s) already exist — skipping seed")
-    finally:
-        db.close()
-
-
-def _check_and_seed_dataset():
-    """Seed database from data/ CSVs if customers table is empty."""
-    from sqlalchemy.orm import Session
-    from backend.database import SessionLocal
-    from backend.customers.models import Customer
-
-    db: Session = SessionLocal()
-    try:
-        cust_count = db.query(Customer).count()
-        if cust_count == 0:
-            print("[Startup] Customer dataset empty — running initial database seeder...")
-            try:
-                from seed_db import seed_database
-                seed_database()
-            except Exception as e:
-                print(f"[Startup] WARNING: Could not seed database: {e}")
-        else:
-            print(f"[Startup] Database populated ({cust_count} customers ready)")
+            admin.hashed_password = hash_password("admin123")
+            db.commit()
+            print("[Startup] Admin user credentials verified (admin / admin123)")
     finally:
         db.close()
 

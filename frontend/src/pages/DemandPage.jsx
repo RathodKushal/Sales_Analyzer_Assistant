@@ -105,6 +105,18 @@ export default function DemandPage() {
         </p>
       </div>
 
+      {!demandData?.has_data && (
+        <div className="p-4 bg-zinc-900/60 border border-zinc-800 rounded-xl flex items-center justify-between gap-4">
+          <div>
+            <h4 className="text-sm font-semibold text-zinc-200">Zero-State Active: No demand data generated yet</h4>
+            <p className="text-xs text-zinc-400 mt-0.5">
+              Upload your sales dataset in Dataset Upload to automatically run demand intelligence on all products.
+            </p>
+          </div>
+        </div>
+      )}
+
+
       {/* Tabs */}
       <div className="flex gap-1 bg-zinc-900 rounded-lg p-1 border border-zinc-800 w-fit">
         {tabs.map(tab => (

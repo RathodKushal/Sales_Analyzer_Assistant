@@ -30,6 +30,7 @@ def get_order(db: Session, order_id: str):
 def get_order_stats(db: Session):
     total_orders = db.query(models.Order).count()
     total_revenue = db.query(func.sum(models.Order.total_amount)).scalar() or 0.0
+    avg_order_value = (total_revenue / total_orders) if total_orders > 0 else 0.0
     
     # Revenue by state
     state_revenue = db.query(
@@ -40,5 +41,7 @@ def get_order_stats(db: Session):
     return {
         "total_orders": total_orders,
         "total_revenue": total_revenue,
-        "top_states": [{"state": s.state, "revenue": s.revenue} for s in state_revenue]
+        "average_order_value": avg_order_value,
+        "top_states": [{"state": s.state, "revenue": s.revenue} for s in state_revenue if s.state and s.state != "-"]
     }
+

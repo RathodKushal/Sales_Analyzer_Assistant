@@ -15,7 +15,7 @@ class ProductResponse(ProductBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ProductListResponse(BaseModel):
     total: int

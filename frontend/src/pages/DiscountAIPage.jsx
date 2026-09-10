@@ -1,41 +1,27 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { analyticsAPI } from '../api/client';
 import { Card } from '../components/UI';
-import { HiOutlineSparkles, HiOutlineArrowTrendingUp, HiOutlineCheckCircle } from 'react-icons/hi2';
+import { HiOutlineSparkles, HiOutlineArrowTrendingUp, HiOutlineCheckCircle, HiOutlineCloudArrowUp } from 'react-icons/hi2';
 import toast from 'react-hot-toast';
 
-const DATASET_CATEGORIES = [
-  'Miscellaneous',
-  'Stationery & Office',
-  'Home Decor',
-  'Textiles & Linen',
-  'Garden & Outdoor',
-  'Kitchen & Dining',
-  'Bags & Storage',
-  'Party & Celebration',
-  'Toys & Games',
-  'Fashion & Accessories',
-];
-
-const CUSTOMER_SEGMENTS = [
-  'Champions',
-  'Loyal',
-  'New',
-  'At Risk',
-  'Lost',
-];
-
 export default function DiscountAIPage() {
+  const navigate = useNavigate();
   const [bins, setBins] = useState([]);
   const [summary, setSummary] = useState(null);
+  const [datasetMeta, setDatasetMeta] = useState(null);
   const [loading, setLoading] = useState(true);
   const [predicting, setPredicting] = useState(false);
   const [prediction, setPrediction] = useState(null);
 
+  const [categories, setCategories] = useState([]);
+  const [states, setStates] = useState([]);
+  const [segments, setSegments] = useState([]);
+
   const [formData, setFormData] = useState({
-    category: 'Home Decor',
+    category: '',
     segment: 'Champions',
-    state: 'Maharashtra',
+    state: '',
     quantity: 2,
     sales: 1000,
   });
@@ -43,14 +29,35 @@ export default function DiscountAIPage() {
   useEffect(() => {
     async function fetchModelData() {
       try {
-        const [binsRes, summaryRes] = await Promise.all([
+        const [binsRes, summaryRes, metaRes] = await Promise.all([
           analyticsAPI.getDiscountBins().catch(() => ({ data: { discount_bins: [0.0, 0.05, 0.1, 0.15, 0.2] } })),
           analyticsAPI.getSummary().catch(() => ({ data: null })),
+          analyticsAPI.getDatasetMeta().catch(() => ({ data: { has_dataset: false, categories: [], states: [], segments: [] } })),
         ]);
+        
         setBins(binsRes.data.discount_bins || []);
         if (summaryRes.data) {
           setSummary(summaryRes.data);
         }
+
+        const meta = metaRes.data || {};
+        setDatasetMeta(meta);
+
+        const loadedCats = meta.categories && meta.categories.length > 0 ? meta.categories : [];
+        const loadedStates = meta.states && meta.states.length > 0 ? meta.states : [];
+        const loadedSegs = meta.segments && meta.segments.length > 0 ? meta.segments : ['Champions', 'Loyal', 'Potential', 'New'];
+
+        setCategories(loadedCats);
+        setStates(loadedStates);
+        setSegments(loadedSegs);
+
+        setFormData(prev => ({
+          ...prev,
+          category: loadedCats[0] || 'General',
+          state: loadedStates[0] || 'General',
+          segment: loadedSegs[0] || 'Champions',
+        }));
+
       } catch (err) {
         console.error(err);
       } finally {
@@ -70,9 +77,9 @@ export default function DiscountAIPage() {
 
     try {
       const payload = {
-        category: formData.category,
-        segment: formData.segment,
-        state: formData.state,
+        category: formData.category || 'General',
+        segment: formData.segment || 'General',
+        state: formData.state || 'General',
         payment_method: 'Credit Card',
         gender: 'Female',
         unit_price: unitPrice,
@@ -105,19 +112,43 @@ export default function DiscountAIPage() {
     );
   }
 
-  const profitImprovement = summary?.profit_improvement_pct ?? 18.5;
-  const agreementRate = summary?.action_agreement_rate ?? 74.2;
+  const hasDataset = Boolean(datasetMeta?.has_dataset);
+  const profitImprovement = summary?.profit_improvement_pct;
+  const agreementRate = summary?.action_agreement_rate;
 
   return (
     <div className="animate-in fade-in duration-500 space-y-8">
-      <header>
-        <h1 className="text-4xl font-bold tracking-tight text-white mb-2 flex items-center gap-3">
-          Discount AI <HiOutlineSparkles className="text-blue-500" />
-        </h1>
-        <p className="text-zinc-400">
-          Optimize discount strategy for your Indian e-commerce transactions using Deep Q-Networks (DQN).
-        </p>
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-4xl font-bold tracking-tight text-white mb-2 flex items-center gap-3">
+            Discount AI <HiOutlineSparkles className="text-blue-500" />
+          </h1>
+          <p className="text-zinc-400">
+            Optimize discount strategy for your transactions using Deep Q-Networks (DQN).
+          </p>
+        </div>
+
+        {!hasDataset && (
+          <button
+            onClick={() => navigate('/upload')}
+            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-sm font-medium transition self-start"
+          >
+            <HiOutlineCloudArrowUp className="text-lg" />
+            Upload Dataset
+          </button>
+        )}
       </header>
+
+      {!hasDataset && (
+        <div className="p-4 bg-zinc-900/60 border border-zinc-800 rounded-xl flex items-center justify-between gap-4">
+          <div>
+            <h4 className="text-sm font-semibold text-zinc-200">Zero-State Active</h4>
+            <p className="text-xs text-zinc-400 mt-0.5">
+              No sales dataset uploaded yet. Upload your transaction dataset to calibrate product categories and pricing margins.
+            </p>
+          </div>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Prediction Form */}
@@ -126,15 +157,21 @@ export default function DiscountAIPage() {
             <h2 className="text-lg font-semibold text-zinc-100 mb-6">Predict Optimal Discount</h2>
             <form onSubmit={handlePredict} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-1">Product Category</label>
+                <label className="block text-sm font-medium text-zinc-400 mb-1">
+                  Product Category {categories.length > 0 && `(${categories.length} in dataset)`}
+                </label>
                 <select
                   className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2.5 text-zinc-200 focus:outline-none focus:border-blue-500"
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                 >
-                  {DATASET_CATEGORIES.map((cat) => (
-                    <option key={cat} value={cat}>{cat}</option>
-                  ))}
+                  {categories.length > 0 ? (
+                    categories.map((cat) => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))
+                  ) : (
+                    <option value="General">General (Default)</option>
+                  )}
                 </select>
               </div>
 
@@ -145,25 +182,32 @@ export default function DiscountAIPage() {
                   value={formData.segment}
                   onChange={(e) => setFormData({ ...formData, segment: e.target.value })}
                 >
-                  {CUSTOMER_SEGMENTS.map((seg) => (
-                    <option key={seg} value={seg}>{seg}</option>
-                  ))}
+                  {segments.length > 0 ? (
+                    segments.map((seg) => (
+                      <option key={seg} value={seg}>{seg}</option>
+                    ))
+                  ) : (
+                    <option value="Champions">Champions</option>
+                  )}
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-1">State / Region</label>
+                <label className="block text-sm font-medium text-zinc-400 mb-1">
+                  State / Region {states.length > 0 && `(${states.length} in dataset)`}
+                </label>
                 <select
                   className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-3 py-2.5 text-zinc-200 focus:outline-none focus:border-blue-500"
                   value={formData.state}
                   onChange={(e) => setFormData({ ...formData, state: e.target.value })}
                 >
-                  <option value="Maharashtra">Maharashtra</option>
-                  <option value="Delhi">Delhi</option>
-                  <option value="Karnataka">Karnataka</option>
-                  <option value="Tamil Nadu">Tamil Nadu</option>
-                  <option value="Gujarat">Gujarat</option>
-                  <option value="West Bengal">West Bengal</option>
+                  {states.length > 0 ? (
+                    states.map((st) => (
+                      <option key={st} value={st}>{st}</option>
+                    ))
+                  ) : (
+                    <option value="General">General (Default)</option>
+                  )}
                 </select>
               </div>
 
@@ -191,7 +235,7 @@ export default function DiscountAIPage() {
               <button
                 type="submit"
                 disabled={predicting}
-                className="w-full mt-4 bg-zinc-100 hover:bg-white text-zinc-900 font-medium py-2.5 rounded-md transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full mt-4 bg-zinc-100 hover:bg-white text-zinc-900 font-medium py-2.5 rounded-md transition-colors flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
               >
                 {predicting ? (
                   <>
@@ -280,13 +324,13 @@ export default function DiscountAIPage() {
             <div className="grid grid-cols-2 gap-4">
               <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
                 <div className="text-3xl font-bold text-emerald-400 mb-1">
-                  +{profitImprovement.toFixed(1)}%
+                  {profitImprovement != null ? `+${profitImprovement.toFixed(1)}%` : '—'}
                 </div>
                 <div className="text-xs text-zinc-400 uppercase tracking-wider">Estimated Profit Uplift</div>
               </div>
               <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-lg">
                 <div className="text-3xl font-bold text-blue-400 mb-1">
-                  {agreementRate.toFixed(1)}%
+                  {agreementRate != null ? `${agreementRate.toFixed(1)}%` : '—'}
                 </div>
                 <div className="text-xs text-zinc-400 uppercase tracking-wider">Historical Strategy Alignment</div>
               </div>
