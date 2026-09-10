@@ -1,0 +1,5493 @@
+{
+  "product_predictions": {
+    "STK10331": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK10356": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK10372": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK10994": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK11177": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK11260": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK11596": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK11677": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK11854": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK11884": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK11906": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK12012": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK12193": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK12258": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK12373": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK12452": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK12524": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK12621": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK12634": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK12771": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK13121": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK13173": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK13196": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK13203": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK13357": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK13411": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK13487": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK13951": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK14048": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK14364": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK14521": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK14557": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK14635": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK14739": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK15103": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK15177": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK15531": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK15574": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK15732": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK15772": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK16111": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK16171": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK16235": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK16885": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK16974": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK17011": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK17735": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK18040": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK18155": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK18451": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK18472": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK18524": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK18577": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK18610": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK18817": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK18952": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK18972": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK19080": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK19083": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK19090": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK19540": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK19627": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK20244": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK20314": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK20949": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK21033": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK21110": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK21192": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK21220": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK21297": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK21479": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK21723": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK21894": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK22150": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK22605": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK22623": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK22678": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK22681": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK22983": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK22998": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK23009": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK23294": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK23417": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK23596": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK23694": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK23952": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK24153": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK24300": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK25453": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK25666": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK25852": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK25938": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK26022": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK26028": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK26187": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK26220": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK26257": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK26262": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK26604": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK26628": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK26910": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK27170": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK27649": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK27681": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK27746": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK27798": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK27867": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK28045": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK28294": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK28519": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK28525": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK28666": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK28752": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK28778": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK28842": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK28867": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK29417": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK29515": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK29553": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK29684": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK29692": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK29783": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK29867": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK30172": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK30237": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK30642": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK30699": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK30970": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK31038": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK31278": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK31294": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK31554": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK31616": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK31793": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK31884": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK31980": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK31996": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK32528": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK32621": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK32637": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK32695": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK32701": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK32897": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK33328": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK33591": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK33691": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK33743": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK33813": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK33911": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK34124": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK34218": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK34618": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK34660": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK34743": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK34913": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK35331": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK36676": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK36872": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK37153": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK37712": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK37779": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK38243": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK38292": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK38336": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK38505": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK38974": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK39236": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK39263": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK39407": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK39512": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK39597": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK39599": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK39649": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK39662": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK39912": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK39927": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK39997": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK40024": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK40032": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK40666": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK40883": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK41201": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK41306": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK41497": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK41508": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK41707": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK41712": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK41722": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK41726": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK41738": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK42434": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK42554": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK42910": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK42959": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK43103": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK43163": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK43172": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK43299": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK43346": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK43359": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK43510": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK43566": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK43966": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK44177": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK44226": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK44437": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK44466": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK44566": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK45003": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK45044": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK45432": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK45769": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK45800": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK46340": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK46403": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK46859": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK46996": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK47056": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK47099": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK47118": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK47178": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK47347": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK47549": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK47979": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK48241": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK48275": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK48879": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK48923": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK49228": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK49302": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK49500": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK49603": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK49692": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK49752": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK49913": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK50101": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK50138": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK50391": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK50616": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK51173": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK51323": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK51401": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK52027": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK52041": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK52196": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK52481": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK52550": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK52988": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK53071": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK53275": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK53332": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK53670": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK53756": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK53852": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK53962": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK54176": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK54474": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK54681": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK54938": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK54947": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK54955": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK54963": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK55024": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK55125": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK55547": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK55819": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK55843": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK56286": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK56414": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK56442": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK57098": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK57828": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK58392": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK58645": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK58726": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK58788": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK59164": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK59249": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK59540": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK59605": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK59697": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK59836": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK60280": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK60858": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK60903": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK60913": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK61109": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK61269": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK61302": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK61551": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK61743": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK61935": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK62267": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK62419": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK62665": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK62712": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK62891": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK62899": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK63042": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK63210": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK63415": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK63608": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK63776": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK64036": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK64109": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK64147": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK64298": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK64321": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK64380": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK65609": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK65797": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK65818": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK66023": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK66456": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK66461": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK66589": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK66595": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK66634": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK66915": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK66917": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK66936": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK67303": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK67624": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK67656": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK67714": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK67808": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK67849": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK68033": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK68138": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK68150": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK68535": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK68593": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK68752": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK69049": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK69515": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK69592": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK69655": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK69666": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK69726": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK69900": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK70172": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK70371": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK70865": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK70915": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK70959": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK71116": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK71242": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK71261": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK71288": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK71370": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK71549": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK71648": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK72002": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK72074": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK73365": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK73396": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK73414": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK73587": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK74610": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK74828": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK74903": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK74966": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK75204": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK75777": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK76330": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK76379": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK76665": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK76981": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK77146": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK77177": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK77189": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK77225": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK77378": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK77661": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK77832": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK77885": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK78018": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK78331": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK78419": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK78538": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK78783": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK79028": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK79071": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK79483": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK79610": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK79723": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK79775": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK80454": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK80469": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK80488": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK80607": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK80941": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK80983": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK81088": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK81110": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK81453": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK81598": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK82010": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK82111": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK82461": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK82470": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK82488": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK82572": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK83085": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK83365": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK83406": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK83588": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK83671": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK83922": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK83996": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK84225": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK84289": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK84515": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK84523": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK84866": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK84972": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK85068": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK85649": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK85756": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK85774": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK85816": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK85830": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK86007": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK86238": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK86412": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK86435": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK86511": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK86923": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK87044": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK88254": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK88346": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK88698": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK88881": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK88914": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK88939": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK88966": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK89053": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK89132": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK89292": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK89305": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK89559": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK89589": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK89608": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK89832": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK89901": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK89949": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK90140": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK91077": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK91097": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK91343": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK91516": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK91824": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK92077": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK92155": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK92299": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK92308": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK92345": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK92485": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK92587": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK92684": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK92923": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK93093": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK93241": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK93283": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK93403": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK93523": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK93613": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK93646": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK93712": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK93787": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK94252": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK94479": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK95322": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    "STK95417": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK95425": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK95433": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK95541": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK95569": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK95888": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK96135": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK96537": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK96662": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK96704": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK96849": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK97172": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK97213": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK97260": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK97337": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        2
+      ]
+    },
+    "STK97969": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK98373": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK98438": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK98861": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK99097": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK99106": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK99187": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-04",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK99300": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-02",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK99394": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK99609": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-01",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    },
+    "STK99916": {
+      "predicted_bin": 2,
+      "actual_growth": 0.0,
+      "target_month": "2019-03",
+      "historical_sales": [
+        0,
+        0,
+        0,
+        1
+      ]
+    }
+  }
+}

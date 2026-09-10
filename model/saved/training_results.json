@@ -1,0 +1,6 @@
+{
+  "total_episodes": 100,
+  "best_reward": -7.73070062689679e-06,
+  "final_epsilon": 0.01,
+  "training_time_seconds": 111.26866483688354
+}

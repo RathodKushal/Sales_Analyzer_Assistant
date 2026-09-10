@@ -1,0 +1,73 @@
+{
+  "overall": {
+    "profit_lift_percentage": -53.150973673038095,
+    "total_profit_predicted": 504389.74333196494,
+    "avg_discount_predicted": 9.49
+  },
+  "by_segment": {
+    "At Risk": {
+      "Count": 2233,
+      "AvgPredDiscount": 0.0,
+      "ProfitLift": 389070.76
+    },
+    "Champions": {
+      "Count": 193,
+      "AvgPredDiscount": 21.68,
+      "ProfitLift": -59569.27
+    },
+    "Lost": {
+      "Count": 1407,
+      "AvgPredDiscount": 16.78,
+      "ProfitLift": -307106.37
+    },
+    "Loyal": {
+      "Count": 12,
+      "AvgPredDiscount": 15.42,
+      "ProfitLift": -69009.83
+    },
+    "Potential": {
+      "Count": 1155,
+      "AvgPredDiscount": 16.86,
+      "ProfitLift": -525623.55
+    }
+  },
+  "by_state_top5": {
+    "Maharashtra": {
+      "ProfitLift": 59841.64,
+      "AvgDiscount": 9.47
+    },
+    "Chhattisgarh": {
+      "ProfitLift": 10763.28,
+      "AvgDiscount": 0.0
+    },
+    "Bihar": {
+      "ProfitLift": 10476.22,
+      "AvgDiscount": 2.21
+    },
+    "Andhra Pradesh": {
+      "ProfitLift": 7254.44,
+      "AvgDiscount": 5.23
+    },
+    "Assam": {
+      "ProfitLift": 6127.98,
+      "AvgDiscount": 1.46
+    }
+  },
+  "by_payment": {
+    "COD": {
+      "AvgDiscount": 10.74
+    },
+    "Credit Card": {
+      "AvgDiscount": 8.47
+    },
+    "Debit Card": {
+      "AvgDiscount": 7.59
+    },
+    "Net Banking": {
+      "AvgDiscount": 11.79
+    },
+    "UPI": {
+      "AvgDiscount": 8.88
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "feature_columns": [
+    "State_Enc",
+    "Category_Enc",
+    "PaymentMethod_Enc",
+    "CustomerSegment_Enc",
+    "Gender_Enc",
+    "UnitPrice",
+    "Quantity",
+    "Profit",
+    "Age",
+    "CustomerLTV",
+    "DaysSinceLastPurchase",
+    "PurchaseFrequency",
+    "AvgOrderValue",
+    "CustomerReturnRate",
+    "OrderMonth",
+    "OrderDayOfWeek",
+    "OrderQuarter",
+    "OrderHour",
+    "DaysSinceFirstPurchase"
+  ],
+  "discount_bins": [
+    0.0,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.25,
+    0.3
+  ],
+  "categorical_cols": [
+    "State",
+    "Category",
+    "PaymentMethod",
+    "CustomerSegment",
+    "Gender"
+  ],
+  "continuous_cols": [
+    "UnitPrice",
+    "Quantity",
+    "TotalAmount",
+    "Profit",
+    "Age",
+    "CustomerLTV",
+    "DaysSinceLastPurchase",
+    "PurchaseFrequency",
+    "AvgOrderValue",
+    "CustomerReturnRate"
+  ],
+  "time_features": [
+    "OrderMonth",
+    "OrderDayOfWeek",
+    "OrderQuarter",
+    "OrderHour",
+    "DaysSinceFirstPurchase"
+  ]
+}
