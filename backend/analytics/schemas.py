@@ -85,3 +85,83 @@ class DiscountBinsResponse(BaseModel):
     """Response listing available discount levels."""
     discount_bins: list[float]
     n_actions: int
+
+
+# ── Forecast Schemas ─────────────────────────────────────────
+
+class ForecastDataPoint(BaseModel):
+    """Time-series data for a single forecast category."""
+    category: str
+    historical: dict  # {dates: [...], values: [...]}
+    forecast: dict    # {dates: [...], values: [...], lower_bound: [...], upper_bound: [...]}
+    trend: list[float]
+
+
+class ForecastSummary(BaseModel):
+    """Summary statistics for the forecast."""
+    total_forecasted_revenue: float
+    avg_monthly_forecast: float
+    last_month_actual: float
+    estimated_growth_pct: float
+    peak_month: Optional[str] = None
+    peak_month_value: float = 0.0
+    categories_analyzed: int
+    category_highlights: list[dict] = []
+
+
+class ForecastResponse(BaseModel):
+    """Response for sales forecast endpoint."""
+    forecasts: dict[str, ForecastDataPoint]
+    summary: ForecastSummary
+    horizon_months: int
+
+
+class DemandProductSignal(BaseModel):
+    """Demand signal for a single product."""
+    stock_code: str
+    demand_score: int
+    demand_label: str
+    demand_emoji: str
+    demand_color: str
+    predicted_bin: int
+    actual_growth_pct: float
+    historical_sales: list = []
+    target_month: str = ""
+
+
+class DemandRecommendation(BaseModel):
+    """Actionable recommendation from demand analysis."""
+    type: str  # "opportunity", "warning", "info"
+    priority: str  # "high", "medium", "low"
+    title: str
+    description: str
+
+
+class DemandAnalysisResponse(BaseModel):
+    """Response for the demand analysis endpoint."""
+    product_demand_signals: list[DemandProductSignal] = []
+    category_forecast_summary: list[dict] = []
+    seasonal_patterns: dict = {}
+    top_rising_products: list[dict] = []
+    top_declining_products: list[dict] = []
+    demand_distribution: dict = {}
+    recommendations: list[DemandRecommendation] = []
+
+
+class CategoryTrendItem(BaseModel):
+    """Trend data for a single category."""
+    category: str
+    historical_dates: list[str]
+    historical_values: list[float]
+    forecast_dates: list[str]
+    forecast_values: list[float]
+    forecast_lower: list[float]
+    forecast_upper: list[float]
+    growth_trend_pct: float
+
+
+class CategoryTrendResponse(BaseModel):
+    """Response for category trends endpoint."""
+    categories: list[CategoryTrendItem]
+    total_categories: int
+

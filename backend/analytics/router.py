@@ -1,10 +1,12 @@
 """
 Analytics Router — ML Model Prediction Endpoints
 ===================================================
-Exposes the trained DQN model for discount optimization predictions.
+Exposes the trained DQN model for discount optimization predictions,
+sales forecasting, and demand analysis.
 """
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query, HTTPException
+from typing import Optional
 
 from backend.auth.models import User
 from backend.auth.utils import get_current_user
@@ -16,6 +18,9 @@ from backend.analytics.schemas import (
     BatchPredictResponse,
     ModelSummaryResponse,
     DiscountBinsResponse,
+    ForecastResponse,
+    DemandAnalysisResponse,
+    CategoryTrendResponse,
 )
 
 router = APIRouter(prefix="/api/analytics", tags=["Analytics & Predictions"])
@@ -101,6 +106,22 @@ def get_discount_bins(
 
 
 @router.get(
+    "/hype-products",
+    summary="Get list of products with hype predictions",
+)
+def get_hype_products(
+    limit: int = Query(100, ge=1, le=500),
+    search: Optional[str] = Query(None, description="Search stock code or product name"),
+    _user: User = Depends(get_current_user),
+    model: ModelService = Depends(get_model_service),
+):
+    """
+    Returns a list of products with pre-computed hype predictions.
+    """
+    return model.get_hype_products(limit=limit, search=search)
+
+
+@router.get(
     "/hype/{stock_code}",
     summary="Get product hype prediction",
 )
@@ -115,5 +136,73 @@ def get_product_hype(
     try:
         return model.get_hype_prediction(stock_code)
     except ValueError as e:
-        from fastapi import HTTPException
         raise HTTPException(status_code=404, detail=str(e))
+
+
+# ── Forecast & Demand Endpoints ─────────────────────────────
+
+
+@router.get(
+    "/forecast",
+    summary="Forecast future sales revenue",
+)
+def forecast_sales(
+    months: int = Query(6, ge=1, le=24, description="Forecast horizon in months"),
+    category: Optional[str] = Query(None, description="Filter by category name"),
+    _user: User = Depends(get_current_user),
+    model: ModelService = Depends(get_model_service),
+):
+    """
+    Generate future sales revenue forecasts using the trained Prophet model.
+    
+    Returns historical data plus predicted values with confidence intervals
+    for the specified time horizon.
+    """
+    try:
+        return model.forecast_sales(
+            horizon_months=months,
+            category=category,
+        )
+    except RuntimeError as e:
+        raise HTTPException(status_code=503, detail=str(e))
+
+
+@router.get(
+    "/demand-analysis",
+    summary="Get comprehensive demand analysis",
+)
+def get_demand_analysis(
+    _user: User = Depends(get_current_user),
+    model: ModelService = Depends(get_model_service),
+):
+    """
+    Returns a comprehensive demand analysis combining:
+    - Product-level demand signals (from Hype RL model)
+    - Category-level revenue forecasts (from Prophet)
+    - Seasonal demand patterns
+    - Top rising/declining products
+    - Actionable recommendations
+    """
+    try:
+        return model.get_demand_analysis()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get(
+    "/category-trends",
+    summary="Get category-level revenue trends",
+)
+def get_category_trends(
+    _user: User = Depends(get_current_user),
+    model: ModelService = Depends(get_model_service),
+):
+    """
+    Returns historical and forecasted revenue trends for each
+    product category, including growth percentages.
+    """
+    try:
+        return model.get_category_trends()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+

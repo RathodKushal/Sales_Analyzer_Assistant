@@ -99,7 +99,7 @@ class ReplayBuffer:
     def push(self, state, action, reward, next_state, done):
         self.buffer.append(Experience(state, action, reward, next_state, done))
 
-    def sample(self, batch_size: int) -> list:
+    def sample(self, batch_size: int, beta: float = 0.4, **kwargs) -> list:
         return random.sample(self.buffer, min(batch_size, len(self.buffer)))
 
     def __len__(self):
@@ -402,9 +402,13 @@ class DQNAgent:
         with open(directory / "agent_config.json", 'r') as f:
             config = json.load(f)
         
-        self.epsilon = config['epsilon']
-        self.training_step = config['training_step']
+        self.epsilon = config.get('epsilon', 0.01)
+        self.training_step = config.get('training_step', 0)
         
+        hidden_dims = config.get('hidden_dims', [256, 128])
+        self.q_network = DuelingQNetwork(self.state_dim, self.n_actions, hidden_dims).to(self.device)
+        self.target_network = DuelingQNetwork(self.state_dim, self.n_actions, hidden_dims).to(self.device)
+
         # Load weights
         self.q_network.load_state_dict(
             torch.load(directory / "q_network.pth", map_location=self.device, weights_only=True)
@@ -412,9 +416,12 @@ class DQNAgent:
         self.target_network.load_state_dict(
             torch.load(directory / "target_network.pth", map_location=self.device, weights_only=True)
         )
-        self.optimizer.load_state_dict(
-            torch.load(directory / "optimizer.pth", map_location=self.device, weights_only=True)
-        )
+        try:
+            self.optimizer.load_state_dict(
+                torch.load(directory / "optimizer.pth", map_location=self.device, weights_only=True)
+            )
+        except Exception as opt_err:
+            print(f"[Agent] Note: Optimizer weights skipped for inference ({opt_err})")
         
         # Load training history if available
         history_path = directory / "training_history.json"

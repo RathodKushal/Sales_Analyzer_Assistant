@@ -29,12 +29,12 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24  # 24 hours
 
     # ── Database ────────────────────────────────────────────────
-    DATABASE_URL: str = "mysql+pymysql://root:@localhost/sales_analyzer"
+    DATABASE_URL: str = "sqlite:///./sales_analyzer.db"
 
     # Data and Model Settings
-    DATA_PATH: Path = Path(os.getenv("DATA_PATH", "../data"))
-    MODEL_PATH: Path = Path(os.getenv("MODEL_PATH", "../model/saved/best"))
-    SQLITE_PATH: str = os.getenv("SQLITE_PATH", "sqlite:///./shopflow_crm.db")
+    DATA_PATH: Path = PROJECT_ROOT / "data"
+    MODEL_PATH: Path = PROJECT_ROOT / "model" / "saved" / "best"
+    SQLITE_PATH: str = os.getenv("SQLITE_PATH", "sqlite:///./sales_analyzer.db")
 
     # ── CORS ────────────────────────────────────────────────────
     CORS_ORIGINS: list[str] = [

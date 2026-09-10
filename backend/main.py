@@ -68,8 +68,9 @@ async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
     print("[Startup] Database tables created")
 
-    # 2. Seed default admin user
+    # 2. Seed default admin user & ensure dataset seeded
     _seed_admin_user()
+    _check_and_seed_dataset()
 
     # 3. Load ML model
     try:
@@ -120,6 +121,28 @@ def _seed_admin_user():
             print("[Startup] Default admin user created (admin / admin123)")
         else:
             print(f"[Startup] {user_count} user(s) already exist — skipping seed")
+    finally:
+        db.close()
+
+
+def _check_and_seed_dataset():
+    """Seed database from data/ CSVs if customers table is empty."""
+    from sqlalchemy.orm import Session
+    from backend.database import SessionLocal
+    from backend.customers.models import Customer
+
+    db: Session = SessionLocal()
+    try:
+        cust_count = db.query(Customer).count()
+        if cust_count == 0:
+            print("[Startup] Customer dataset empty — running initial database seeder...")
+            try:
+                from seed_db import seed_database
+                seed_database()
+            except Exception as e:
+                print(f"[Startup] WARNING: Could not seed database: {e}")
+        else:
+            print(f"[Startup] Database populated ({cust_count} customers ready)")
     finally:
         db.close()
 

@@ -11,11 +11,12 @@ from backend.config import get_settings
 
 settings = get_settings()
 
-# Engine (Removed check_same_thread as it's SQLite only)
-engine = create_engine(
-    settings.DATABASE_URL,
-    echo=settings.DEBUG,
-)
+# Build engine kwargs based on database type
+_engine_kwargs: dict = {"echo": settings.DEBUG}
+if settings.DATABASE_URL.startswith("sqlite"):
+    _engine_kwargs["connect_args"] = {"check_same_thread": False}
+
+engine = create_engine(settings.DATABASE_URL, **_engine_kwargs)
 
 # Session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

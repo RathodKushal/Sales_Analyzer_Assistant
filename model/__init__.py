@@ -6,9 +6,14 @@
 from .data_preprocessor import EcommerceDataPreprocessor
 from .ecommerce_environment import EcommerceEnvironment
 from .agent import DQNAgent
+from .sales_forecaster import SalesForecaster
+from .demand_analyzer import DemandAnalyzer
 
 __all__ = [
     'EcommerceDataPreprocessor',
     'EcommerceEnvironment',
     'DQNAgent',
+    'SalesForecaster',
+    'DemandAnalyzer',
 ]
+

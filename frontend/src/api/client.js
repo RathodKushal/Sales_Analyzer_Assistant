@@ -99,6 +99,19 @@ export const analyticsAPI = {
 
   getHypePrediction: (stockCode) =>
     client.get(`/analytics/hype/${stockCode}`),
+
+  // ── Forecast & Demand ──────────────────────────────
+  getForecast: (months = 6, category = null) => {
+    const params = { months };
+    if (category) params.category = category;
+    return client.get('/analytics/forecast', { params });
+  },
+
+  getDemandAnalysis: () =>
+    client.get('/analytics/demand-analysis'),
+
+  getCategoryTrends: () =>
+    client.get('/analytics/category-trends'),
 };
 
 // ── Reports API ─────────────────────────────────────────
@@ -127,6 +140,17 @@ export const ingestionAPI = {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
   },
+  uploadSalesDataset: (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    return client.post('/ingestion/upload-sales-dataset', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  },
+  getDatasetStatus: () =>
+    client.get('/ingestion/dataset-status'),
+  downloadTemplate: () =>
+    client.get('/ingestion/sample-template', { responseType: 'blob' }),
   getHistory: () =>
     client.get('/ingestion/history'),
 };

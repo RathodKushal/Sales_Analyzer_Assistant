@@ -323,12 +323,15 @@ class EcommerceDataPreprocessor:
                     )
 
         # --- Scale Continuous ---
-        continuous_present = [c for c in self.CONTINUOUS_COLS if c in df.columns]
-        time_present = [c for c in self.TIME_FEATURES if c in df.columns]
-        scale_cols = continuous_present + time_present
+        if hasattr(self.scaler, 'feature_names_in_') and self.scaler.feature_names_in_ is not None:
+            scale_cols = list(self.scaler.feature_names_in_)
+        else:
+            scale_cols = [c for c in self.CONTINUOUS_COLS + self.TIME_FEATURES if c in df.columns]
 
-        # Fill any remaining NaN before scaling
+        # Ensure all required scale columns exist in df
         for col in scale_cols:
+            if col not in df.columns:
+                df[col] = 0.0
             df[col] = df[col].fillna(0)
 
         if fit:
@@ -339,8 +342,7 @@ class EcommerceDataPreprocessor:
         # --- Build feature column list ---
         self.feature_columns = (
             [c + '_Enc' for c in self.CATEGORICAL_COLS] +
-            continuous_present +
-            time_present
+            scale_cols
         )
 
         self._is_fitted = True
@@ -424,21 +426,29 @@ class EcommerceDataPreprocessor:
     def load_saved(self, directory: str):
         """Load a previously saved preprocessor."""
         directory = Path(directory)
+        parent_dir = directory.parent if directory.parent.exists() else directory
 
         # Load label encoders
         self.label_encoders = {}
         for col in self.CATEGORICAL_COLS:
-            path = directory / f"le_{col.replace(' ', '_')}.pkl"
+            file_name = f"le_{col.replace(' ', '_')}.pkl"
+            path = directory / file_name
+            if not path.exists():
+                path = parent_dir / file_name
             if path.exists():
                 self.label_encoders[col] = joblib.load(path)
 
         # Load scaler
         scaler_path = directory / "scaler.pkl"
+        if not scaler_path.exists():
+            scaler_path = parent_dir / "scaler.pkl"
         if scaler_path.exists():
             self.scaler = joblib.load(scaler_path)
 
         # Load config
         config_path = directory / "preprocessor_config.json"
+        if not config_path.exists():
+            config_path = parent_dir / "preprocessor_config.json"
         if config_path.exists():
             with open(config_path, 'r') as f:
                 config = json.load(f)

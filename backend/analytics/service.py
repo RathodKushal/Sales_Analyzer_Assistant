@@ -5,6 +5,7 @@ Loads the trained DQN agent and preprocessor once at startup,
 then exposes prediction methods for the API endpoints.
 """
 
+from model import DQNAgent
 import sys
 import json
 import numpy as np
@@ -19,6 +20,8 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from model.data_preprocessor import EcommerceDataPreprocessor
+from model.sales_forecaster import SalesForecaster
+from model.demand_analyzer import DemandAnalyzer
 
 
 class ModelService:
@@ -35,6 +38,8 @@ class ModelService:
         self.preprocessor: Optional[EcommerceDataPreprocessor] = None
         self.evaluation_results: Optional[dict] = None
         self.hype_results: Optional[dict] = None
+        self.forecaster: Optional[SalesForecaster] = None
+        self.demand_analyzer: Optional[DemandAnalyzer] = None
         self._is_loaded = False
 
     @classmethod
@@ -91,7 +96,49 @@ class ModelService:
                 
         self._is_loaded = True
         print(f"[ModelService] Model loaded successfully. "
-              f"State dim: {state_dim}, Actions: {n_actions}")
+        f"State dim: {state_dim}, Actions: {n_actions}")
+
+        # Also load the forecaster if available
+        self._load_forecaster()
+
+    def _load_forecaster(self):
+        """Load or train the sales forecaster."""
+        settings = get_settings()
+        forecast_dir = PROJECT_ROOT / "model" / "saved_forecast"
+        data_dir = PROJECT_ROOT / "data"
+
+        self.forecaster = SalesForecaster()
+
+        if (forecast_dir / "forecaster_historical.json").exists():
+            try:
+                self.forecaster.load(str(forecast_dir))
+                print("[ModelService] Forecaster loaded from saved state")
+                return
+            except Exception as e:
+                print(f"[ModelService] Could not load saved forecaster: {e}")
+
+        # Train on the fly if data is available
+        if data_dir.exists() and ((data_dir / "uploaded_sales_dataset.csv").exists() or (data_dir / "orders.csv").exists()):
+            try:
+                self.forecaster.train(str(data_dir))
+                self.forecaster.save(str(forecast_dir))
+                print("[ModelService] Forecaster trained and saved")
+            except Exception as e:
+                print(f"[ModelService] WARNING: Could not train forecaster: {e}")
+                self.forecaster = None
+        else:
+            print("[ModelService] WARNING: No data directory found for forecaster")
+            self.forecaster = None
+
+    def retrain_models(self):
+        """Force re-training of forecaster and demand models on updated dataset."""
+        data_dir = PROJECT_ROOT / "data"
+        forecast_dir = PROJECT_ROOT / "model" / "saved_forecast"
+        if data_dir.exists():
+            self.forecaster = SalesForecaster()
+            self.forecaster.train(str(data_dir))
+            self.forecaster.save(str(forecast_dir))
+            print("[ModelService] Models retrained successfully on new dataset.")
 
     def load_hype_results(self):
         """Load hype evaluation results independently of DQN model."""
@@ -226,6 +273,110 @@ class ModelService:
             "n_actions": len(self.preprocessor.discount_bins),
         }
 
+    # ── Forecast & Demand Methods ─────────────────────────────
+
+    def forecast_sales(
+        self, horizon_months: int = 6, category: Optional[str] = None
+    ) -> dict:
+        """
+        Generate future sales forecasts.
+
+        Args:
+            horizon_months: Number of months to forecast (3, 6, or 12).
+            category: Specific category to forecast, or None for all.
+
+        Returns:
+            Forecast data with historical + predicted values.
+        """
+        if self.forecaster is None:
+            self._load_forecaster()
+        
+        if self.forecaster is None or not self.forecaster._is_fitted:
+            raise RuntimeError(
+                "Sales forecaster is not available. "
+                "Ensure data is present and train the forecaster."
+            )
+
+        return self.forecaster.forecast(
+            horizon_months=horizon_months,
+            category=category,
+        )
+
+    def get_demand_analysis(self) -> dict:
+        """
+        Generate a comprehensive demand analysis report combining
+        hype predictions and sales forecasts.
+
+        Returns:
+            Full demand analysis with signals, trends, and recommendations.
+        """
+        analyzer = DemandAnalyzer()
+
+        # Load hype results
+        hype_path = PROJECT_ROOT / "model" / "saved_hype" / "hype_evaluation_results.json"
+        analyzer.load_hype_results(str(hype_path))
+
+        # Load forecast results
+        if self.forecaster and self.forecaster._is_fitted:
+            forecast_data = self.forecaster.forecast(horizon_months=6)
+            analyzer.load_forecast_results(forecast_data)
+
+        data_dir = PROJECT_ROOT / "data"
+        return analyzer.analyze(
+            data_dir=str(data_dir) if data_dir.exists() else None
+        )
+
+    def get_category_trends(self) -> dict:
+        """
+        Get category-level historical + predicted trend data.
+
+        Returns:
+            List of category trend items with time-series data.
+        """
+        if self.forecaster is None or not self.forecaster._is_fitted:
+            self._load_forecaster()
+
+        if self.forecaster is None or not self.forecaster._is_fitted:
+            return {"categories": [], "total_categories": 0}
+
+        forecast_data = self.forecaster.forecast(horizon_months=6)
+        categories = []
+
+        for cat, data in forecast_data.get("forecasts", {}).items():
+            hist = data.get("historical", {})
+            fcast = data.get("forecast", {})
+            hist_values = hist.get("values", [])
+            fcast_values = fcast.get("values", [])
+
+            # Compute growth
+            if hist_values and fcast_values:
+                last_hist = hist_values[-1]
+                avg_fcast = np.mean(fcast_values) if fcast_values else 0
+                growth = (
+                    ((avg_fcast - last_hist) / last_hist * 100)
+                    if last_hist > 0 else 0
+                )
+            else:
+                growth = 0
+
+            categories.append({
+                "category": cat,
+                "historical_dates": hist.get("dates", []),
+                "historical_values": hist_values,
+                "forecast_dates": fcast.get("dates", []),
+                "forecast_values": fcast_values,
+                "forecast_lower": fcast.get("lower_bound", []),
+                "forecast_upper": fcast.get("upper_bound", []),
+                "growth_trend_pct": round(growth, 2),
+            })
+
+        categories.sort(key=lambda x: x["growth_trend_pct"], reverse=True)
+
+        return {
+            "categories": categories,
+            "total_categories": len(categories),
+        }
+
     def _features_to_dataframe(self, features: dict) -> pd.DataFrame:
         """
         Convert API feature dict to a single-row DataFrame
@@ -264,29 +415,143 @@ class ModelService:
                 "Model not loaded. Call ModelService.load() at startup."
             )
 
-    def get_hype_prediction(self, stock_code: str) -> dict:
+    def get_hype_products(self, limit: int = 100, search: Optional[str] = None) -> dict:
         """
-        Returns the hype prediction for a specific product.
+        Returns a list of products with hype predictions for frontend selectors/dropdowns.
         """
         if not self.hype_results:
-            raise ValueError("Hype model results not loaded. Run evaluate_hype.py first.")
-            
+            self.load_hype_results()
+
+        preds = self.hype_results.get('product_predictions', {}) if self.hype_results else {}
+        if not preds:
+            return {"products": [], "total": 0}
+
+        bin_labels = {
+            0: ("Severe Drop", "🧊", 10),
+            1: ("Dropping", "📉", 30),
+            2: ("Steady", "📊", 50),
+            3: ("Growing", "📈", 75),
+            4: ("Viral Hype", "🔥", 95),
+        }
+
+        # Attempt to load product metadata mapping from database or CSV
+        prod_map = {}
+        data_dir = PROJECT_ROOT / "data"
+        products_csv = data_dir / "products.csv"
+        if products_csv.exists():
+            try:
+                df_p = pd.read_csv(products_csv)
+                for _, row in df_p.iterrows():
+                    code = str(row["StockCode"]).strip()
+                    prod_map[code] = {
+                        "description": str(row.get("Description", "")).strip(),
+                        "category": str(row.get("Category", "Miscellaneous")).strip(),
+                    }
+            except Exception:
+                pass
+
+        results = []
+        search_query = search.strip().lower() if search else None
+
+        for code, data in preds.items():
+            meta = prod_map.get(code, {"description": f"Product {code}", "category": "Miscellaneous"})
+            desc = meta["description"]
+            cat = meta["category"]
+
+            if search_query:
+                if search_query not in code.lower() and search_query not in desc.lower() and search_query not in cat.lower():
+                    continue
+
+            p_bin = data.get('predicted_bin', 2)
+            label, emoji, score = bin_labels.get(p_bin, ("Steady", "📊", 50))
+
+            results.append({
+                "stock_code": code,
+                "description": desc,
+                "category": cat,
+                "hype_score": score,
+                "predicted_bin": p_bin,
+                "demand_label": label,
+                "demand_emoji": emoji,
+                "actual_growth_percentage": round(data.get('actual_growth', 0.0) * 100, 2),
+            })
+
+        # Sort by hype score descending
+        results.sort(key=lambda x: x["hype_score"], reverse=True)
+
+        return {
+            "products": results[:limit],
+            "total": len(results),
+        }
+
+    def get_hype_prediction(self, stock_code_or_query: str) -> dict:
+        """
+        Returns the hype prediction for a specific product by stock code or product name.
+        """
+        if not self.hype_results:
+            self.load_hype_results()
+
+        if not self.hype_results:
+            raise ValueError("Hype model results not loaded.")
+
         preds = self.hype_results.get('product_predictions', {})
-        if stock_code not in preds:
-            raise ValueError(f"No hype prediction found for {stock_code}")
-            
-        data = preds[stock_code]
-        
-        # Convert prediction bin to score 0-100
-        # Bins: 0: Severe Drop, 1: Drop, 2: Steady, 3: Growth, 4: Viral
+        query = stock_code_or_query.strip()
+        matched_code = None
+
+        if query in preds:
+            matched_code = query
+        else:
+            # Case insensitive exact match or substring search
+            for code in preds.keys():
+                if code.lower() == query.lower():
+                    matched_code = code
+                    break
+
+        if not matched_code:
+            # Try matching by product description in products.csv
+            data_dir = PROJECT_ROOT / "data"
+            products_csv = data_dir / "products.csv"
+            if products_csv.exists():
+                try:
+                    df_p = pd.read_csv(products_csv)
+                    matches = df_p[df_p["Description"].astype(str).str.lower().str.contains(query.lower(), na=False)]
+                    for _, row in matches.iterrows():
+                        code = str(row["StockCode"]).strip()
+                        if code in preds:
+                            matched_code = code
+                            break
+                except Exception:
+                    pass
+
+        if not matched_code:
+            raise ValueError(f"No hype prediction found for '{stock_code_or_query}'")
+
+        data = preds[matched_code]
         bin_score = {0: 10, 1: 30, 2: 50, 3: 75, 4: 95}
         score = bin_score.get(data['predicted_bin'], 50)
-        
+
+        # Retrieve description and category
+        desc = f"Product {matched_code}"
+        cat = "Miscellaneous"
+        products_csv = PROJECT_ROOT / "data" / "products.csv"
+        if products_csv.exists():
+            try:
+                df_p = pd.read_csv(products_csv)
+                match = df_p[df_p["StockCode"].astype(str).str.strip() == matched_code]
+                if not match.empty:
+                    desc = str(match.iloc[0]["Description"])
+                    cat = str(match.iloc[0]["Category"])
+            except Exception:
+                pass
+
         return {
-            "stock_code": stock_code,
+            "stock_code": matched_code,
+            "description": desc,
+            "category": cat,
             "hype_score": score,
             "predicted_bin": data['predicted_bin'],
             "actual_growth_percentage": round(data['actual_growth'] * 100, 2),
             "historical_sales": data['historical_sales'],
             "target_month": str(data['target_month'])
         }
+

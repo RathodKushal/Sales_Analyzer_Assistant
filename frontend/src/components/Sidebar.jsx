@@ -7,8 +7,11 @@ import {
   HiOutlineCube,
   HiOutlineSparkles,
   HiOutlineFire,
+  HiOutlineArrowTrendingUp,
+  HiOutlinePresentationChartBar,
   HiOutlineArrowRightOnRectangle,
   HiOutlineCommandLine,
+  HiOutlineCloudArrowUp,
 } from 'react-icons/hi2';
 
 export default function Sidebar() {
@@ -25,6 +28,11 @@ export default function Sidebar() {
       to: '/dashboard',
       icon: <HiOutlineChartBarSquare />,
       label: 'Overview',
+    },
+    {
+      to: '/upload',
+      icon: <HiOutlineCloudArrowUp />,
+      label: 'Upload Dataset',
     },
     {
       to: '/customers',
@@ -50,6 +58,16 @@ export default function Sidebar() {
       to: '/hype-ai',
       icon: <HiOutlineFire />,
       label: 'Hype AI',
+    },
+    {
+      to: '/forecast',
+      icon: <HiOutlineArrowTrendingUp />,
+      label: 'Sales Forecast',
+    },
+    {
+      to: '/demand',
+      icon: <HiOutlinePresentationChartBar />,
+      label: 'Demand Analysis',
     },
   ];
 
