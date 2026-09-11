@@ -38,10 +38,186 @@ COLUMN_ALIASES = {
     "RefundAmount": ["refundamount", "refund_amount", "refund", "refunded"],
 }
 
+COLUMN_DESCRIPTIONS = {
+    "OrderDate": ("Transaction / Order Date", True),
+    "StockCode": ("Product Code / SKU ID", True),
+    "ProductName": ("Product Description / Title", True),
+    "Quantity": ("Order Quantity / Units Sold", True),
+    "UnitPrice": ("Unit Price / Item Rate", True),
+    "TotalAmount": ("Total Sales / Revenue Amount", True),
+    "Category": ("Product Department / Category", False),
+    "CustomerID": ("Customer ID / User Account", False),
+    "Country": ("Geography / City / State / Location", False),
+    "Profit": ("Estimated Profit Margin / Net Profit", False),
+    "ReturnReason": ("Return Reason Record", False),
+    "RefundAmount": ("Refund Amount Issued", False),
+}
+
 
 def _clean_header(col_name: str) -> str:
     """Normalize string header for fuzzy matching."""
     return re.sub(r"[^a-z0-9]", "", str(col_name).strip().lower())
+
+
+def inspect_column_keywords(df: pd.DataFrame) -> Dict[str, Any]:
+    """
+    Inspect all uploaded column headers against keyword dictionaries.
+    Checks whether essential sales data is present or missing.
+    """
+    raw_cols = df.columns.tolist()
+    cleaned_map = {_clean_header(col): col for col in raw_cols}
+
+    inspection_results = []
+    matched_canonical_fields = []
+
+    for canonical, aliases in COLUMN_ALIASES.items():
+        desc, is_essential = COLUMN_DESCRIPTIONS.get(canonical, (canonical, False))
+        found_col = None
+        found_keyword = None
+
+        for alias in aliases:
+            cleaned_alias = _clean_header(alias)
+            if cleaned_alias in cleaned_map:
+                found_col = cleaned_map[cleaned_alias]
+                found_keyword = alias
+                break
+
+        if found_col:
+            matched_canonical_fields.append(canonical)
+            inspection_results.append({
+                "field": canonical,
+                "description": desc,
+                "status": "DETECTED",
+                "detected": True,
+                "column_name": str(found_col),
+                "keyword_matched": found_keyword,
+                "is_essential": is_essential,
+            })
+        else:
+            inspection_results.append({
+                "field": canonical,
+                "description": desc,
+                "status": "MISSING",
+                "detected": False,
+                "column_name": "-",
+                "keyword_matched": "-",
+                "is_essential": is_essential,
+            })
+
+    # Validate overall sales data readiness
+    has_sales = "TotalAmount" in matched_canonical_fields or ("UnitPrice" in matched_canonical_fields and "Quantity" in matched_canonical_fields)
+    has_product = "StockCode" in matched_canonical_fields or "ProductName" in matched_canonical_fields
+    has_date = "OrderDate" in matched_canonical_fields
+
+    if has_sales and has_product and has_date:
+        validation_status = "VALID"
+        validation_msg = "✓ Excellent! Essential sales data keywords (Date, Product/SKU, Sales Amount/Price) were successfully detected in column headers."
+    elif has_sales or has_product:
+        validation_status = "PARTIAL_WARNING"
+        validation_msg = "⚠️ Partial sales keywords detected. Standard missing fields (e.g. Date or SKU ID) were defaulted gracefully."
+    else:
+        validation_status = "CRITICAL_WARNING"
+        validation_msg = "⚠️ No standard sales revenue or pricing keywords found in file columns. Synthetic values used for missing calculations."
+
+    return {
+        "validation_status": validation_status,
+        "validation_message": validation_msg,
+        "raw_columns_uploaded": [str(c) for c in raw_cols],
+        "total_columns_uploaded": len(raw_cols),
+        "column_inspections": inspection_results,
+        "essential_keywords_matched_count": len([i for i in inspection_results if i["detected"] and i["is_essential"]]),
+        "total_keywords_matched_count": len([i for i in inspection_results if i["detected"]]),
+    }
+
+
+def generate_sales_analysis(std_df: pd.DataFrame, mapping: dict, metadata: dict) -> Dict[str, Any]:
+    """
+    Automated deep sales data analyzer — runs calculations on dataset.
+    """
+    total_rev = float(std_df["TotalAmount"].sum())
+    total_qty = int(std_df["Quantity"].sum())
+    total_txns = len(std_df)
+    unique_orders = int(std_df["OrderID"].nunique()) if "OrderID" in std_df.columns else total_txns
+    aov = total_rev / unique_orders if unique_orders > 0 else 0.0
+    avg_item_price = float(std_df["UnitPrice"].mean())
+
+    # Top selling products (by revenue)
+    top_rev_products = (
+        std_df.groupby(["StockCode", "ProductName"])
+        .agg(total_revenue=("TotalAmount", "sum"), units_sold=("Quantity", "sum"))
+        .reset_index()
+        .sort_values(by="total_revenue", ascending=False)
+        .head(5)
+    )
+    top_products_list = [
+        {
+            "stock_code": str(row["StockCode"]),
+            "product_name": str(row["ProductName"]),
+            "revenue": round(float(row["total_revenue"]), 2),
+            "units_sold": int(row["units_sold"]),
+        }
+        for _, row in top_rev_products.iterrows()
+    ]
+
+    # Category breakdown
+    has_cat = metadata.get("available_metrics", {}).get("categories", False)
+    category_summary = []
+    if has_cat:
+        cat_df = std_df[std_df["Category"] != "-"].groupby("Category").agg(
+            revenue=("TotalAmount", "sum"),
+            qty=("Quantity", "sum")
+        ).reset_index().sort_values(by="revenue", ascending=False)
+
+        for _, c_row in cat_df.iterrows():
+            c_rev = float(c_row["revenue"])
+            share = (c_rev / total_rev * 100) if total_rev > 0 else 0.0
+            category_summary.append({
+                "category": str(c_row["Category"]),
+                "revenue": round(c_rev, 2),
+                "units_sold": int(c_row["qty"]),
+                "share_percentage": round(share, 1),
+            })
+
+    # Time series / Date analysis
+    min_date = std_df["OrderDate"].min()
+    max_date = std_df["OrderDate"].max()
+    date_span_days = max(1, (max_date - min_date).days + 1)
+    daily_sales_velocity = round(total_rev / date_span_days, 2)
+
+    # Executive takeaways generator
+    takeaways = [
+        f"Analyzed {total_txns:,} transaction rows spanning {date_span_days} day(s) ({min_date.strftime('%d %b %Y')} to {max_date.strftime('%d %b %Y')}).",
+        f"Generated total sales revenue of ₹{total_rev:,.2f} across {unique_orders:,} order(s) with an Average Order Value (AOV) of ₹{aov:,.2f}.",
+    ]
+    if top_products_list:
+        top_p = top_products_list[0]
+        takeaways.append(f"Top performing product: '{top_p['product_name']}' ({top_p['stock_code']}) generating ₹{top_p['revenue']:,.2f} ({top_p['units_sold']} units).")
+
+    if category_summary:
+        top_c = category_summary[0]
+        takeaways.append(f"Leading category: '{top_c['category']}' contributing {top_c['share_percentage']}% of total sales revenue.")
+    else:
+        takeaways.append("Product Category column was not found in dataset; categories defaulted to '-'.")
+
+    if metadata.get("available_metrics", {}).get("customers", False):
+        takeaways.append(f"Customer records detected: {metadata.get('total_customers', 0):,} unique customers identified.")
+    else:
+        takeaways.append("Customer IDs missing in file; individual customer profiles defaulted.")
+
+    return {
+        "summary": {
+            "total_revenue": round(total_rev, 2),
+            "total_orders": unique_orders,
+            "total_units_sold": total_qty,
+            "avg_order_value": round(aov, 2),
+            "avg_unit_price": round(avg_item_price, 2),
+            "daily_sales_velocity": daily_sales_velocity,
+            "date_span_days": date_span_days,
+        },
+        "top_products": top_products_list,
+        "category_breakdown": category_summary,
+        "executive_takeaways": takeaways,
+    }
 
 
 def map_columns(df: pd.DataFrame) -> Tuple[pd.DataFrame, Dict[str, str], list]:
@@ -194,6 +370,34 @@ def parse_and_import_single_dataset(file_path: str, db: Session) -> Dict[str, An
 
     if df.empty:
         raise ValueError("Uploaded file is empty.")
+
+    # 1. Strict Validation: Check if uploaded dataset contains sales & product keywords
+    column_inspection_report = inspect_column_keywords(df)
+    detected_fields = [i["field"] for i in column_inspection_report["column_inspections"] if i["detected"]]
+
+    has_sales = "TotalAmount" in detected_fields or "UnitPrice" in detected_fields or "Quantity" in detected_fields
+    has_product = "StockCode" in detected_fields or "ProductName" in detected_fields or "Category" in detected_fields
+
+    if not (has_sales and has_product):
+        missing_parts = []
+        if not has_product:
+            missing_parts.append("Product Information (missing column names like Product, SKU, Item Name, or Description)")
+        if not has_sales:
+            missing_parts.append("Sales & Revenue Numbers (missing column names like Total Amount, Sales, Price, or Quantity)")
+
+        clean_name = path.name.replace("temp_upload_", "")
+
+        err_payload = {
+            "error_type": "INAPPROPRIATE_DATASET",
+            "title": "⚠️ This File Doesn't Look Like a Sales Dataset",
+            "message": f"The uploaded file ('{clean_name}') contains tabular data, but it is missing product names and sales numbers required for analytics.",
+            "missing_requirements": missing_parts,
+            "uploaded_headers": [str(c) for c in df.columns.tolist()],
+            "file_name": clean_name,
+            "total_rows": len(df),
+            "simple_solution": "Please ensure your file has columns for Product Name/SKU, Sales Price/Amount, and Date, or download our ready-to-use sample CSV template below."
+        }
+        raise ValueError(json.dumps(err_payload))
 
     # Process and map columns
     std_df, mapping, missing = map_columns(df)
@@ -384,6 +588,9 @@ def parse_and_import_single_dataset(file_path: str, db: Session) -> Dict[str, An
         db.rollback()
         print(f"[DatasetParser] Database sync note ({e})")
 
+    # Inspect keywords in raw columns
+    column_inspection_report = inspect_column_keywords(df)
+
     # Build and save active dataset metadata
     metadata = {
         "has_dataset": True,
@@ -395,6 +602,7 @@ def parse_and_import_single_dataset(file_path: str, db: Session) -> Dict[str, An
         "total_customers": total_customers_seeded,
         "categories_found": sorted([c for c in std_df["Category"].unique().tolist() if c != "-"]),
         "states_found": sorted([s for s in std_df["Country"].unique().tolist() if s != "-"]),
+        "column_inspection": column_inspection_report,
         "available_metrics": {
             "revenue": True,
             "orders": True,
@@ -419,6 +627,10 @@ def parse_and_import_single_dataset(file_path: str, db: Session) -> Dict[str, An
             "max": std_df["OrderDate"].max().strftime("%Y-%m-%d"),
         },
     }
+
+    # Generate dynamic automated sales analysis
+    sales_analysis = generate_sales_analysis(std_df, mapping, metadata)
+    metadata["sales_analysis"] = sales_analysis
 
     # Write metadata JSON
     meta_path = data_dir / "dataset_metadata.json"

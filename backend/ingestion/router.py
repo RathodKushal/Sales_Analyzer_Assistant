@@ -100,6 +100,14 @@ async def upload_sales_dataset(
 
         return stats
 
+    except ValueError as val_err:
+        err_str = str(val_err)
+        try:
+            import json
+            err_json = json.loads(err_str)
+            raise HTTPException(status_code=400, detail=err_json)
+        except Exception:
+            raise HTTPException(status_code=400, detail=err_str)
     except Exception as e:
         import traceback
         traceback.print_exc()
