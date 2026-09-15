@@ -282,7 +282,7 @@ export default function DataUploadPage() {
       }} />
 
       {/* ── Chrome Browser-Style Multi-Dataset Workspaces Tab Bar ── */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-2 mb-6 border-b border-zinc-800 scrollbar-thin">
+      <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-6 border-b border-white/10 scrollbar-thin">
         {workspaces.map((ws) => {
           const isActive = ws.id === activeWsId;
           const displayTitle = ws.uploadResult?.file_name || ws.file?.name || (isActive && datasetStatus?.file_name) || ws.title;
@@ -290,13 +290,13 @@ export default function DataUploadPage() {
             <div
               key={ws.id}
               onClick={() => handleSwitchWorkspace(ws.id)}
-              className={`group relative flex items-center gap-2 px-4 py-2.5 rounded-t-xl text-xs font-medium transition cursor-pointer select-none max-w-[240px] ${
+              className={`group relative flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-semibold transition cursor-pointer select-none max-w-[240px] backdrop-blur-xl border shadow-sm ${
                 isActive
-                  ? 'bg-zinc-900 text-indigo-300 border-t-2 border-x border-indigo-500/80 border-x-zinc-800 shadow-lg'
-                  : 'bg-zinc-950/70 hover:bg-zinc-900/80 text-zinc-400 border border-transparent'
+                  ? 'bg-zinc-900/90 text-cyan-300 border-cyan-500/50 shadow-cyan-500/10'
+                  : 'bg-zinc-950/60 hover:bg-zinc-900/60 text-zinc-400 border-white/5 hover:border-white/15'
               }`}
             >
-              <HiOutlineTableCells className={`text-sm flex-shrink-0 ${isActive ? 'text-indigo-400' : 'text-zinc-500'}`} />
+              <HiOutlineTableCells className={`text-sm flex-shrink-0 ${isActive ? 'text-cyan-400' : 'text-zinc-500'}`} />
               <span className="truncate">{displayTitle}</span>
 
               {workspaces.length > 1 && (
@@ -315,10 +315,10 @@ export default function DataUploadPage() {
         {/* Plus Button to Open New Dataset Workspace Tab */}
         <button
           onClick={handleAddNewWorkspace}
-          className="flex items-center gap-1.5 px-3 py-2 bg-zinc-900/80 hover:bg-indigo-600/20 text-zinc-400 hover:text-indigo-300 border border-zinc-800 hover:border-indigo-500/40 rounded-xl text-xs font-medium transition cursor-pointer ml-1 flex-shrink-0 shadow-sm"
+          className="flex items-center gap-1.5 px-3.5 py-2 bg-zinc-950/60 hover:bg-cyan-500/20 text-zinc-300 hover:text-cyan-300 border border-white/10 hover:border-cyan-500/40 rounded-2xl text-xs font-semibold transition cursor-pointer ml-1 flex-shrink-0 backdrop-blur-xl shadow-sm active:scale-95"
           title="Open New Dataset Workspace Tab (+)"
         >
-          <HiOutlinePlus className="text-base text-indigo-400" />
+          <HiOutlinePlus className="text-base text-cyan-400" />
           <span>New Workspace</span>
         </button>
       </div>
@@ -326,8 +326,12 @@ export default function DataUploadPage() {
       {/* Header */}
       <header className="page-header flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-            <HiOutlineCloudArrowUp className="text-indigo-400 text-3xl" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/80 border border-white/10 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-2 backdrop-blur-md">
+            <HiOutlineSparkles className="text-sm animate-spin" style={{ animationDuration: '6s' }} />
+            <span>Dataset Ingestion Pipeline</span>
+          </div>
+          <h1 className="text-3xl font-extrabold text-white flex items-center gap-3 drop-shadow-sm">
+            <HiOutlineCloudArrowUp className="text-cyan-400 text-3xl" />
             Dataset Upload & Auto-Analysis
           </h1>
           <p className="text-zinc-400 text-sm mt-1">
@@ -339,7 +343,7 @@ export default function DataUploadPage() {
           {datasetStatus?.has_dataset && (
             <button
               onClick={handleResetDataset}
-              className="flex items-center gap-2 px-3.5 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-sm font-medium rounded-lg border border-rose-500/30 transition cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs font-semibold rounded-xl border border-rose-500/30 transition cursor-pointer backdrop-blur-md"
               title="Reset all tables and dashboard metrics back to 0 / null"
             >
               <HiOutlineTrash className="text-base" />
@@ -349,43 +353,43 @@ export default function DataUploadPage() {
 
           <button
             onClick={handleDownloadTemplate}
-            className="flex items-center gap-2 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-sm font-medium rounded-lg border border-zinc-700 transition"
+            className="flex items-center gap-2 px-4 py-2.5 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-200 text-xs font-semibold rounded-xl border border-white/10 transition backdrop-blur-md shadow-sm"
           >
-            <HiOutlineArrowDownTray className="text-indigo-400 text-base" />
+            <HiOutlineArrowDownTray className="text-cyan-400 text-base" />
             Download Sample CSV
           </button>
         </div>
       </header>
 
       {/* Features Overview Banner */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div className="p-4 bg-zinc-900/60 border border-zinc-800/80 rounded-xl flex items-start gap-3">
-          <div className="p-2.5 bg-indigo-500/10 rounded-lg text-indigo-400">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+        <div className="p-5 bg-zinc-950/60 backdrop-blur-2xl border border-white/10 rounded-2xl flex items-start gap-3.5 shadow-lg">
+          <div className="p-2.5 bg-cyan-500/10 border border-cyan-500/20 rounded-xl text-cyan-400">
             <HiOutlineDocumentText className="text-xl" />
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-zinc-100">Strict Dataset Analytics</h4>
-            <p className="text-xs text-zinc-400 mt-0.5">All 7 tabs calculate predictions and graphs strictly on your uploaded data.</p>
+            <h4 className="text-sm font-bold text-white">Strict Dataset Analytics</h4>
+            <p className="text-xs text-zinc-400 mt-1 leading-relaxed">All 7 tabs calculate predictions and graphs strictly on your uploaded data.</p>
           </div>
         </div>
 
-        <div className="p-4 bg-zinc-900/60 border border-zinc-800/80 rounded-xl flex items-start gap-3">
-          <div className="p-2.5 bg-amber-500/10 rounded-lg text-amber-400">
+        <div className="p-5 bg-zinc-950/60 backdrop-blur-2xl border border-white/10 rounded-2xl flex items-start gap-3.5 shadow-lg">
+          <div className="p-2.5 bg-amber-500/10 border border-amber-500/20 rounded-xl text-amber-400">
             <span className="font-bold text-lg leading-none">!</span>
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-zinc-100">Missing Metrics Warning</h4>
-            <p className="text-xs text-zinc-400 mt-0.5">Missing metrics show an exclamation mark on hover: "This data not mentioned in dataset".</p>
+            <h4 className="text-sm font-bold text-white">Missing Metrics Warning</h4>
+            <p className="text-xs text-zinc-400 mt-1 leading-relaxed">Missing metrics show an exclamation mark on hover: "This data not mentioned in dataset".</p>
           </div>
         </div>
 
-        <div className="p-4 bg-zinc-900/60 border border-zinc-800/80 rounded-xl flex items-start gap-3">
-          <div className="p-2.5 bg-purple-500/10 rounded-lg text-purple-400">
+        <div className="p-5 bg-zinc-950/60 backdrop-blur-2xl border border-white/10 rounded-2xl flex items-start gap-3.5 shadow-lg">
+          <div className="p-2.5 bg-violet-500/10 border border-violet-500/20 rounded-xl text-violet-400">
             <HiOutlineSparkles className="text-xl" />
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-zinc-100">Instant AI Calibration</h4>
-            <p className="text-xs text-zinc-400 mt-0.5">Automatically fits Prophet Forecaster & Hype Demand Analyzer on your file.</p>
+            <h4 className="text-sm font-bold text-white">Instant AI Calibration</h4>
+            <p className="text-xs text-zinc-400 mt-1 leading-relaxed">Automatically fits Prophet Forecaster & Hype Demand Analyzer on your file.</p>
           </div>
         </div>
       </div>
@@ -393,9 +397,9 @@ export default function DataUploadPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Column: Dropzone & Upload Action */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-6 shadow-xl backdrop-blur-sm">
-            <h2 className="text-lg font-semibold text-zinc-100 mb-4 flex items-center gap-2">
-              <HiOutlineCloudArrowUp className="text-indigo-400" />
+          <div className="bg-zinc-950/65 backdrop-blur-2xl border border-white/10 rounded-3xl p-7 shadow-[0_12px_44px_rgba(0,0,0,0.6)]">
+            <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+              <HiOutlineCloudArrowUp className="text-cyan-400" />
               Upload Sales File
             </h2>
 
@@ -403,10 +407,10 @@ export default function DataUploadPage() {
             <div
               onDragOver={(e) => e.preventDefault()}
               onDrop={handleDrop}
-              className={`border-2 border-dashed rounded-xl p-8 text-center transition cursor-pointer ${
+              className={`border-2 border-dashed rounded-2xl p-10 text-center transition cursor-pointer backdrop-blur-xl ${
                 file
-                  ? 'border-indigo-500/70 bg-indigo-500/5'
-                  : 'border-zinc-700/70 hover:border-indigo-500/50 bg-zinc-950/40 hover:bg-zinc-800/20'
+                  ? 'border-cyan-500/70 bg-cyan-500/10 shadow-lg shadow-cyan-500/10'
+                  : 'border-white/15 hover:border-cyan-400/60 bg-zinc-950/40 hover:bg-zinc-900/40'
               }`}
               onClick={() => document.getElementById('fileInput').click()}
             >
@@ -418,23 +422,23 @@ export default function DataUploadPage() {
                 className="hidden"
               />
 
-              <div className="mx-auto w-14 h-14 bg-zinc-800/80 text-indigo-400 rounded-full flex items-center justify-center mb-3">
-                <HiOutlineCloudArrowUp className="text-2xl" />
+              <div className="mx-auto w-16 h-16 bg-gradient-to-tr from-cyan-500/20 to-violet-500/20 border border-white/10 text-cyan-400 rounded-2xl flex items-center justify-center mb-3.5 shadow-inner">
+                <HiOutlineCloudArrowUp className="text-3xl" />
               </div>
 
               {file ? (
                 <div>
-                  <p className="text-sm font-semibold text-indigo-300">{file.name}</p>
+                  <p className="text-sm font-bold text-cyan-300">{file.name}</p>
                   <p className="text-xs text-zinc-400 mt-1">
                     {(file.size / 1024).toFixed(1)} KB • Click or drop to change file
                   </p>
                 </div>
               ) : (
                 <div>
-                  <p className="text-sm font-medium text-zinc-200">
-                    Drag and drop your <span className="text-indigo-400 font-semibold">CSV or Excel</span> file here
+                  <p className="text-sm font-semibold text-zinc-200">
+                    Drag and drop your <span className="text-cyan-400 font-bold">CSV or Excel</span> file here
                   </p>
-                  <p className="text-xs text-zinc-500 mt-1">Supports .csv, .xlsx, and .xls formats</p>
+                  <p className="text-xs text-zinc-500 mt-1.5">Supports .csv, .xlsx, and .xls formats</p>
                 </div>
               )}
             </div>

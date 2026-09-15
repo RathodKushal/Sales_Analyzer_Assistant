@@ -72,13 +72,16 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="fixed inset-y-0 left-0 w-64 bg-zinc-950 border-r border-zinc-800/60 flex flex-col pt-6 pb-4">
+    <aside className="fixed inset-y-0 left-0 w-64 bg-zinc-950/85 backdrop-blur-2xl border-r border-zinc-800/80 flex flex-col pt-6 pb-4 z-30 shadow-[4px_0_30px_rgba(0,0,0,0.5)]">
       {/* Logo */}
       <div className="px-6 flex items-center gap-3 mb-10">
-        <div className="w-8 h-8 rounded-md bg-zinc-800/80 border border-zinc-700/50 flex items-center justify-center text-zinc-300">
-          <HiOutlineCommandLine size={18} />
+        <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500/20 to-violet-500/20 border border-zinc-700/60 flex items-center justify-center text-cyan-400 shadow-inner">
+          <HiOutlineCommandLine size={20} />
         </div>
-        <span className="font-semibold tracking-tight text-zinc-100">ShopFlow CRM</span>
+        <div>
+          <span className="font-bold tracking-tight text-white block text-sm">ShopFlow CRM</span>
+          <span className="text-[10px] text-cyan-400 font-mono tracking-wider block uppercase font-medium">3D Spatial Suite</span>
+        </div>
       </div>
 
       {/* Navigation */}
