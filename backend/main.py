@@ -186,3 +186,9 @@ def health_check():
         "model_loaded": model_service._is_loaded,
         "version": settings.APP_VERSION,
     }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("backend.main:app", host="127.0.0.1", port=8000, reload=True)
+

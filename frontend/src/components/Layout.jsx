@@ -1,13 +1,58 @@
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import { Toaster } from 'react-hot-toast';
 import FullPageCRMCanvas from './FullPageCRMCanvas';
+import DashboardAtmosphere from './DashboardAtmosphere';
 
 export default function Layout() {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('sf_ambient_theme') || 'aurora';
+  });
+  const [particlesEnabled, setParticlesEnabled] = useState(() => {
+    return localStorage.getItem('sf_particles_enabled') !== 'false';
+  });
+  const [intensity, setIntensity] = useState(() => {
+    return localStorage.getItem('sf_ambient_intensity') || 'vibrant';
+  });
+
+  const handleThemeChange = (newTheme) => {
+    setTheme(newTheme);
+    localStorage.setItem('sf_ambient_theme', newTheme);
+  };
+
+  const handleToggleParticles = (val) => {
+    setParticlesEnabled(val);
+    localStorage.setItem('sf_particles_enabled', String(val));
+  };
+
+  const handleIntensityChange = (val) => {
+    setIntensity(val);
+    localStorage.setItem('sf_ambient_intensity', val);
+  };
+
+  const canvasOpacity = intensity === 'vibrant' ? 0.85 : intensity === 'subtle' ? 0.45 : 0.65;
+
   return (
-    <div className="relative flex min-h-screen bg-zinc-950 text-zinc-300 font-sans antialiased overflow-x-hidden">
-      {/* 3D Full-Page CRM Data Universe (Covers the entire application) */}
-      <FullPageCRMCanvas opacity={0.65} interactive={true} />
+    <div className="relative flex min-h-screen bg-[#03040a] text-zinc-300 font-sans antialiased overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-200">
+      {/* Dynamic Multi-Layer Ambient Atmosphere (Aurora glows, cyber grid, interactive spotlight, stardust) */}
+      <DashboardAtmosphere
+        theme={theme}
+        onThemeChange={handleThemeChange}
+        particlesEnabled={particlesEnabled}
+        onToggleParticles={handleToggleParticles}
+        intensity={intensity}
+        onIntensityChange={handleIntensityChange}
+      />
+
+      {/* 3D Full-Page CRM Constellation Universe */}
+      <FullPageCRMCanvas 
+        opacity={canvasOpacity} 
+        interactive={true} 
+        enableNodes={particlesEnabled}
+        theme={theme}
+        intensity={intensity}
+      />
 
       {/* Navigation Sidebar */}
       <Sidebar />
@@ -23,12 +68,13 @@ export default function Layout() {
         position="bottom-right" 
         toastOptions={{
           style: {
-            background: 'rgba(24, 24, 27, 0.85)',
-            backdropFilter: 'blur(16px)',
-            color: '#e4e4e7',
-            border: '1px solid rgba(255,255,255,0.12)',
+            background: 'rgba(15, 18, 30, 0.9)',
+            backdropFilter: 'blur(20px)',
+            color: '#f4f4f5',
+            border: '1px solid rgba(255,255,255,0.15)',
+            boxShadow: '0 12px 40px rgba(0,0,0,0.8)',
             fontSize: '14px',
-            borderRadius: '12px'
+            borderRadius: '14px'
           }
         }}
       />

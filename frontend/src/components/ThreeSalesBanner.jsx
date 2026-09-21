@@ -33,7 +33,7 @@ export default function ThreeSalesBanner({ totalOrders = 0, totalRevenue = 0 }) 
   };
 
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-zinc-950/90 border border-zinc-800/80 shadow-[0_8px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-500 hover:border-zinc-700/80 group">
+    <div className="relative overflow-hidden rounded-3xl bg-zinc-950/75 border border-white/10 shadow-[0_12px_45px_rgba(0,0,0,0.7)] backdrop-blur-2xl transition-all duration-500 hover:border-white/20 group">
       {/* Dynamic Colorful Ambient Lighting behind the Card */}
       <div className="absolute -top-24 -left-20 w-96 h-96 bg-gradient-to-br from-pink-500/15 via-purple-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 -right-20 w-96 h-96 bg-gradient-to-tl from-cyan-500/15 via-blue-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
