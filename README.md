@@ -18,7 +18,7 @@ An AI-powered e-commerce sales analytics platform that uses **Reinforcement Lear
 | **Auth** | JWT (Bearer tokens) |
 
 ## Architecture
-
+...............
 ```
 ├── data/                    # E-commerce CSV datasets (6 relational tables)
 ├── model/                   # ML models and training scripts
