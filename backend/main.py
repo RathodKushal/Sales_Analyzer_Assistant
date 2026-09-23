@@ -45,6 +45,7 @@ from backend.orders.models import Order, OrderItem # noqa: F401
 from backend.products.models import Product        # noqa: F401
 from backend.returns.models import ReturnRecord    # noqa: F401
 from backend.ingestion.models import DocumentAnalysis # noqa: F401
+from backend.analytics.models import Promotion, MLPrediction # noqa: F401
 
 settings = get_settings()
 

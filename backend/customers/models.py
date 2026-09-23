@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime
+from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Boolean, Text
 from backend.database import Base
 from datetime import datetime
 
@@ -31,3 +31,39 @@ class Customer(Base):
     
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class Address(Base):
+    __tablename__ = "addresses"
+    id = Column(Integer, primary_key=True, index=True)
+    customer_id = Column(Integer, ForeignKey("customers.customer_id"), index=True)
+    address_line_1 = Column(String(255))
+    address_line_2 = Column(String(255), nullable=True)
+    city = Column(String(100))
+    state = Column(String(100))
+    pincode = Column(String(20))
+    is_default = Column(Boolean, default=False)
+
+class Wishlist(Base):
+    __tablename__ = "wishlists"
+    id = Column(Integer, primary_key=True, index=True)
+    customer_id = Column(Integer, ForeignKey("customers.customer_id"), index=True)
+    product_id = Column(Integer, ForeignKey("products.id"), index=True)
+    added_date = Column(DateTime, default=datetime.utcnow)
+
+class Review(Base):
+    __tablename__ = "reviews"
+    id = Column(Integer, primary_key=True, index=True)
+    customer_id = Column(Integer, ForeignKey("customers.customer_id"), index=True)
+    product_id = Column(Integer, ForeignKey("products.id"), index=True)
+    rating = Column(Integer)
+    review_text = Column(Text, nullable=True)
+    sentiment_score = Column(Float, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+class CartItem(Base):
+    __tablename__ = "cart_items"
+    id = Column(Integer, primary_key=True, index=True)
+    customer_id = Column(Integer, ForeignKey("customers.customer_id"), index=True)
+    product_id = Column(Integer, ForeignKey("products.id"), index=True)
+    quantity = Column(Integer, default=1)
+    added_date = Column(DateTime, default=datetime.utcnow)

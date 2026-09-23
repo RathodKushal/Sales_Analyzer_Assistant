@@ -16,10 +16,11 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from backend.database import SessionLocal, engine, Base
-from backend.customers.models import Customer
-from backend.products.models import Product
-from backend.orders.models import Order, OrderItem
+from backend.customers.models import Customer, Address, Wishlist, Review, CartItem
+from backend.products.models import Product, Category, Brand, Inventory, Supplier
+from backend.orders.models import Order, OrderItem, Payment, ShippingMethod, Shipment
 from backend.returns.models import ReturnRecord
+from backend.analytics.models import Promotion, MLPrediction
 
 
 def seed_database():

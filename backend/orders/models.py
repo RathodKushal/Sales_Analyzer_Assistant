@@ -31,3 +31,30 @@ class OrderItem(Base):
     unit_price = Column(Float, default=0.0)
     line_total = Column(Float, default=0.0)
     is_returned = Column(Boolean, default=False)
+
+class Payment(Base):
+    __tablename__ = "payments"
+    id = Column(Integer, primary_key=True, index=True)
+    order_id = Column(String(50), ForeignKey("orders.order_id"), index=True)
+    payment_method = Column(String(50))
+    amount = Column(Float)
+    transaction_id = Column(String(100), unique=True, nullable=True)
+    payment_date = Column(DateTime, default=datetime.utcnow)
+    status = Column(String(50), default="Completed")
+
+class ShippingMethod(Base):
+    __tablename__ = "shipping_methods"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(100), unique=True)
+    cost = Column(Float, default=0.0)
+    estimated_days = Column(Integer)
+
+class Shipment(Base):
+    __tablename__ = "shipments"
+    id = Column(Integer, primary_key=True, index=True)
+    order_id = Column(String(50), ForeignKey("orders.order_id"), index=True)
+    shipping_method_id = Column(Integer, ForeignKey("shipping_methods.id"))
+    tracking_number = Column(String(100), nullable=True)
+    status = Column(String(50), default="Pending")
+    shipped_date = Column(DateTime, nullable=True)
+    estimated_delivery = Column(DateTime, nullable=True)
