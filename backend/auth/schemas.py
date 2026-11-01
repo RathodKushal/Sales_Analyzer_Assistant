@@ -16,7 +16,7 @@ class UserRegister(BaseModel):
     username: str = Field(..., min_length=3, max_length=50, examples=["john_doe"])
     email: str = Field(..., max_length=100, examples=["john@example.com"])
     password: str = Field(..., min_length=6, max_length=128, examples=["strongpassword123"])
-    role: Optional[str] = Field(default="viewer", pattern="^(admin|viewer)$")
+    role: Optional[str] = Field(default="viewer", pattern="^(admin|manager|analyst|viewer)$")
 
 
 class UserLogin(BaseModel):
@@ -33,6 +33,8 @@ class UserResponse(BaseModel):
     username: str
     email: str
     role: str
+    is_active: bool = True
+    last_login: Optional[datetime] = None
     created_at: datetime
 
     class Config:

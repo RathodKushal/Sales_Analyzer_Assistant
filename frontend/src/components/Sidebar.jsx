@@ -12,10 +12,11 @@ import {
   HiOutlineArrowRightOnRectangle,
   HiOutlineCommandLine,
   HiOutlineCloudArrowUp,
+  HiOutlineShieldCheck,
 } from 'react-icons/hi2';
 
 export default function Sidebar() {
-  const { user, logout } = useAuth();
+  const { user, logout, isAdmin } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -119,6 +120,39 @@ export default function Sidebar() {
             )}
           </NavLink>
         ))}
+
+        {isAdmin && (
+          <div className="pt-3">
+            <div className="px-3 mb-2 flex items-center justify-between text-[10px] font-semibold tracking-wider text-amber-400/80 uppercase">
+              <span>Admin Control</span>
+              <span className="px-1.5 py-0.5 rounded text-[9px] bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">
+                PORTAL
+              </span>
+            </div>
+            <NavLink
+              to="/admin"
+              className={({ isActive }) =>
+                `relative flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group ${
+                  isActive
+                    ? 'bg-gradient-to-r from-amber-500/20 via-orange-500/15 to-transparent text-white shadow-[0_4px_20px_rgba(0,0,0,0.4)] border border-amber-500/35 backdrop-blur-xl'
+                    : 'text-zinc-400 hover:text-amber-200 hover:bg-amber-500/10 border border-transparent'
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  {isActive && (
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 rounded-r-full bg-gradient-to-b from-amber-400 to-orange-500 shadow-[0_0_12px_rgba(245,158,11,0.8)]" />
+                  )}
+                  <span className={`text-[1.15rem] transition-colors ${isActive ? 'text-amber-400' : 'opacity-75 group-hover:text-amber-300 group-hover:opacity-100'}`}>
+                    <HiOutlineShieldCheck />
+                  </span>
+                  <span className="truncate">Administration</span>
+                </>
+              )}
+            </NavLink>
+          </div>
+        )}
       </nav>
 
       {/* Footer: User + Logout */}

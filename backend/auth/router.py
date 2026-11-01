@@ -4,6 +4,7 @@ Auth Router — Registration & Login Endpoints
 Handles user creation, login (JWT issuance), and profile retrieval.
 """
 
+from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -82,6 +83,17 @@ def login(payload: UserLogin, db: Session = Depends(get_db)):
             detail="Invalid username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
+
+    if not getattr(user, "is_active", True):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="This account has been deactivated. Please contact an administrator.",
+        )
+
+    # Update last login timestamp
+    user.last_login = datetime.now(timezone.utc)
+    db.commit()
+    db.refresh(user)
 
     # Issue JWT
     token = create_access_token(data={"sub": user.username, "role": user.role})

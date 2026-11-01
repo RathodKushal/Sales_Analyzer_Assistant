@@ -184,4 +184,17 @@ export const socialAPI = {
     client.get('/social/history'),
 };
 
+// ── Admin API ───────────────────────────────────────────
+export const adminAPI = {
+  getMetrics: () => client.get('/admin/metrics'),
+  getUsers: (params = {}) => client.get('/admin/users', { params }),
+  createUser: (data) => client.post('/admin/users', data),
+  updateUser: (id, data) => client.put(`/admin/users/${id}`, data),
+  resetPassword: (id, new_password) => client.put(`/admin/users/${id}/reset-password`, { new_password }),
+  deleteUser: (id) => client.delete(`/admin/users/${id}`),
+  getSettings: () => client.get('/admin/settings'),
+  updateSettings: (settings) => client.put('/admin/settings', { settings }),
+  resetSettings: () => client.post('/admin/settings/reset'),
+};
+
 export default client;

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
 import Layout from './components/Layout';
 
 import LoginPage from './pages/LoginPage';
@@ -13,6 +14,7 @@ import ProductHypePage from './pages/ProductHypePage';
 import ForecastPage from './pages/ForecastPage';
 import DemandPage from './pages/DemandPage';
 import DataUploadPage from './pages/DataUploadPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
 
 export default function App() {
   return (
@@ -31,6 +33,14 @@ export default function App() {
             <Route path="/hype-ai" element={<ProductHypePage />} />
             <Route path="/forecast" element={<ForecastPage />} />
             <Route path="/demand" element={<DemandPage />} />
+            <Route
+              path="/admin"
+              element={
+                <AdminRoute>
+                  <AdminDashboardPage />
+                </AdminRoute>
+              }
+            />
             
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
           </Route>

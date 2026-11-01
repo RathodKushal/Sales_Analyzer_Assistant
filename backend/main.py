@@ -37,6 +37,7 @@ from backend.reports.router import router as reports_router
 from backend.social.router import router as social_router
 from backend.ingestion.router import router as ingestion_router
 from backend.powerbi.router import router as powerbi_router
+from backend.admin.router import router as admin_router
 
 # Import models so SQLAlchemy knows about them when creating tables
 from backend.auth.models import User       # noqa: F401
@@ -46,6 +47,8 @@ from backend.products.models import Product        # noqa: F401
 from backend.returns.models import ReturnRecord    # noqa: F401
 from backend.ingestion.models import DocumentAnalysis # noqa: F401
 from backend.analytics.models import Promotion, MLPrediction # noqa: F401
+from backend.admin.models import SystemSetting        # noqa: F401
+from backend.admin.service import AdminService
 
 settings = get_settings()
 
@@ -65,14 +68,20 @@ async def lifespan(app: FastAPI):
     print(f"  {settings.APP_NAME} v{settings.APP_VERSION}")
     print("=" * 60)
 
-    # 1. Create database tables
+    # 1. Run schema migrations for users table
+    _migrate_user_columns()
+
+    # 2. Create database tables
     Base.metadata.create_all(bind=engine)
     print("[Startup] Database tables created")
 
-    # 2. Seed default admin user (admin/admin123)
+    # 3. Seed default admin user (admin/admin123)
     _seed_admin_user()
 
-    # 3. Load ML model (if available)
+    # 4. Seed default system settings
+    _seed_system_settings()
+
+    # 5. Load ML model (if available)
     try:
         model_service = ModelService.get_instance()
         model_service.load()
@@ -82,7 +91,7 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         print(f"[Startup] NOTE: Failed to load model: {e}")
 
-    # 4. Load Hype RL results
+    # 6. Load Hype RL results
     try:
         model_service = ModelService.get_instance()
         model_service.load_hype_results()
@@ -96,6 +105,43 @@ async def lifespan(app: FastAPI):
 
     # ── Shutdown ────────────────────────────────────────────
     print("[Shutdown] Server shutting down...")
+
+
+def _migrate_user_columns():
+    """Ensure is_active and last_login columns exist on the users table."""
+    import sqlite3
+    db_file = PROJECT_ROOT / "sales_analyzer.db"
+    if not db_file.exists():
+        return
+    try:
+        conn = sqlite3.connect(str(db_file))
+        cursor = conn.cursor()
+        cursor.execute("PRAGMA table_info(users)")
+        cols = [r[1] for r in cursor.fetchall()]
+        if "is_active" not in cols:
+            cursor.execute("ALTER TABLE users ADD COLUMN is_active BOOLEAN NOT NULL DEFAULT 1")
+            conn.commit()
+            print("[Startup] Migrated: added 'is_active' column to users")
+        if "last_login" not in cols:
+            cursor.execute("ALTER TABLE users ADD COLUMN last_login DATETIME")
+            conn.commit()
+            print("[Startup] Migrated: added 'last_login' column to users")
+        conn.close()
+    except Exception as e:
+        print(f"[Startup] Migration note: {e}")
+
+
+def _seed_system_settings():
+    """Ensure default platform settings exist in the database."""
+    from backend.database import SessionLocal
+    db = SessionLocal()
+    try:
+        AdminService.ensure_default_settings(db)
+        print("[Startup] Platform default settings verified")
+    except Exception as e:
+        print(f"[Startup] Could not seed settings: {e}")
+    finally:
+        db.close()
 
 
 def _seed_admin_user():
@@ -163,6 +209,7 @@ app.include_router(reports_router)
 app.include_router(social_router)
 app.include_router(ingestion_router)
 app.include_router(powerbi_router)
+app.include_router(admin_router)
 
 
 # ── Root / Health Check ─────────────────────────────────────
