@@ -19,7 +19,7 @@ class User(Base):
     username = Column(String(50), unique=True, index=True, nullable=False)
     email = Column(String(100), unique=True, index=True, nullable=False)
     hashed_password = Column(String(255), nullable=False)
-    role = Column(String(20), default="viewer", nullable=False)  # "admin", "manager", "analyst", "viewer"
+    role = Column(String(50), default="viewer", nullable=False)
     is_active = Column(Boolean, default=True, nullable=False)
     last_login = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
@@ -29,3 +29,7 @@ class User(Base):
 
     def __repr__(self):
         return f"<User(id={self.id}, username='{self.username}', role='{self.role}')>"
+
+
+# Ensure DocumentAnalysis model is registered with SQLAlchemy mapper
+from backend.ingestion.models import DocumentAnalysis  # noqa: E402, F401

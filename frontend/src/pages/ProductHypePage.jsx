@@ -8,7 +8,7 @@ import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaCh
 
 const HYPE_LABELS = {
   0: { label: 'Severe Drop', emoji: '🧊', color: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/30', ring: 'text-rose-500' },
-  1: { label: 'Dropping', emoji: '📉', color: 'text-orange-400', bg: 'bg-orange-500/10', border: 'border-orange-500/30', ring: 'text-orange-500' },
+  1: { label: 'Slight Drop', emoji: '📉', color: 'text-orange-400', bg: 'bg-orange-500/10', border: 'border-orange-500/30', ring: 'text-orange-500' },
   2: { label: 'Steady', emoji: '📊', color: 'text-zinc-300', bg: 'bg-zinc-500/10', border: 'border-zinc-500/30', ring: 'text-zinc-400' },
   3: { label: 'Growing', emoji: '📈', color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', ring: 'text-emerald-500' },
   4: { label: 'Viral Hype', emoji: '🔥', color: 'text-blue-400', bg: 'bg-blue-500/10', border: 'border-blue-500/30', ring: 'text-blue-500' },
@@ -108,7 +108,7 @@ export default function ProductHypePage() {
       {/* Product Selector Card */}
       <Card className="p-6">
         <h2 className="text-sm font-semibold tracking-wide text-zinc-400 uppercase mb-4 flex items-center gap-2">
-          <HiOutlineTag className="text-blue-400" /> Select or Search Dataset Product
+          <HiOutlineTag className="text-blue-400" /> Select or Search Billed Inventory Product
         </h2>
         <form onSubmit={handleSearchSubmit} className="flex flex-col md:flex-row gap-4">
           {/* Dropdown Selector */}
@@ -119,11 +119,11 @@ export default function ProductHypePage() {
               className="w-full bg-zinc-900 border border-zinc-800 rounded-md px-4 py-2.5 text-zinc-200 focus:outline-none focus:border-blue-500"
             >
               <option value="" disabled>
-                {productList.length > 0 ? '-- Select a Product from Dataset --' : '-- No Products (Upload a dataset first) --'}
+                {productList.length > 0 ? '-- Select a Product from Billed Inventory --' : '-- No Products Billed Yet (Create a bill in Billing/POS) --'}
               </option>
               {productList.map((p) => (
                 <option key={p.stock_code} value={p.stock_code}>
-                  [{p.stock_code}] {p.description} ({p.demand_emoji} {p.demand_label})
+                  [{p.stock_code}] {p.description} ({p.demand_emoji} {p.demand_label} • Stock: {p.stock ?? 0})
                 </option>
               ))}
             </select>
@@ -136,7 +136,7 @@ export default function ProductHypePage() {
               type="text"
               value={stockCode}
               onChange={(e) => setStockCode(e.target.value)}
-              placeholder="Or type Stock Code / Product Name (e.g. 85123A)"
+              placeholder="Or type Stock Code / Product Name (e.g. 10002)"
               className="w-full bg-zinc-900 border border-zinc-800 rounded-md pl-10 pr-4 py-2.5 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-blue-500 transition-colors"
             />
           </div>
@@ -144,7 +144,7 @@ export default function ProductHypePage() {
           <button
             type="submit"
             disabled={loading}
-            className="px-6 bg-zinc-100 hover:bg-white text-zinc-900 font-medium py-2.5 rounded-md transition-colors flex items-center gap-2 justify-center disabled:opacity-50"
+            className="px-6 bg-zinc-100 hover:bg-white text-zinc-900 font-medium py-2.5 rounded-md transition-colors flex items-center gap-2 justify-center disabled:opacity-50 cursor-pointer"
           >
             {loading ? (
               <>
@@ -160,6 +160,16 @@ export default function ProductHypePage() {
         {error && <p className="text-rose-400 mt-3 text-sm">{error}</p>}
       </Card>
 
+      {productList.length === 0 && !loadingProducts && (
+        <div className="p-6 bg-zinc-900/60 border border-zinc-800 rounded-xl text-center">
+          <HiOutlineFire className="mx-auto text-4xl text-orange-400/50 mb-2" />
+          <h3 className="text-sm font-semibold text-zinc-200">No Billed Sales Recorded Yet</h3>
+          <p className="text-xs text-zinc-400 mt-1 max-w-md mx-auto">
+            Products will automatically appear in Hype AI as soon as sales are recorded in the Billing/POS module.
+          </p>
+        </div>
+      )}
+
       {/* Results View */}
       {hypeData && hypeInfo && (
         <motion.div
@@ -173,7 +183,7 @@ export default function ProductHypePage() {
             <div>
               <h2 className="text-xl font-bold text-white">{hypeData.description}</h2>
               <p className="text-xs text-zinc-400 mt-0.5">
-                Stock Code: <span className="text-blue-400 font-mono font-medium">{hypeData.stock_code}</span> • Category: <span className="text-zinc-200 font-medium">{hypeData.category}</span>
+                Stock Code: <span className="text-blue-400 font-mono font-medium">{hypeData.stock_code}</span> • Category: <span className="text-zinc-200 font-medium">{hypeData.category}</span> • Warehouse Stock: <span className="text-emerald-400 font-medium">{hypeData.stock ?? 0} units</span> • Total Sold: <span className="text-blue-300 font-medium">{hypeData.total_sold ?? 0} units</span>
               </p>
             </div>
             <div className={`px-4 py-2 rounded-full text-sm font-semibold ${hypeInfo.bg} ${hypeInfo.border} border ${hypeInfo.color} flex items-center gap-2`}>
@@ -183,7 +193,7 @@ export default function ProductHypePage() {
           </div>
 
           {/* Top KPI Row */}
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <section className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <StatCard
               label="Hype Score"
               value={`${hypeData.hype_score}/100`}
@@ -191,15 +201,20 @@ export default function ProductHypePage() {
               trend={hypeData.actual_growth_percentage}
             />
             <StatCard
-              label="Predicted Demand Trend"
+              label="Predicted Momentum"
               value={`${hypeInfo.label} ${hypeInfo.emoji}`}
               icon={hypeData.predicted_bin >= 2 ? <HiOutlineArrowTrendingUp size={22} className="text-emerald-400" /> : <HiOutlineArrowTrendingDown size={22} className="text-rose-400" />}
             />
             <StatCard
-              label="Sales Volume Growth"
+              label="Sales Velocity Growth"
               value={`${hypeData.actual_growth_percentage > 0 ? '+' : ''}${hypeData.actual_growth_percentage}%`}
               icon={<HiOutlineChartBar size={22} />}
               trend={hypeData.actual_growth_percentage}
+            />
+            <StatCard
+              label="Warehouse Inventory"
+              value={`${hypeData.stock ?? 0} units`}
+              icon={<HiOutlineTag size={22} className="text-blue-400" />}
             />
           </section>
 

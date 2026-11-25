@@ -40,16 +40,29 @@ def seed_database():
         db.commit()
 
         print("[Seeder] Reading CSV datasets from data/...")
+
+        # 0. Load Suppliers
+        existing_suppliers = db.query(Supplier).count()
+        if existing_suppliers == 0:
+            suppliers = [
+                Supplier(name="Apex Industrial Supplies", contact_email="orders@apex.com", contact_phone="+91 98765 43210", contact_info="orders@apex.com / +91 98765 43210", rating=4.8),
+                Supplier(name="Titan Logistics & Hardware", contact_email="supply@titanlogistics.in", contact_phone="+91 98234 56789", contact_info="supply@titanlogistics.in", rating=4.9),
+                Supplier(name="Nova Global Component Corp", contact_email="support@novaglobal.com", contact_phone="+1 800 555 0199", contact_info="support@novaglobal.com", rating=4.7),
+                Supplier(name="Kushal Vendor Hub", contact_email="rathodkushal07@gmail.com", contact_phone="+91 99999 88888", contact_info="rathodkushal07@gmail.com", rating=5.0),
+            ]
+            db.add_all(suppliers)
+            db.commit()
+            print(f"[Seeder] Successfully seeded {len(suppliers)} suppliers.")
         
         # 1. Load Products
         products_csv = data_dir / "products.csv"
         if products_csv.exists():
             df_prod = pd.read_csv(products_csv)
             df_prod["StockCode"] = df_prod["StockCode"].astype(str).str.strip()
-            df_prod = df_prod.drop_duplicates(subset=["StockCode"])
-            print(f"[Seeder] Ingesting {len(df_prod)} products...")
+            df_prod = df_prod.drop_duplicates(subset=["StockCode"]).head(3)
+            print(f"[Seeder] Ingesting {len(df_prod)} core products...")
             db_products = []
-            for _, row in df_prod.iterrows():
+            for i, (_, row) in enumerate(df_prod.iterrows()):
                 db_products.append(
                     Product(
                         stock_code=str(row["StockCode"]).strip(),
@@ -58,6 +71,10 @@ def seed_database():
                         avg_price=float(row.get("AvgPrice", 100.0)),
                         total_quantity_sold=int(row.get("TotalQuantitySold", 0)),
                         total_revenue=float(row.get("TotalRevenue", 0.0)),
+                        stock=4 if i == 0 else 60,
+                        supplier_id=(i % 3) + 1,
+                        is_deleted=False,
+                        approval_status="active",
                     )
                 )
             db.bulk_save_objects(db_products)

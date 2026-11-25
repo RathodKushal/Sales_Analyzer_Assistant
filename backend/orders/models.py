@@ -20,6 +20,15 @@ class Order(Base):
     payment_method = Column(String(50), default="Unknown")
     profit_estimate = Column(Float, default=0.0)
 
+    # Billing & invoice metadata
+    subtotal = Column(Float, default=0.0)
+    tax_amount = Column(Float, default=0.0)
+    tax_rate = Column(Float, default=0.0)
+    customer_name = Column(String(100), nullable=True)
+    customer_phone = Column(String(20), nullable=True)
+    customer_email = Column(String(100), nullable=True)
+    invoice_number = Column(String(50), nullable=True, index=True)
+
 class OrderItem(Base):
     __tablename__ = "order_items"
 
@@ -29,8 +38,10 @@ class OrderItem(Base):
     description = Column(String(200))
     quantity = Column(Integer, default=1)
     unit_price = Column(Float, default=0.0)
+    discount = Column(Float, default=0.0)
     line_total = Column(Float, default=0.0)
     is_returned = Column(Boolean, default=False)
+    product_id = Column(Integer, nullable=True)
 
 class Payment(Base):
     __tablename__ = "payments"

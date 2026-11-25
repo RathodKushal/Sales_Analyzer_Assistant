@@ -14,8 +14,10 @@ class PredictRequest(BaseModel):
     """
     Input features for a single discount prediction.
     
-    These match the columns from SALES.xlsx that the model was trained on.
+    These match the features expected by the Dueling DDQN model.
     """
+    customer_id: Optional[int] = Field(None, description="Optional customer ID to pull real RFM & CLV metrics")
+    stock_code: Optional[str] = Field(None, description="Optional product stock code to pull real price and category")
     state: str = Field("Unknown", examples=["Delhi"])
     category: str = Field("Unknown", examples=["Electronics"])
     payment_method: str = Field("Unknown", examples=["Credit Card"])
@@ -96,33 +98,45 @@ class DiscountBinsResponse(BaseModel):
 class ForecastDataPoint(BaseModel):
     """Time-series data for a single forecast category."""
     category: str
-    historical: dict  # {dates: [...], values: [...]}
-    forecast: dict    # {dates: [...], values: [...], lower_bound: [...], upper_bound: [...]}
-    trend: list[float]
+    historical: dict = {}  # {dates: [...], values: [...]}
+    forecast: dict = {}    # {dates: [...], values: [...], lower_bound: [...], upper_bound: [...]}
+    trend: list[float] = []
+    model_type: Optional[str] = None
 
 
 class ForecastSummary(BaseModel):
     """Summary statistics for the forecast."""
-    total_forecasted_revenue: float
-    avg_monthly_forecast: float
-    last_month_actual: float
-    estimated_growth_pct: float
+    total_forecasted_revenue: float = 0.0
+    avg_monthly_forecast: float = 0.0
+    last_month_actual: float = 0.0
+    estimated_growth_pct: float = 0.0
     peak_month: Optional[str] = None
     peak_month_value: float = 0.0
-    categories_analyzed: int
+    categories_analyzed: int = 0
     category_highlights: list[dict] = []
+    is_fallback: Optional[bool] = False
+    notice: Optional[str] = None
 
 
 class ForecastResponse(BaseModel):
     """Response for sales forecast endpoint."""
-    forecasts: dict[str, ForecastDataPoint]
+    forecasts: dict[str, ForecastDataPoint] = {}
     summary: ForecastSummary
-    horizon_months: int
+    horizon_months: int = 6
+    has_data: Optional[bool] = True
+    is_fallback: Optional[bool] = False
+    model_used: Optional[str] = None
+    notice: Optional[str] = None
 
 
 class DemandProductSignal(BaseModel):
     """Demand signal for a single product."""
     stock_code: str
+    description: Optional[str] = None
+    category: Optional[str] = None
+    stock: Optional[int] = 0
+    total_sold: Optional[int] = 0
+    stock_status: Optional[str] = None
     demand_score: int
     demand_label: str
     demand_emoji: str
@@ -150,6 +164,8 @@ class DemandAnalysisResponse(BaseModel):
     top_declining_products: list[dict] = []
     demand_distribution: dict = {}
     recommendations: list[DemandRecommendation] = []
+    has_data: Optional[bool] = True
+    notice: Optional[str] = None
 
 
 class CategoryTrendItem(BaseModel):

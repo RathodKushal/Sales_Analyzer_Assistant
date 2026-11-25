@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 from typing import Dict, List, Any
 
 from sqlalchemy.orm import Session
-from sqlalchemy import func
+from sqlalchemy import func, or_, and_
 
 import fastapi
 from backend.config import get_settings, PROJECT_ROOT
@@ -201,13 +201,20 @@ class AdminService:
         for u in all_users:
             roles_breakdown[u.role] = roles_breakdown.get(u.role, 0) + 1
 
-        # 2. Business Metrics
-        total_orders = db.query(func.count(Order.id)).scalar() or 0
-        total_revenue = db.query(func.sum(Order.total_amount)).scalar() or 0.0
-        avg_order_val = (total_revenue / total_orders) if total_orders > 0 else 0.0
+        # 2. Business Metrics (Computed strictly from billing transactions & purchasers)
+        billing_customers_query = db.query(Order.customer_id).filter(Order.invoice_number.isnot(None))
+        total_customers = db.query(func.count(Customer.id)).filter(
+            Customer.customer_id.in_(billing_customers_query),
+            Customer.total_orders > 0
+        ).scalar() or 0
 
-        total_customers = db.query(func.count(Customer.id)).scalar() or 0
-        total_products = db.query(func.count(Product.id)).scalar() or 0
+        total_orders = db.query(func.count(Order.id)).filter(Order.invoice_number.isnot(None)).scalar() or 0
+        total_revenue = db.query(func.sum(Order.total_amount)).filter(Order.invoice_number.isnot(None)).scalar() or 0.0
+        avg_order_val = (total_revenue / total_orders) if total_orders > 0 else 0.0
+        total_products = db.query(func.count(Product.id)).filter(
+            Product.approval_status == "active",
+            or_(Product.is_deleted == False, Product.is_deleted == None)
+        ).scalar() or 0
         total_returns = db.query(func.count(ReturnRecord.id)).scalar() or 0
         return_rate_pct = (
             (total_returns / total_orders * 100) if total_orders > 0 else 0.0

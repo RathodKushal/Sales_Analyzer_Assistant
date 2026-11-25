@@ -7,7 +7,9 @@ sales forecasting, and demand analysis.
 
 from fastapi import APIRouter, Depends, Query, HTTPException
 from typing import Optional
+from sqlalchemy.orm import Session
 
+from backend.database import get_db
 from backend.auth.models import User
 from backend.auth.utils import get_current_user
 from backend.analytics.service import ModelService
@@ -38,6 +40,7 @@ def get_model_service() -> ModelService:
 )
 def predict_discount(
     payload: PredictRequest,
+    db: Session = Depends(get_db),
     _user: User = Depends(get_current_user),
     model: ModelService = Depends(get_model_service),
 ):
@@ -48,7 +51,7 @@ def predict_discount(
     The model uses a trained Deep Q-Network to find the discount that
     maximizes estimated profit.
     """
-    result = model.predict_discount(payload.model_dump())
+    result = model.predict_discount(payload.model_dump(), db=db)
     return PredictResponse(**result)
 
 
@@ -59,6 +62,7 @@ def predict_discount(
 )
 def batch_predict(
     payload: BatchPredictRequest,
+    db: Session = Depends(get_db),
     _user: User = Depends(get_current_user),
     model: ModelService = Depends(get_model_service),
 ):
@@ -67,7 +71,7 @@ def batch_predict(
     Returns a list of discount recommendations.
     """
     records = [r.model_dump() for r in payload.records]
-    predictions = model.batch_predict(records)
+    predictions = model.batch_predict(records, db=db)
 
     return BatchPredictResponse(
         predictions=[PredictResponse(**p) for p in predictions],
@@ -81,6 +85,7 @@ def batch_predict(
     summary="Get model evaluation summary",
 )
 def get_model_summary(
+    db: Session = Depends(get_db),
     _user: User = Depends(get_current_user),
     model: ModelService = Depends(get_model_service),
 ):
@@ -88,7 +93,7 @@ def get_model_summary(
     Returns the model's evaluation metrics from the latest training run:
     profit improvement, positive profit rate, per-category breakdown, etc.
     """
-    summary = model.get_evaluation_summary()
+    summary = model.get_evaluation_summary(db=db)
     return ModelSummaryResponse(**summary)
 
 
@@ -110,11 +115,12 @@ def get_discount_bins(
     summary="Get active dataset categories, segments, and regions for AI forms",
 )
 def get_dataset_meta(
+    db: Session = Depends(get_db),
     _user: User = Depends(get_current_user),
     model: ModelService = Depends(get_model_service),
 ):
-    """Returns categories, segments, and states from active dataset."""
-    return model.get_dataset_meta()
+    """Returns categories, segments, states, and active items from live billing database."""
+    return model.get_dataset_meta(db=db)
 
 
 
@@ -125,13 +131,14 @@ def get_dataset_meta(
 def get_hype_products(
     limit: int = Query(100, ge=1, le=500),
     search: Optional[str] = Query(None, description="Search stock code or product name"),
+    db: Session = Depends(get_db),
     _user: User = Depends(get_current_user),
     model: ModelService = Depends(get_model_service),
 ):
     """
-    Returns a list of products with pre-computed hype predictions.
+    Returns a list of products with pre-computed hype predictions from live sales.
     """
-    return model.get_hype_products(limit=limit, search=search)
+    return model.get_hype_products(limit=limit, search=search, db=db)
 
 
 @router.get(
@@ -140,14 +147,15 @@ def get_hype_products(
 )
 def get_product_hype(
     stock_code: str,
+    db: Session = Depends(get_db),
     _user: User = Depends(get_current_user),
     model: ModelService = Depends(get_model_service),
 ):
     """
-    Returns the RL agent's hype prediction for a given product.
+    Returns the RL agent's hype prediction for a given product from live sales.
     """
     try:
-        return model.get_hype_prediction(stock_code)
+        return model.get_hype_prediction(stock_code, db=db)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
 
@@ -162,22 +170,23 @@ def get_product_hype(
 def forecast_sales(
     months: int = Query(6, ge=1, le=24, description="Forecast horizon in months"),
     category: Optional[str] = Query(None, description="Filter by category name"),
+    db: Session = Depends(get_db),
     _user: User = Depends(get_current_user),
     model: ModelService = Depends(get_model_service),
 ):
     """
-    Generate future sales revenue forecasts using the trained Prophet model.
-    
-    Returns historical data plus predicted values with confidence intervals
-    for the specified time horizon.
+    Generate future sales revenue forecasts reading live from billing & orders data.
+    Uses Facebook Prophet when history is >=4 months, with an intelligent
+    moving-average baseline fallback for recent store data.
     """
     try:
         return model.forecast_sales(
             horizon_months=months,
             category=category,
+            db=db,
         )
-    except RuntimeError as e:
-        raise HTTPException(status_code=503, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get(
@@ -185,6 +194,7 @@ def forecast_sales(
     summary="Get comprehensive demand analysis",
 )
 def get_demand_analysis(
+    db: Session = Depends(get_db),
     _user: User = Depends(get_current_user),
     model: ModelService = Depends(get_model_service),
 ):
@@ -197,7 +207,7 @@ def get_demand_analysis(
     - Actionable recommendations
     """
     try:
-        return model.get_demand_analysis()
+        return model.get_demand_analysis(db=db)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -207,15 +217,15 @@ def get_demand_analysis(
     summary="Get category-level revenue trends",
 )
 def get_category_trends(
+    db: Session = Depends(get_db),
     _user: User = Depends(get_current_user),
     model: ModelService = Depends(get_model_service),
 ):
     """
-    Returns historical and forecasted revenue trends for each
-    product category, including growth percentages.
+    Returns historical and predicted monthly revenue trends per category.
     """
     try:
-        return model.get_category_trends()
+        return model.get_category_trends(db=db)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

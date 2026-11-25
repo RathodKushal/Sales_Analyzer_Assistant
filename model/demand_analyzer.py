@@ -68,14 +68,19 @@ class DemandAnalyzer:
         Returns:
             Dict with demand signals, trends, and recommendations.
         """
+        product_signals = self._analyze_product_demand()
+        has_data = len(product_signals) > 0
+
         report = {
-            "product_demand_signals": self._analyze_product_demand(),
+            "product_demand_signals": product_signals,
             "category_forecast_summary": self._analyze_category_forecasts(),
             "seasonal_patterns": self._analyze_seasonal_patterns(data_dir),
             "top_rising_products": self._get_top_products("rising", limit=10),
             "top_declining_products": self._get_top_products("declining", limit=10),
             "demand_distribution": self._get_demand_distribution(),
             "recommendations": self._generate_recommendations(),
+            "has_data": has_data,
+            "notice": "Demand signals and recommendations live from billing orders." if has_data else "No billing transactions recorded yet. Complete sales in Billing/POS to activate Demand Intelligence."
         }
 
         return report
@@ -92,14 +97,31 @@ class DemandAnalyzer:
             pred_bin = data.get("predicted_bin", 2)
             actual_growth = data.get("actual_growth", 0.0)
             hist_sales = data.get("historical_sales", [])
+            stock = int(data.get("stock", 0))
+            total_sold = int(data.get("total_sold", 0))
 
             bin_info = self.HYPE_LABELS.get(pred_bin, self.HYPE_LABELS[2])
 
             # Compute demand score (0-100)
             score = {0: 10, 1: 30, 2: 50, 3: 75, 4: 95}.get(pred_bin, 50)
 
+            # Determine stock status
+            if stock == 0 and total_sold > 0:
+                stock_status = "Out of Stock"
+            elif stock < 10 and pred_bin >= 3:
+                stock_status = "Low Stock / High Demand"
+            elif stock > 50 and total_sold == 0:
+                stock_status = "Overstocked"
+            else:
+                stock_status = f"{stock} in stock"
+
             signals.append({
                 "stock_code": stock_code,
+                "description": data.get("description", f"Product {stock_code}"),
+                "category": data.get("category", "General"),
+                "stock": stock,
+                "total_sold": total_sold,
+                "stock_status": stock_status,
                 "demand_score": score,
                 "demand_label": bin_info["label"],
                 "demand_emoji": bin_info["emoji"],
@@ -238,6 +260,10 @@ class DemandAnalyzer:
         for stock_code, data in predictions.items():
             products.append({
                 "stock_code": stock_code,
+                "description": data.get("description", f"Product {stock_code}"),
+                "category": data.get("category", "General"),
+                "stock": int(data.get("stock", 0)),
+                "total_sold": int(data.get("total_sold", 0)),
                 "growth_pct": round(data.get("actual_growth", 0) * 100, 2),
                 "predicted_bin": data.get("predicted_bin", 2),
                 "label": self.HYPE_LABELS.get(
@@ -283,9 +309,46 @@ class DemandAnalyzer:
         """Generate actionable recommendations based on analysis."""
         recommendations = []
 
-        # Based on hype predictions
+        # 1. Product Stock vs Demand recommendations
         if self.hype_results:
             predictions = self.hype_results.get("product_predictions", {})
+            for code, p in predictions.items():
+                stock = int(p.get("stock", 0))
+                sold = int(p.get("total_sold", 0))
+                desc = p.get("description", f"Product {code}")
+                pred_bin = p.get("predicted_bin", 2)
+
+                if stock == 0 and sold > 0:
+                    recommendations.append({
+                        "type": "warning",
+                        "priority": "high",
+                        "title": f"🚨 Stockout Alert: {desc}",
+                        "description": (
+                            f"Product {code} ({desc}) is completely out of stock with {sold} units "
+                            "sold in billing. Create a purchase order to replenish inventory immediately."
+                        ),
+                    })
+                elif stock <= 5 and pred_bin >= 3:
+                    recommendations.append({
+                        "type": "opportunity",
+                        "priority": "high",
+                        "title": f"⚡ Low Stock & High Demand: {desc}",
+                        "description": (
+                            f"Product {code} shows positive momentum ({self.HYPE_LABELS.get(pred_bin, {}).get('label', 'Growing')}) "
+                            f"with only {stock} units in stock. Reorder soon to avoid disruption."
+                        ),
+                    })
+                elif stock >= 50 and sold == 0:
+                    recommendations.append({
+                        "type": "info",
+                        "priority": "medium",
+                        "title": f"📦 Overstocked Inventory: {desc}",
+                        "description": (
+                            f"Product {code} has {stock} units in inventory but 0 recent billing sales. "
+                            "Consider applying AI-recommended discounts to accelerate turnover."
+                        ),
+                    })
+
             viral_count = sum(
                 1 for p in predictions.values()
                 if p.get("predicted_bin", 2) >= 3
@@ -295,25 +358,25 @@ class DemandAnalyzer:
                 if p.get("predicted_bin", 2) <= 1
             )
 
-            if viral_count > 0:
+            if viral_count > 0 and not any(r["title"].startswith("🔥") for r in recommendations):
                 recommendations.append({
                     "type": "opportunity",
                     "priority": "high",
                     "title": f"🔥 {viral_count} products trending upward",
                     "description": (
                         f"{viral_count} products show Growing or Viral demand signals. "
-                        "Consider increasing inventory and marketing spend for these items."
+                        "Prioritize stock availability and sales promotion for these items."
                     ),
                 })
 
-            if declining_count > 0:
+            if declining_count > 0 and not any(r["title"].startswith("⚠️") for r in recommendations):
                 recommendations.append({
                     "type": "warning",
                     "priority": "medium",
                     "title": f"⚠️ {declining_count} products showing declining demand",
                     "description": (
-                        f"{declining_count} products are predicted to decline. "
-                        "Consider running clearance promotions or reducing reorder quantities."
+                        f"{declining_count} products show declining or drop demand. "
+                        "Evaluate discounting strategy or reduce future purchase order quantities."
                     ),
                 })
 

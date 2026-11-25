@@ -1,10 +1,10 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 from typing import Optional, List
 from datetime import datetime
 
 class CustomerBase(BaseModel):
     name: str
-    email: EmailStr
+    email: Optional[str] = None
     phone: Optional[str] = None
     gender: Optional[str] = None
     age: Optional[int] = None
@@ -18,6 +18,7 @@ class CustomerCreate(CustomerBase):
 class CustomerUpdate(BaseModel):
     name: Optional[str] = None
     phone: Optional[str] = None
+    email: Optional[str] = None
     state: Optional[str] = None
     city: Optional[str] = None
     pincode: Optional[str] = None
@@ -25,17 +26,17 @@ class CustomerUpdate(BaseModel):
 class CustomerResponse(CustomerBase):
     id: int
     customer_id: int
-    segment: str
-    total_orders: int
-    total_spent: float
-    avg_order_value: float
-    return_rate: float
-    first_purchase_date: Optional[datetime]
-    last_purchase_date: Optional[datetime]
-    lifetime_value: float
-    churn_risk_score: float
-    created_at: datetime
-    updated_at: datetime
+    segment: Optional[str] = "Retail"
+    total_orders: int = 0
+    total_spent: float = 0.0
+    avg_order_value: float = 0.0
+    return_rate: float = 0.0
+    first_purchase_date: Optional[datetime] = None
+    last_purchase_date: Optional[datetime] = None
+    lifetime_value: float = 0.0
+    churn_risk_score: float = 0.0
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
 
     class Config:
         from_attributes = True

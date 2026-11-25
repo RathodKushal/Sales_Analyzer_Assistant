@@ -1,10 +1,15 @@
 import { useState, useEffect, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
-import { adminAPI } from '../api/client';
+import { adminAPI, customersAPI } from '../api/client';
 import { Card } from '../components/UI';
 import {
   HiOutlineShieldCheck,
+  HiOutlineBuildingStorefront,
+  HiOutlineArchiveBox,
+  HiOutlineDocumentCheck,
+  HiOutlineCheckBadge,
   HiOutlineUsers,
   HiOutlineServerStack,
   HiOutlineCog6Tooth,
@@ -15,7 +20,6 @@ import {
   HiOutlineCheckCircle,
   HiOutlineXCircle,
   HiOutlineArrowPath,
-  HiOutlineCpuChip,
   HiOutlineCircleStack,
   HiOutlineShoppingCart,
   HiOutlineCurrencyRupee,
@@ -25,6 +29,11 @@ import {
   HiOutlineFunnel,
   HiOutlineExclamationTriangle,
   HiOutlineAdjustmentsHorizontal,
+  HiOutlineEnvelope,
+  HiOutlinePhone,
+  HiOutlineCalendar,
+  HiOutlineReceiptPercent,
+  HiOutlineXMark,
 } from 'react-icons/hi2';
 import toast from 'react-hot-toast';
 
@@ -44,6 +53,11 @@ export default function AdminDashboardPage() {
   const [userSearch, setUserSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
+
+  // State: Verified Purchasing Customers
+  const [customersList, setCustomersList] = useState([]);
+  const [customersLoading, setCustomersLoading] = useState(false);
+  const [customerSearch, setCustomerSearch] = useState('');
 
   // State: Settings
   const [settingsList, setSettingsList] = useState([]);
@@ -106,6 +120,42 @@ export default function AdminDashboardPage() {
     }
   };
 
+  // ── Fetch Verified Purchasing Customers ─────────────────────
+  const fetchCustomers = async () => {
+    setCustomersLoading(true);
+    try {
+      const res = await customersAPI.list(0, 200);
+      setCustomersList(res.data?.customers || []);
+    } catch (err) {
+      toast.error('Failed to load customer directory');
+      console.error(err);
+    } finally {
+      setCustomersLoading(false);
+    }
+  };
+
+  // Filtered purchasing customers for Admin search
+  const filteredAdminCustomers = useMemo(() => {
+    if (!customerSearch.trim()) return customersList;
+    const q = customerSearch.toLowerCase().trim();
+    return customersList.filter((c) => {
+      const name = (c.name || '').toLowerCase();
+      const phone = (c.phone || '').toLowerCase();
+      const email = (c.email || '').toLowerCase();
+      const id = String(c.customer_id || '');
+      const city = (c.city || '').toLowerCase();
+      const state = (c.state || '').toLowerCase();
+      return (
+        name.includes(q) ||
+        phone.includes(q) ||
+        email.includes(q) ||
+        id.includes(q) ||
+        city.includes(q) ||
+        state.includes(q)
+      );
+    });
+  }, [customersList, customerSearch]);
+
   // ── Fetch Settings ─────────────────────────────────────────
   const fetchSettings = async () => {
     setSettingsLoading(true);
@@ -129,6 +179,7 @@ export default function AdminDashboardPage() {
   useEffect(() => {
     fetchMetrics();
     fetchUsers();
+    fetchCustomers();
     fetchSettings();
   }, []);
 
@@ -334,6 +385,26 @@ export default function AdminDashboardPage() {
         </button>
 
         <button
+          onClick={() => {
+            setActiveTab('customers');
+            fetchCustomers();
+          }}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+            activeTab === 'customers'
+              ? 'bg-gradient-to-r from-amber-500/20 via-orange-500/15 to-transparent text-white border border-amber-500/30 shadow-[0_4px_16px_rgba(245,158,11,0.2)]'
+              : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5 border border-transparent'
+          }`}
+        >
+          <HiOutlineUsers className={activeTab === 'customers' ? 'text-amber-400' : ''} />
+          Purchasing Customers
+          {metrics?.business?.total_customers ? (
+            <span className="ml-1 px-1.5 py-0.2 rounded-full text-[10px] bg-white/10 text-zinc-300 font-mono">
+              {metrics.business.total_customers}
+            </span>
+          ) : null}
+        </button>
+
+        <button
           onClick={() => setActiveTab('users')}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             activeTab === 'users'
@@ -454,95 +525,47 @@ export default function AdminDashboardPage() {
             </Card>
           </div>
 
-          {/* Infrastructure Health & Role Breakdown Section */}
+          {/* System Events & Role Breakdown Section */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* System Health & Telemetry Card */}
+            {/* System Events & Telemetry Card */}
             <Card className="p-6 lg:col-span-2">
               <div className="flex items-center justify-between mb-5 border-b border-white/5 pb-4">
                 <div className="flex items-center gap-3">
                   <div className="p-2.5 rounded-xl bg-gradient-to-tr from-cyan-500/20 to-violet-500/20 border border-white/10 text-cyan-300">
-                    <HiOutlineCpuChip size={20} />
+                    <HiOutlineClock size={20} />
                   </div>
                   <div>
-                    <h3 className="text-base font-bold text-white">Infrastructure & Engine Status</h3>
-                    <p className="text-xs text-zinc-400">Core backend runtime and machine learning modules</p>
+                    <h3 className="text-base font-bold text-white">Recent System Events</h3>
+                    <p className="text-xs text-zinc-400">Live audit log of account registrations and data ingestion</p>
                   </div>
                 </div>
                 <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                  Operational
+                  Live Stream
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                <div className="p-3.5 rounded-xl bg-zinc-900/50 border border-white/5 flex items-center justify-between">
-                  <span className="text-zinc-400">Python Runtime</span>
-                  <span className="text-white font-mono font-semibold">{metrics?.health?.python_version ?? '3.13'}</span>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-zinc-900/50 border border-white/5 flex items-center justify-between">
-                  <span className="text-zinc-400">Server Uptime</span>
-                  <span className="text-white font-mono font-semibold">
-                    {metrics?.health?.uptime_seconds ? `${Math.floor(metrics.health.uptime_seconds / 60)}m ${Math.floor(metrics.health.uptime_seconds % 60)}s` : 'Active'}
-                  </span>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-zinc-900/50 border border-white/5 flex items-center justify-between">
-                  <span className="text-zinc-400">Dueling DQN Agent</span>
-                  <span className={`px-2 py-0.5 rounded-md font-semibold ${
-                    metrics?.health?.model_dueling_dqn ? 'bg-emerald-500/15 text-emerald-300' : 'bg-zinc-800 text-zinc-400'
-                  }`}>
-                    {metrics?.health?.model_dueling_dqn ? 'Loaded / Active' : 'Zero-State Mode'}
-                  </span>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-zinc-900/50 border border-white/5 flex items-center justify-between">
-                  <span className="text-zinc-400">Prophet Forecaster</span>
-                  <span className={`px-2 py-0.5 rounded-md font-semibold ${
-                    metrics?.health?.model_prophet_ready ? 'bg-emerald-500/15 text-emerald-300' : 'bg-rose-500/15 text-rose-300'
-                  }`}>
-                    {metrics?.health?.model_prophet_ready ? 'Installed & Ready' : 'Unavailable'}
-                  </span>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-zinc-900/50 border border-white/5 flex items-center justify-between">
-                  <span className="text-zinc-400">Total Unique SKUs</span>
-                  <span className="text-white font-mono font-semibold">{metrics?.business?.total_products ?? 0}</span>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-zinc-900/50 border border-white/5 flex items-center justify-between">
-                  <span className="text-zinc-400">Total Ingestion Analyses</span>
-                  <span className="text-white font-mono font-semibold">{metrics?.activities?.length ?? 0}</span>
-                </div>
-              </div>
-
-              {/* Recent System Activity Feed */}
-              <div className="mt-6 pt-5 border-t border-white/5">
-                <h4 className="text-xs font-bold text-zinc-300 uppercase tracking-wider mb-3">
-                  Recent System Events
-                </h4>
-                <div className="space-y-2.5">
-                  {metrics?.activities?.length > 0 ? (
-                    metrics.activities.map((act, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center justify-between p-3 rounded-xl bg-zinc-900/30 border border-white/5 hover:border-white/10 transition-all text-xs"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                          <div>
-                            <span className="font-semibold text-zinc-100">{act.title}</span>
-                            <span className="text-zinc-400 ml-2">{act.description}</span>
-                          </div>
+              <div className="space-y-2.5">
+                {metrics?.activities?.length > 0 ? (
+                  metrics.activities.map((act, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center justify-between p-3 rounded-xl bg-zinc-900/30 border border-white/5 hover:border-white/10 transition-all text-xs"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                        <div>
+                          <span className="font-semibold text-zinc-100">{act.title}</span>
+                          <span className="text-zinc-400 ml-2">{act.description}</span>
                         </div>
-                        <span className="text-zinc-500 text-[11px] font-mono">
-                          {act.timestamp ? new Date(act.timestamp).toLocaleTimeString() : ''}
-                        </span>
                       </div>
-                    ))
-                  ) : (
-                    <div className="text-xs text-zinc-500 italic p-3">No system events logged recently.</div>
-                  )}
-                </div>
+                      <span className="text-zinc-500 text-[11px] font-mono">
+                        {act.timestamp ? new Date(act.timestamp).toLocaleTimeString() : ''}
+                      </span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-xs text-zinc-500 italic p-3">No system events logged recently.</div>
+                )}
               </div>
             </Card>
 
@@ -603,6 +626,247 @@ export default function AdminDashboardPage() {
               </div>
             </Card>
           </div>
+        </motion.div>
+      )}
+
+      {/* ── TAB: PURCHASING CUSTOMERS (ADMIN VIEW) ────────────── */}
+      {activeTab === 'customers' && (
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25 }}
+          className="space-y-5"
+        >
+          {/* Header & Search Bar Card */}
+          <Card className="p-5">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-base font-bold text-white flex items-center gap-2">
+                  <HiOutlineUsers className="text-amber-400" size={20} />
+                  <span>Purchasing Customers Directory</span>
+                </h2>
+                <p className="text-xs text-zinc-400 mt-0.5">
+                  Showing {filteredAdminCustomers.length} of {customersList.length} verified billing buyers (dummy/unpurchased customers excluded)
+                </p>
+              </div>
+
+              {/* Live Search Input matching Admin style */}
+              <div className="flex items-center gap-3 w-full md:w-auto">
+                <div className="relative flex-1 md:w-96">
+                  <HiOutlineMagnifyingGlass className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" size={16} />
+                  <input
+                    type="text"
+                    value={customerSearch}
+                    onChange={(e) => setCustomerSearch(e.target.value)}
+                    placeholder="Search by name, phone, email, or customer ID..."
+                    className="w-full pl-9 pr-9 py-2 bg-zinc-900 border border-white/10 rounded-xl text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/30 transition"
+                  />
+                  {customerSearch && (
+                    <button
+                      type="button"
+                      onClick={() => setCustomerSearch('')}
+                      title="Clear search"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white p-0.5 rounded transition cursor-pointer"
+                    >
+                      <HiOutlineXMark size={14} />
+                    </button>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={fetchCustomers}
+                  title="Refresh customers list"
+                  className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white border border-white/10 transition cursor-pointer"
+                >
+                  <HiOutlineArrowPath className={customersLoading ? 'animate-spin' : ''} size={15} />
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Metrics Bar */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 pt-4 border-t border-white/5">
+              <div className="p-3 rounded-xl bg-zinc-900/60 border border-white/5">
+                <span className="text-[10px] uppercase font-semibold text-zinc-400 block tracking-wider">
+                  Verified Buyers
+                </span>
+                <span className="text-lg font-extrabold text-white font-mono mt-0.5 block">
+                  {customersList.length}
+                </span>
+              </div>
+              <div className="p-3 rounded-xl bg-zinc-900/60 border border-white/5">
+                <span className="text-[10px] uppercase font-semibold text-zinc-400 block tracking-wider">
+                  Total System Orders
+                </span>
+                <span className="text-lg font-extrabold text-white font-mono mt-0.5 block">
+                  {customersList.reduce((acc, c) => acc + (c.total_orders || 0), 0)}
+                </span>
+              </div>
+              <div className="p-3 rounded-xl bg-zinc-900/60 border border-white/5">
+                <span className="text-[10px] uppercase font-semibold text-zinc-400 block tracking-wider">
+                  Total Revenue
+                </span>
+                <span className="text-lg font-extrabold text-amber-400 font-mono mt-0.5 block">
+                  ₹{customersList.reduce((acc, c) => acc + (parseFloat(c.total_spent) || 0), 0).toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                </span>
+              </div>
+              <div className="p-3 rounded-xl bg-zinc-900/60 border border-white/5">
+                <span className="text-[10px] uppercase font-semibold text-zinc-400 block tracking-wider">
+                  Avg Buyer Spend
+                </span>
+                <span className="text-lg font-extrabold text-zinc-200 font-mono mt-0.5 block">
+                  ₹{customersList.length > 0 ? (customersList.reduce((acc, c) => acc + (parseFloat(c.total_spent) || 0), 0) / customersList.length).toFixed(2) : '0.00'}
+                </span>
+              </div>
+            </div>
+          </Card>
+
+          {/* Table Card */}
+          <Card className="overflow-hidden">
+            {customersLoading ? (
+              <div className="py-20 text-center text-zinc-400">
+                <div className="w-8 h-8 rounded-full border-2 border-amber-500/20 border-t-amber-400 animate-spin mx-auto mb-3" />
+                <p className="text-sm">Loading verified purchasing customers...</p>
+              </div>
+            ) : customersList.length === 0 ? (
+              <div className="py-16 text-center text-zinc-500">
+                <div className="w-14 h-14 rounded-2xl bg-zinc-900/80 border border-white/10 flex items-center justify-center mx-auto mb-3 text-zinc-400">
+                  <HiOutlineUsers size={26} />
+                </div>
+                <h3 className="text-base font-bold text-zinc-200">No Billed Customers Recorded Yet</h3>
+                <p className="text-xs text-zinc-400 mt-1 max-w-sm mx-auto">
+                  Customer profiles are recorded automatically when purchases are completed through the POS / Billing system in Purchase Orders.
+                </p>
+              </div>
+            ) : filteredAdminCustomers.length === 0 ? (
+              <div className="py-16 text-center text-zinc-500">
+                <div className="w-14 h-14 rounded-2xl bg-zinc-900/80 border border-white/10 flex items-center justify-center mx-auto mb-3 text-zinc-400">
+                  <HiOutlineMagnifyingGlass size={26} />
+                </div>
+                <h3 className="text-base font-bold text-zinc-200">No Purchasing Customers Found</h3>
+                <p className="text-xs text-zinc-400 mt-1 max-w-sm mx-auto">
+                  No verified purchasing customers match <span className="text-amber-400 font-semibold font-mono">"{customerSearch}"</span>. Try searching by customer name, phone number, email address, or customer ID.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setCustomerSearch('')}
+                  className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white rounded-xl text-xs font-semibold border border-white/10 transition cursor-pointer"
+                >
+                  <HiOutlineXMark size={14} />
+                  <span>Clear Search Query</span>
+                </button>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr className="border-b border-white/10 bg-zinc-950/80 text-[11px] uppercase tracking-wider text-zinc-400">
+                      <th className="py-3 px-4 font-semibold">Customer</th>
+                      <th className="py-3 px-4 font-semibold">Contact Details</th>
+                      <th className="py-3 px-4 font-semibold text-center">Orders Count</th>
+                      <th className="py-3 px-4 font-semibold text-right">Total Spent (₹)</th>
+                      <th className="py-3 px-4 font-semibold">Last Purchase Date</th>
+                      <th className="py-3 px-4 font-semibold">Location</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5 text-zinc-300">
+                    {filteredAdminCustomers.map((c) => {
+                      const initials = (c.name || 'C')
+                        .split(' ')
+                        .map((n) => n[0])
+                        .slice(0, 2)
+                        .join('')
+                        .toUpperCase();
+
+                      const lastPurchase = c.last_purchase_date
+                        ? new Date(c.last_purchase_date).toLocaleString('en-IN', {
+                            dateStyle: 'medium',
+                            timeStyle: 'short',
+                          })
+                        : '—';
+
+                      const totalSpent = parseFloat(c.total_spent || 0).toLocaleString('en-IN', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      });
+
+                      return (
+                        <tr key={c.id || c.customer_id} className="hover:bg-white/[0.04] transition">
+                          <td className="py-3.5 px-4">
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500/20 to-orange-500/20 border border-amber-500/30 flex items-center justify-center text-amber-300 font-bold text-xs flex-shrink-0">
+                                {initials}
+                              </div>
+                              <div>
+                                <div className="font-bold text-zinc-100 text-xs">
+                                  {c.name || `Customer #${c.customer_id}`}
+                                </div>
+                                <span className="text-[10px] text-zinc-500 font-mono">
+                                  ID: #{c.customer_id}
+                                </span>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td className="py-3.5 px-4">
+                            <div className="space-y-0.5">
+                              {c.phone ? (
+                                <div className="flex items-center gap-1.5 text-zinc-300 font-mono text-[11px]">
+                                  <HiOutlinePhone className="text-zinc-500" size={13} />
+                                  <span>{c.phone}</span>
+                                </div>
+                              ) : (
+                                <span className="text-zinc-600 text-[11px]">No phone</span>
+                              )}
+                              {c.email ? (
+                                <div className="flex items-center gap-1.5 text-zinc-400 text-[11px]">
+                                  <HiOutlineEnvelope className="text-zinc-500" size={13} />
+                                  <span className="truncate max-w-[180px]">{c.email}</span>
+                                </div>
+                              ) : (
+                                <span className="text-zinc-600 text-[11px]">No email</span>
+                              )}
+                            </div>
+                          </td>
+
+                          <td className="py-3.5 px-4 text-center">
+                            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-950/60 text-amber-300 border border-amber-800/40 font-mono">
+                              {c.total_orders || 1} {c.total_orders === 1 ? 'order' : 'orders'}
+                            </span>
+                          </td>
+
+                          <td className="py-3.5 px-4 text-right">
+                            <div className="font-mono font-extrabold text-sm text-white">
+                              ₹{totalSpent}
+                            </div>
+                            {c.avg_order_value > 0 && (
+                              <div className="text-[10px] text-zinc-400 font-mono">
+                                avg: ₹{parseFloat(c.avg_order_value).toFixed(2)}
+                              </div>
+                            )}
+                          </td>
+
+                          <td className="py-3.5 px-4 whitespace-nowrap">
+                            <div className="flex items-center gap-1.5 text-zinc-300 font-medium">
+                              <HiOutlineCalendar className="text-amber-400" size={14} />
+                              <span>{lastPurchase}</span>
+                            </div>
+                          </td>
+
+                          <td className="py-3.5 px-4">
+                            <div className="text-zinc-300">{c.city || 'Store Counter'}</div>
+                            {c.state && c.state !== c.city && (
+                              <div className="text-[10px] text-zinc-500">{c.state}</div>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </Card>
         </motion.div>
       )}
 

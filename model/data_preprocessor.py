@@ -270,11 +270,14 @@ class EcommerceDataPreprocessor:
             df = df.merge(rfm[merge_cols], on='CustomerID', how='left')
 
         else:
-            # Fallback values if no CustomerID
+            # Fallback values if no CustomerID (or single prediction row):
+            # Only set default 0 if the column was not already provided by the caller
             for col in ['DaysSinceLastPurchase', 'PurchaseFrequency', 'CustomerLTV',
                         'AvgOrderValue', 'CustomerReturnRate', 'DaysSinceFirstPurchase']:
-                df[col] = 0
-            df['CustomerSegment'] = 'Unknown'
+                if col not in df.columns:
+                    df[col] = 0.0
+            if 'CustomerSegment' not in df.columns:
+                df['CustomerSegment'] = 'Unknown'
 
         # Fill NaN in engineered features
         for col in self.CONTINUOUS_COLS + self.TIME_FEATURES:

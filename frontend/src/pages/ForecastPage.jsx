@@ -140,7 +140,7 @@ export default function ForecastPage() {
         <div>
           <h1 className="text-2xl font-bold text-zinc-100">📈 Sales Forecast</h1>
           <p className="text-sm text-zinc-500 mt-1">
-            AI-powered revenue predictions with confidence intervals
+            AI-powered revenue predictions reading from live billing and orders data
           </p>
         </div>
 
@@ -163,6 +163,19 @@ export default function ForecastPage() {
           </div>
         </div>
       </div>
+
+      {/* Informative Notice Banner */}
+      {forecastData?.notice && (
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-500/10 via-indigo-500/5 to-transparent border border-blue-500/25 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-blue-200">
+          <div className="flex items-center gap-2.5">
+            <span className="text-base">📊</span>
+            <span>{forecastData.notice}</span>
+          </div>
+          <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30 whitespace-nowrap">
+            {forecastData.model_used || 'Active Model'}
+          </span>
+        </div>
+      )}
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -299,10 +312,10 @@ export default function ForecastPage() {
           </div>
         </motion.div>
       ) : (
-        <div className="bg-zinc-950/50 border border-zinc-800/60 rounded-xl p-12 text-center">
-          <p className="text-zinc-300 font-medium text-base mb-1">Zero-State Active: No forecast model trained yet.</p>
+        <div className="bg-zinc-950/50 border border-zinc-800/60 rounded-xl p-12 text-center space-y-2">
+          <p className="text-zinc-300 font-semibold text-base">No Sales or Billing Records Found</p>
           <p className="text-zinc-500 text-xs max-w-md mx-auto">
-            Upload your sales dataset in the Dataset Upload page. The AI Forecaster will automatically fit Prophet models strictly to your historical revenue.
+            {forecastData?.notice || 'Generate customer bills in the Billing section to automatically view revenue predictions.'}
           </p>
         </div>
       )}

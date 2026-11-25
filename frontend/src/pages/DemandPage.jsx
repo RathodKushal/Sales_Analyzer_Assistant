@@ -108,9 +108,9 @@ export default function DemandPage() {
       {!demandData?.has_data && (
         <div className="p-4 bg-zinc-900/60 border border-zinc-800 rounded-xl flex items-center justify-between gap-4">
           <div>
-            <h4 className="text-sm font-semibold text-zinc-200">Zero-State Active: No demand data generated yet</h4>
+            <h4 className="text-sm font-semibold text-zinc-200">Zero-State Active: No billing demand data recorded yet</h4>
             <p className="text-xs text-zinc-400 mt-0.5">
-              Upload your sales dataset in Dataset Upload to automatically run demand intelligence on all products.
+              Complete sales in the Billing/POS module to automatically generate live demand signals, inventory restock alerts, and growth trends.
             </p>
           </div>
         </div>
@@ -285,34 +285,96 @@ export default function DemandPage() {
 
       {/* Products Tab */}
       {activeTab === 'products' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Top Rising */}
-          <div className="bg-zinc-950/50 border border-zinc-800/60 rounded-xl p-6">
-            <h3 className="text-sm font-medium text-green-400 mb-4">
-              📈 Top Rising Products
-            </h3>
-            <div className="space-y-2">
-              {rising.length > 0 ? rising.map((prod, i) => (
-                <ProductRow key={i} product={prod} rank={i + 1} type="rising" />
-              )) : (
-                <p className="text-zinc-500 text-sm py-4">No rising products found</p>
-              )}
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Top Rising */}
+            <div className="bg-zinc-950/50 border border-zinc-800/60 rounded-xl p-6">
+              <h3 className="text-sm font-medium text-green-400 mb-4">
+                📈 Top Rising Products
+              </h3>
+              <div className="space-y-2">
+                {rising.length > 0 ? rising.map((prod, i) => (
+                  <ProductRow key={i} product={prod} rank={i + 1} type="rising" />
+                )) : (
+                  <p className="text-zinc-500 text-sm py-4">No rising products found</p>
+                )}
+              </div>
+            </div>
+
+            {/* Top Declining */}
+            <div className="bg-zinc-950/50 border border-zinc-800/60 rounded-xl p-6">
+              <h3 className="text-sm font-medium text-red-400 mb-4">
+                📉 Top Declining Products
+              </h3>
+              <div className="space-y-2">
+                {declining.length > 0 ? declining.map((prod, i) => (
+                  <ProductRow key={i} product={prod} rank={i + 1} type="declining" />
+                )) : (
+                  <p className="text-zinc-500 text-sm py-4">No declining products found</p>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Top Declining */}
-          <div className="bg-zinc-950/50 border border-zinc-800/60 rounded-xl p-6">
-            <h3 className="text-sm font-medium text-red-400 mb-4">
-              📉 Top Declining Products
-            </h3>
-            <div className="space-y-2">
-              {declining.length > 0 ? declining.map((prod, i) => (
-                <ProductRow key={i} product={prod} rank={i + 1} type="declining" />
-              )) : (
-                <p className="text-zinc-500 text-sm py-4">No declining products found</p>
-              )}
+          {/* All Product Demand vs Stock Table */}
+          {demandData?.product_demand_signals?.length > 0 && (
+            <div className="bg-zinc-950/50 border border-zinc-800/60 rounded-xl p-6">
+              <h3 className="text-sm font-medium text-zinc-300 mb-4">
+                📦 Product Demand Signals & Warehouse Stock Levels
+              </h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-zinc-900/60 text-zinc-400 uppercase text-[10px] tracking-wider border-b border-zinc-800">
+                    <tr>
+                      <th className="py-2.5 px-3">Stock Code</th>
+                      <th className="py-2.5 px-3">Product Name</th>
+                      <th className="py-2.5 px-3">Category</th>
+                      <th className="py-2.5 px-3">Sold Units</th>
+                      <th className="py-2.5 px-3">Warehouse Stock</th>
+                      <th className="py-2.5 px-3">Stock Status</th>
+                      <th className="py-2.5 px-3">Demand Momentum</th>
+                      <th className="py-2.5 px-3 text-right">Score</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-850">
+                    {demandData.product_demand_signals.map((p, idx) => (
+                      <tr key={idx} className="hover:bg-zinc-900/40 transition-colors">
+                        <td className="py-2.5 px-3 font-mono font-medium text-blue-400">{p.stock_code}</td>
+                        <td className="py-2.5 px-3 text-zinc-200 font-medium">{p.description || `Product ${p.stock_code}`}</td>
+                        <td className="py-2.5 px-3 text-zinc-400">{p.category || 'General'}</td>
+                        <td className="py-2.5 px-3 font-semibold text-zinc-200">{p.total_sold ?? 0}</td>
+                        <td className="py-2.5 px-3 font-semibold">
+                          <span className={p.stock === 0 ? 'text-rose-400' : p.stock < 10 ? 'text-orange-400' : 'text-emerald-400'}>
+                            {p.stock ?? 0} units
+                          </span>
+                        </td>
+                        <td className="py-2.5 px-3">
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                            p.stock === 0
+                              ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
+                              : p.stock < 10
+                              ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
+                              : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                          }`}>
+                            {p.stock_status || (p.stock === 0 ? 'Out of Stock' : `${p.stock} in stock`)}
+                          </span>
+                        </td>
+                        <td className="py-2.5 px-3">
+                          <span className="inline-flex items-center gap-1.5 font-medium" style={{ color: p.demand_color }}>
+                            <span>{p.demand_emoji}</span>
+                            <span>{p.demand_label}</span>
+                          </span>
+                        </td>
+                        <td className="py-2.5 px-3 text-right font-mono font-bold text-zinc-300">
+                          {p.demand_score}/100
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
 
@@ -412,10 +474,16 @@ function ProductRow({ product, rank, type }) {
       <span className="text-xs text-zinc-500 w-5 text-right font-mono">#{rank}</span>
       <div className="flex-1 min-w-0">
         <div className="text-sm text-zinc-200 font-medium truncate">
-          {product.stock_code}
+          {product.description || product.stock_code}
         </div>
-        <div className="text-[10px] text-zinc-500">
-          {product.label}
+        <div className="text-[10px] text-zinc-500 flex items-center gap-2">
+          <span>Code: <span className="font-mono text-zinc-400">{product.stock_code}</span></span>
+          <span>•</span>
+          <span>{product.label}</span>
+          <span>•</span>
+          <span className={product.stock === 0 ? 'text-rose-400' : 'text-emerald-400 font-medium'}>
+            Stock: {product.stock ?? 0}
+          </span>
         </div>
       </div>
       <span className={`text-xs font-mono font-medium px-2 py-0.5 rounded ${bgColor} ${color}`}>

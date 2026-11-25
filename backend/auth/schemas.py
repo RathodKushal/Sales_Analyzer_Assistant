@@ -4,7 +4,7 @@ Auth Schemas — Pydantic Models
 Request and response schemas for authentication endpoints.
 """
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional
 
@@ -15,14 +15,14 @@ class UserRegister(BaseModel):
     """Schema for user registration."""
     username: str = Field(..., min_length=3, max_length=50, examples=["john_doe"])
     email: str = Field(..., max_length=100, examples=["john@example.com"])
-    password: str = Field(..., min_length=6, max_length=128, examples=["strongpassword123"])
-    role: Optional[str] = Field(default="viewer", pattern="^(admin|manager|analyst|viewer)$")
+    password: str = Field(..., min_length=4, max_length=128, examples=["strongpassword123"])
+    role: Optional[str] = Field(default="viewer")
 
 
 class UserLogin(BaseModel):
     """Schema for user login."""
-    username: str = Field(..., examples=["john_doe"])
-    password: str = Field(..., examples=["strongpassword123"])
+    username: str = Field(..., examples=["admin"])
+    password: str = Field(..., examples=["admin123"])
 
 
 # ── Response Schemas ─────────────────────────────────────────

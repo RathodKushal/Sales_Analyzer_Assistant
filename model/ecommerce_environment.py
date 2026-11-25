@@ -6,6 +6,7 @@ Simulates customer behavior based on historical RFM metrics, segment
 loyalty, return risk, and payment methods.
 """
 
+from scipy.stats import bootstrap
 import numpy as np
 
 

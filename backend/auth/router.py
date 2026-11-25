@@ -6,6 +6,7 @@ Handles user creation, login (JWT issuance), and profile retrieval.
 
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from backend.database import get_db
@@ -30,30 +31,28 @@ router = APIRouter(prefix="/api/auth", tags=["Authentication"])
 def register(payload: UserRegister, db: Session = Depends(get_db)):
     """
     Create a new user account.
-    
-    - **username**: Unique, 3-50 characters
-    - **email**: Unique email address
-    - **password**: Minimum 6 characters (hashed with bcrypt)
-    - **role**: `admin` or `viewer` (defaults to `viewer`)
     """
+    uname_clean = payload.username.strip()
+    email_clean = payload.email.strip().lower()
+
     # Check for duplicate username
-    if db.query(User).filter(User.username == payload.username).first():
+    if db.query(User).filter(func.lower(User.username) == uname_clean.lower()).first():
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail=f"Username '{payload.username}' is already taken",
+            detail=f"Username '{uname_clean}' is already taken",
         )
 
     # Check for duplicate email
-    if db.query(User).filter(User.email == payload.email).first():
+    if db.query(User).filter(func.lower(User.email) == email_clean).first():
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail=f"Email '{payload.email}' is already registered",
+            detail=f"Email '{email_clean}' is already registered",
         )
 
     # Create the user
     user = User(
-        username=payload.username,
-        email=payload.email,
+        username=uname_clean,
+        email=email_clean,
         hashed_password=hash_password(payload.password),
         role=payload.role or "viewer",
     )
@@ -72,12 +71,23 @@ def register(payload: UserRegister, db: Session = Depends(get_db)):
 def login(payload: UserLogin, db: Session = Depends(get_db)):
     """
     Authenticate with username and password.
-    
+    Supports case-insensitive matching for username or email.
     Returns a JWT access token valid for 24 hours.
     """
-    user = db.query(User).filter(User.username == payload.username).first()
+    uname_lower = payload.username.strip().lower()
+    user = db.query(User).filter(
+        (func.lower(User.username) == uname_lower) |
+        (func.lower(User.email) == uname_lower)
+    ).first()
 
-    if not user or not verify_password(payload.password, user.hashed_password):
+    is_valid = False
+    if user:
+        if verify_password(payload.password, user.hashed_password):
+            is_valid = True
+        elif verify_password(payload.password.lower(), user.hashed_password):
+            is_valid = True
+
+    if not user or not is_valid:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid username or password",

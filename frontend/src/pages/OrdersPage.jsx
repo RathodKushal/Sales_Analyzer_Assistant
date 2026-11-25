@@ -153,8 +153,9 @@ export default function OrdersPage() {
                     <td className="p-4 text-cyan-300 font-mono text-xs font-semibold">
                       {o.order_id}
                     </td>
-                    <td className="p-4 text-zinc-300 font-mono text-xs">
-                      {o.customer_id ? o.customer_id : '—'}
+                    <td className="p-4 text-zinc-300 text-xs">
+                      <div className="font-semibold text-zinc-100">{o.customer_name || (o.customer_id ? `Customer #${o.customer_id}` : '—')}</div>
+                      {o.customer_phone && <div className="text-[10px] text-zinc-500 font-mono">{o.customer_phone}</div>}
                     </td>
                     <td className="p-4 text-zinc-400 text-xs">
                       {o.order_date ? new Date(o.order_date).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : '—'}

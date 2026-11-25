@@ -76,6 +76,35 @@ export const productsAPI = {
   getById: (id) => client.get(`/products/${id}`),
 };
 
+// ── Inventory API (Live SKU Catalog & Stock Control) ───
+export const inventoryAPI = {
+  list: (includeArchived = false, approvalStatus = 'active') =>
+    client.get('/products/inventory', { params: { includeArchived, approval_status: approvalStatus } }),
+  listPending: () => client.get('/products/inventory', { params: { approval_status: 'pending_approval' } }),
+  listAll: (includeArchived = false) =>
+    client.get('/products/inventory', { params: { includeArchived, approval_status: 'all' } }),
+  create: (data) => client.post('/products/', data),
+  update: (id, data) => client.put(`/products/${id}`, data),
+  delete: (id) => client.delete(`/products/${id}`),
+  restore: (id) => client.post(`/products/${id}/restore`),
+};
+
+// ── Suppliers / Vendors API ─────────────────────────────
+export const suppliersAPI = {
+  list: () => client.get('/suppliers/'),
+  create: (data) => client.post('/suppliers/', data),
+};
+
+// ── Restock & Procurement Workflow API ─────────────────
+export const restockRequestsAPI = {
+  list: (status = null, requestType = null) =>
+    client.get('/products/restock-requests', { params: { status, request_type: requestType } }),
+  create: (data) =>
+    client.post('/products/restock-requests', data),
+  updateStatus: (id, data) =>
+    client.put(`/products/restock-requests/${id}/status`, data),
+};
+
 // ── Returns API ─────────────────────────────────────────
 export const returnsAPI = {
   list: (skip = 0, limit = 50) => client.get('/returns/', { params: { skip, limit } }),
@@ -182,6 +211,13 @@ export const socialAPI = {
 
   getHistory: () =>
     client.get('/social/history'),
+};
+
+// ── Billing / POS API ────────────────────────────────────
+export const billingAPI = {
+  createBill: (data) => client.post('/orders/billing', data),
+  getInvoices: (params = {}) => client.get('/orders/invoices', { params }),
+  getInvoice: (id) => client.get(`/orders/invoices/${id}`),
 };
 
 // ── Admin API ───────────────────────────────────────────
