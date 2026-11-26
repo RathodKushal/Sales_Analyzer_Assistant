@@ -10,7 +10,6 @@ import {
   HiOutlinePresentationChartBar,
   HiOutlineArrowRightOnRectangle,
   HiOutlineCommandLine,
-  HiOutlineCloudArrowUp,
   HiOutlineShieldCheck,
   HiOutlineBuildingStorefront,
   HiOutlineArchiveBox,
@@ -123,11 +122,6 @@ export default function Sidebar() {
   const portal = getSingleAuthorizedPortal();
 
   const coreOperations = [
-    {
-      to: '/upload',
-      icon: <HiOutlineCloudArrowUp />,
-      label: 'Upload Dataset',
-    },
     {
       to: '/customers',
       icon: <HiOutlineUsers />,

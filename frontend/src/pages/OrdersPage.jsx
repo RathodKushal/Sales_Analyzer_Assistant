@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { ordersAPI, ingestionAPI } from '../api/client';
 import { Card, StatCard } from '../components/UI';
 import { 
@@ -15,6 +16,7 @@ import toast from 'react-hot-toast';
 
 export default function OrdersPage() {
   const navigate = useNavigate();
+  const { isAdmin } = useAuth();
   const [orders, setOrders] = useState([]);
   const [totalOrders, setTotalOrders] = useState(0);
   const [datasetStatus, setDatasetStatus] = useState(null);
@@ -80,7 +82,7 @@ export default function OrdersPage() {
           </p>
         </div>
 
-        {!hasDataset && (
+        {!hasDataset && isAdmin && (
           <button
             onClick={() => navigate('/upload')}
             className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white rounded-xl text-sm font-semibold transition shadow-lg shadow-indigo-600/25 self-start cursor-pointer active:scale-95"

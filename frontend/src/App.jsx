@@ -127,7 +127,14 @@ export default function App() {
                 </RoleRoute>
               }
             />
-            <Route path="/upload" element={<DataUploadPage />} />
+            <Route
+              path="/upload"
+              element={
+                <RoleRoute allowedRoles={['admin']}>
+                  <DataUploadPage />
+                </RoleRoute>
+              }
+            />
             <Route path="/customers" element={<CustomersPage />} />
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/products" element={<ProductsPage />} />
